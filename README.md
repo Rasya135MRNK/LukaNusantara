@@ -1,6 +1,6 @@
 # 🌏 LukaNusantara — EcoDigital For Environment
 
-Website interaktif bertema pelestarian lingkungan yang mengangkat realitas bencana ekologis di Indonesia berbasis data ilmiah, dilengkapi dengan eksplorasi peta interaktif, komparasi perubahan ekosistem, dan edukasi mitigasi.
+Interaktif Website bertema pelestarian lingkungan yang mengangkat realitas bencana ekologis di Indonesia berbasis data ilmiah, dilengkapi dengan eksplorasi peta interaktif, komparasi perubahan ekosistem, dan edukasi mitigasi.
 
 ---
 
