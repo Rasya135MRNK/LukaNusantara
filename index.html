@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LukaNusantara — Peta Interaktif Bencana Ekologis Indonesia</title>
+  <meta name="description" content="Interactive storytelling dampak kerusakan lingkungan dan bencana ekologis di Indonesia berbasis data resmi, dengan langkah mitigasi dan pemulihan." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E" />
+
+  <!-- ============ TEMPLATE HEAD BERSAMA (jangan ubah versi CDN) ============ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep: { 950: "#07120D", 900: "#0B1A13", 800: "#0F2418", 700: "#153223", 600: "#1E4530" },
+            leaf: { 300: "#6EE7B7", 400: "#34D399" },
+            tealx: { 400: "#2DD4BF" },
+            sand: "#E7E4D9",
+            mist: "#9CB4A7",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- ===================================================================== -->
+</head>
+
+<body data-page="home" class="bg-deep-950 text-sand font-body min-h-screen">
+
+  <!-- ================= NAVBAR (komponen bersama, jangan ubah) ================= -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-deep-950/80 backdrop-blur border-b border-deep-700">
+    <nav class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-display font-bold text-lg">
+        <i data-lucide="leaf" class="w-5 h-5 text-leaf-400"></i>
+        Luka<span class="text-leaf-400">Nusantara</span>
+      </a>
+      <div id="nav-menu" class="hidden md:flex items-center gap-1 font-mono text-xs uppercase tracking-widest">
+        <a href="index.html" class="px-4 py-2 rounded-full bg-leaf-400/10 text-leaf-300 border border-leaf-400/30">Home</a>
+        <a href="eksplorasi.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Eksplorasi</a>
+        <a href="about.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">About</a>
+        <a href="contact.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Contact</a>
+      </div>
+      <button id="nav-toggle" class="md:hidden p-2 text-mist hover:text-sand" aria-label="Buka menu" aria-expanded="false">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </nav>
+    <div id="nav-menu-mobile" class="hidden md:hidden border-t border-deep-700 bg-deep-950/95 backdrop-blur px-4 py-3 font-mono text-xs uppercase tracking-widest">
+      <a href="index.html" class="block px-3 py-2 rounded-lg bg-leaf-400/10 text-leaf-300">Home</a>
+      <a href="eksplorasi.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Eksplorasi</a>
+      <a href="about.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">About</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Contact</a>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- ================= HERO ================= -->
+    <section class="relative min-h-[88vh] flex items-center overflow-hidden">
+      <!-- SVG kontur topografi (line drawing oleh Anime.js) -->
+      <svg id="hero-svg" class="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path class="draw-line" d="M-100,600 C280,470 560,700 920,540 C1140,440 1360,500 1540,450" stroke="#2DD4BF" stroke-opacity="0.18" stroke-width="1.5"/>
+        <path class="draw-line" d="M-100,650 C250,520 550,760 900,600 C1150,490 1350,560 1540,500" stroke="#34D399" stroke-opacity="0.14" stroke-width="1.5"/>
+        <path class="draw-line" d="M-100,700 C250,580 600,820 950,650 C1180,540 1380,610 1540,560" stroke="#2DD4BF" stroke-opacity="0.12" stroke-width="1.5"/>
+        <path class="draw-line" d="M-100,750 C300,640 650,880 1000,700 C1220,600 1400,660 1540,620" stroke="#34D399" stroke-opacity="0.10" stroke-width="1.5"/>
+        <circle class="draw-line" cx="1200" cy="170" r="150" stroke="#2DD4BF" stroke-opacity="0.16" stroke-width="1.5"/>
+        <circle class="draw-line" cx="1200" cy="170" r="110" stroke="#34D399" stroke-opacity="0.10" stroke-width="1.5"/>
+      </svg>
+
+      <div class="relative max-w-6xl mx-auto px-4 md:px-6 py-20">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400 mb-5">
+          EcoDigital for Environment &mdash; Edukasi Lingkungan
+        </p>
+        <h1 id="hero-title" class="font-display font-bold tracking-tight text-4xl md:text-6xl leading-tight max-w-3xl">
+          Membaca Luka Bumi, Menanam Pemulihan
+        </h1>
+        <p id="hero-sub" class="mt-6 text-sm md:text-lg text-mist max-w-2xl leading-relaxed">
+          LukaNusantara memetakan realitas bencana ekologis Indonesia berbasis data resmi
+          BNPB, BMKG, dan KLHK &mdash; lalu mengajakmu bergerak dari sekadar melihat menjadi bertindak.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href="#peta" class="inline-flex items-center gap-2 bg-leaf-400 text-deep-950 font-semibold rounded-full px-7 py-3 hover:bg-leaf-300 transition">
+            Jelajahi Peta <i data-lucide="map-pin" class="w-4 h-4"></i>
+          </a>
+          <a href="contact.html" class="inline-flex items-center gap-2 border border-deep-600 text-sand rounded-full px-7 py-3 hover:border-leaf-400 hover:text-leaf-300 transition">
+            Mulai Aksimu <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <a href="#statistik" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-mist hover:text-leaf-300 transition" aria-label="Gulir ke bawah">
+        <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
+      </a>
+    </section>
+
+    <!-- ================= STATISTIK KRISIS ================= -->
+    <section id="statistik" class="py-16 md:py-24 bg-deep-900">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">01 &mdash; Realitas dalam Angka</p>
+        <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl">Krisis Ekologis Tidak Pernah Berbohong</h2>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-2xl leading-relaxed">
+          Angka-angka di bawah disusun dari lembaga resmi. Ia bukan untuk menakut-nakuti,
+          melainkan memastikan kita membicarakannya dengan data &mdash; bukan rumor.
+        </p>
+        <div id="stats-grid" class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <!-- diisi oleh renderStats() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PETA INTERAKTIF ================= -->
+    <section id="peta" class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">02 &mdash; Peta Interaktif</p>
+        <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl">Luka di Lima Wilayah</h2>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-2xl leading-relaxed">
+          Klik titik berdenyut pada peta untuk membuka detail bencana ekologis dominan,
+          penyebab ilmiahnya, dan langkah mitigasinya.
+        </p>
+
+        <div class="mt-10 grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+
+          <!-- Peta SVG stylized kepulauan Indonesia -->
+          <div class="lg:col-span-3 relative bg-deep-900 border border-deep-700 rounded-2xl p-3 md:p-6">
+            <div class="relative">
+              <svg viewBox="0 0 1000 420" class="w-full h-auto" role="img" aria-label="Peta stylized kepulauan Indonesia">
+                <!-- kerangka garis bantu -->
+                <g stroke="#153223" stroke-width="1" stroke-dasharray="4 6">
+                  <line x1="0" y1="105" x2="1000" y2="105"/>
+                  <line x1="0" y1="210" x2="1000" y2="210"/>
+                  <line x1="0" y1="315" x2="1000" y2="315"/>
+                  <line x1="250" y1="0" x2="250" y2="420"/>
+                  <line x1="500" y1="0" x2="500" y2="420"/>
+                  <line x1="750" y1="0" x2="750" y2="420"/>
+                </g>
+                <!-- pulau-pulau -->
+                <g fill="#153223" stroke="#34D399" stroke-opacity="0.35" stroke-width="1.5">
+                  <path d="M60,70 C90,60 110,75 125,100 C160,150 210,215 265,275 C290,300 315,325 335,350 C340,362 330,372 316,368 C285,355 250,320 215,280 C165,225 115,160 75,110 C55,95 45,78 60,70 Z"/>
+                  <path d="M280,352 C320,344 380,342 450,348 C500,352 545,358 575,366 C585,370 585,382 572,384 C520,388 440,384 370,376 C330,372 300,368 282,362 C274,358 273,354 280,352 Z"/>
+                  <path d="M430,120 C470,95 540,90 590,115 C640,140 665,185 655,230 C645,275 605,300 555,305 C505,310 460,290 435,250 C410,210 405,160 430,120 Z"/>
+                  <path d="M660,150 C672,145 680,155 678,175 C676,200 674,225 676,250 C678,268 672,278 662,274 C652,270 648,250 652,225 C654,200 652,170 660,150 Z
+                           M680,190 C700,180 715,185 722,200 C725,210 718,218 705,215 C690,212 678,205 680,190 Z
+                           M676,240 C690,238 700,244 702,255 C703,264 694,268 684,262 C676,257 672,248 676,240 Z"/>
+                  <path d="M770,150 C820,130 900,125 940,150 C970,168 975,200 955,225 C930,252 880,265 835,258 C795,252 765,230 760,200 C757,180 755,158 770,150 Z"/>
+                  <ellipse cx="600" cy="362" rx="8" ry="4"/>
+                  <ellipse cx="626" cy="366" rx="6" ry="3"/>
+                  <ellipse cx="656" cy="386" rx="10" ry="3.5"/>
+                  <ellipse cx="684" cy="378" rx="12" ry="3.5"/>
+                  <ellipse cx="726" cy="396" rx="14" ry="4"/>
+                  <circle cx="718" cy="252" r="4"/>
+                  <circle cx="734" cy="282" r="3"/>
+                  <circle cx="708" cy="292" r="2.5"/>
+                </g>
+              </svg>
+              <!-- overlay marker (diisi renderMap()) -->
+              <div id="map-markers" class="absolute inset-0"></div>
+            </div>
+            <p class="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-mist/60">
+              Peta stylized &mdash; posisi indikator menunjukkan wilayah, bukan titik koordinat presisi
+            </p>
+          </div>
+
+          <!-- Panel detail wilayah -->
+          <div class="lg:col-span-2 bg-deep-800 border border-deep-700 rounded-2xl p-6 md:p-7 min-h-[420px]">
+            <div id="region-panel">
+              <!-- diisi selectRegion() -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA AKSI ================= -->
+    <section class="py-16 md:py-24 bg-deep-900">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 text-center">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">03 &mdash; Dari Melihat ke Bertindak</p>
+        <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl max-w-2xl mx-auto">
+          Satu Aksi Kecil Hari Ini, Ekosistem yang Bernapas Lusa
+        </h2>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-xl mx-auto leading-relaxed">
+          Hitung jejak positif aksi harianmu, atau sampaikan laporan lingkungan di sekitarmu.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a href="contact.html" class="inline-flex items-center gap-2 bg-leaf-400 text-deep-950 font-semibold rounded-full px-7 py-3 hover:bg-leaf-300 transition">
+            <i data-lucide="sprout" class="w-4 h-4"></i> Kalkulator Aksi Hijau
+          </a>
+          <a href="eksplorasi.html" class="inline-flex items-center gap-2 border border-deep-600 text-sand rounded-full px-7 py-3 hover:border-leaf-400 hover:text-leaf-300 transition">
+            Eksplorasi Kasus <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER (komponen bersama, jangan ubah) ================= -->
+  <footer class="border-t border-deep-700 py-10">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <p class="flex items-center gap-2 font-display font-bold text-lg">
+          <i data-lucide="leaf" class="w-5 h-5 text-leaf-400"></i>
+          Luka<span class="text-leaf-400">Nusantara</span>
+        </p>
+        <p class="mt-3 text-sm text-mist leading-relaxed">
+          Interactive storytelling bencana ekologis Indonesia berbasis data resmi.
+        </p>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Navigasi</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="text-mist hover:text-leaf-300 transition">Home</a></li>
+          <li><a href="eksplorasi.html" class="text-mist hover:text-leaf-300 transition">Eksplorasi</a></li>
+          <li><a href="about.html" class="text-mist hover:text-leaf-300 transition">About</a></li>
+          <li><a href="contact.html" class="text-mist hover:text-leaf-300 transition">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Sumber Data</p>
+        <p class="text-sm text-mist leading-relaxed">
+          BNPB &middot; BMKG &middot; KLHK &middot; BRIN &middot; Global Forest Watch
+        </p>
+        <p class="mt-3 text-xs text-mist/60 leading-relaxed">
+          Seluruh konten bebas SARA, pornografi, dan hoaks. Angka merujuk laporan lembaga resmi.
+        </p>
+      </div>
+    </div>
+    <p class="mt-8 text-center font-mono text-[11px] text-mist/50">
+      &copy; <span id="year">2026</span> LukaNusantara &mdash; EcoDigital For Environment
+    </p>
+  </footer>
+
+  <!-- ============ SCRIPTS BERSAMA (urutan & versi jangan diubah) ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/data.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
