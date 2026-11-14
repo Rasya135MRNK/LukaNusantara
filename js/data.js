@@ -1,9 +1,10 @@
 /* ============================================================
    LukaNusantara — js/data.js
    Satu sumber data untuk semua halaman.
-   Pemilik bagian (lihat PLAN.md):
+   Pemilik bagian awal (lihat PLAN.md):
    - Dev A (Rasya)   : STATS, REGIONS, TIMELINE, SOURCES, TEAM
-   - Dev B (Tamam)   : GALLERY, ACTIONS  (cari komentar "TODO Dev B")
+   - Dev B (Tamam)   : GALLERY, ACTIONS (diisi saat integrasi final
+     oleh Dev A atas nama Dev B)
    Jangan mengubah nama key tanpa kesepakatan tim.
    ============================================================ */
 
@@ -162,16 +163,16 @@ const SITE_DATA = {
      ------------------------------------------------------------ */
   GALLERY: [
     {
-      id: "contoh-rob-pekalongan",
+      id: "rob-pekalongan",
       title: "Rob Menelan Pesisir Utara Jawa",
       category: "Banjir Rob",
       region: "Jawa",
       image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop",
-      alt: "Air laut masuk ke kawasan pesisir",
+      alt: "Gelombang air laut yang masuk ke kawasan pesisir",
       desc: "Banjir rob di pesisir utara Jawa bukan lagi kejadian langka — ia hadir tiap pasang penuh, merendam permukiman, tambak, dan jalan nasional.",
       fakta: [
         "Ambungan tanah di Pekalongan mencapai ±10 cm per tahun",
-        "Rob kini terjadi ±40 hari lebih dalam setahun di titik terdampak",
+        "Rob kini terjadi puluhan hari lebih sering dalam setahun di titik terdampak",
       ],
       penyebab: [
         "Ambungan akibat ekstraksi air tanah berlebih",
@@ -182,7 +183,237 @@ const SITE_DATA = {
         "Dukung penggantian sumber air tanah kota",
       ],
     },
-    // TODO Dev B: tambahkan 11 kartu lainnya di sini (3-4 per kategori)
+    {
+      id: "jakarta-tenggelam",
+      title: "Jakarta yang Perlahan Tenggelam",
+      category: "Banjir Rob",
+      region: "Jawa",
+      image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1200&auto=format&fit=crop",
+      alt: "Permukaan laut yang mengancam kawasan pesisir",
+      desc: "Sebagian besar wilayah Jakarta Utara kini berada di bawah permukaan laut. Kombinasi ambungan tanah dan hujan ekstrem membuat banjir bukan lagi soal musim, melainkan soal pasang-surut.",
+      fakta: [
+        "Ambungan tanah Jakarta Utara mencapai 5–15 cm per tahun di titik rawan",
+        "Sebagian besar kawasan pesisir ibu kota berada di bawah muka laut rata-rata",
+      ],
+      penyebab: [
+        "Ekstraksi air tanah oleh industri dan permukiman padat",
+        "Betonisasi kota menghambat resapan air hujan",
+      ],
+      aksi: [
+        "Beralih dari sumur bor ke air bersih jaringan kota",
+        "Dukung taman resapan dan greening kota",
+      ],
+    },
+    {
+      id: "mangrove-hilang",
+      title: "Mangrove: Benteng yang Hilang",
+      category: "Banjir Rob",
+      region: "Jawa",
+      image: "https://images.unsplash.com/photo-1447752875315-247703c9f238?q=80&w=1200&auto=format&fit=crop",
+      alt: "Kanopi hijau dari udara di kawasan pesisir",
+      desc: "Indonesia punya mangrove terluas di dunia, tetapi luasnya terus menyusut. Padahal lereng bakau adalah pemecah gelombang alami yang melindungi pesisir dari rob dan abrasi.",
+      fakta: [
+        "Indonesia menyimpan ±3 juta ha mangrove — terluas di dunia",
+        "Sabuk mangrove cukup tebal mampu meredam energi gelombang secara signifikan",
+      ],
+      penyebab: [
+        "Alih fungsi hutan bakau menjadi tambak dan kawasan terbangun",
+        "Penebangan untuk arang dan kayu bangunan",
+      ],
+      aksi: [
+        "Ikut serta penanaman mangrove dengan spesies lokal",
+        "Lindungi area bakau yang masih utuh, jangan dibuka jadi tambak baru",
+      ],
+    },
+    {
+      id: "kanopi-sumatera",
+      title: "Kehilangan Kanopi Sumatera",
+      category: "Deforestasi",
+      region: "Sumatera",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop",
+      alt: "Cahaya menembus kanopi hutan tropis",
+      desc: "Sumatera menjadi episentrum deforestasi Indonesia. Hutan alam dibuka untuk perkebunan dan industri pulp, menyisakan fragmen hutan yang makin sulit bernapas.",
+      fakta: [
+        "±9,8 juta ha hutan Sumatera hilang dalam dua dekade terakhir",
+        "Lebih dari separuh tutupan hutan asli Sumatera telah berubah fungsi",
+      ],
+      penyebab: [
+        "Ekspansi perkebunan kelapa sawit",
+        "Konsesi industri pulp dan kertas di hutan alam",
+      ],
+      aksi: [
+        "Pilih produk bersertifikasi keberlanjutan (RSPO/FSC)",
+        "Dukung program koridor ekologis antarblok hutan",
+      ],
+    },
+    {
+      id: "gambut-terbakar",
+      title: "Gambut yang Kering dan Terbakar",
+      category: "Deforestasi",
+      region: "Kalimantan",
+      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1200&auto=format&fit=crop",
+      alt: "Asap tebal membumbung dari lahan terbakar",
+      desc: "Gambut yang dikeringkan oleh kanal mudah sekali terbakar saat kemarau. Api menyala di bawah permukaan tanah, sulit dipadamkan, dan melepas karbon yang tersimpan berabad-abad.",
+      fakta: [
+        "Kebakaran lahan 2019 menjangkau lebih dari 1,6 juta ha di Indonesia",
+        "Asap karhutla menaikkan risiko ISPA berkali lipat di wilayah terdampak",
+      ],
+      penyebab: [
+        "Kanal gambut mengeringkan lapisan organik",
+        "Pembukaan lahan dengan cara dibakar",
+      ],
+      aksi: [
+        "Dukung restorasi gambut (pembasahan kembali)",
+        "Laporkan titik api melalui saluran resmi BNPB/KLHK",
+      ],
+    },
+    {
+      id: "koridor-satwa",
+      title: "Koridor Satwa Terfragmentasi",
+      category: "Deforestasi",
+      region: "Sumatera",
+      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
+      alt: "Hutan berkabut yang terpotong kebun-kebun",
+      desc: "Hutan yang terpecah-pecah memutus jalur migrasi gajah dan harimau. Ketika habitat menyempit, konflik manusia-satwa meningkat — dan satwa selalu pihak yang kalah.",
+      fakta: [
+        "Habitat harimau Sumatera tersisa di fragmen-fragmen kecil hutan",
+        "Konflik gajah-manusia terjadi ratusan kasus per tahun di wilayah perbatasan hutan",
+      ],
+      penyebab: [
+        "Kebun dan permukiman memisahkan blok hutan",
+        "Jalur infrastruktur menembus koridor satwa",
+      ],
+      aksi: [
+        "Dukung skema pembangunan ramah satwa di sekitar hutan",
+        "Hindari produk yang berasal dari lahan pembukaan ilegal",
+      ],
+    },
+    {
+      id: "kemarau-panjang",
+      title: "Musim Kemarau yang Makin Panjang",
+      category: "Kekeringan",
+      region: "Jawa",
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
+      alt: "Ladang kering kecokelatan di musim kemarau",
+      desc: "Musim kemarau Indonesia memanjang seiring perubahan iklim. Sumber air menurun, panen terancam, dan kebakaran lahan semakin mudah terjadi.",
+      fakta: [
+        "Anomali curah hujan tercatat BMKG pada kemarau-kemarau ekstrem terakhir",
+        "Sebagian besar daerah aliran sungai nasional berstatus terdegradasi",
+      ],
+      penyebab: [
+        "Perubahan iklim memperpanjang durasi kemarau",
+        "Deforestasi hulu DAS mengurangi cadangan air tanah",
+      ],
+      aksi: [
+        "Praktikkan hemat air di rumah tangga",
+        "Bangun panen hujan sederhana di halaman atau sekolah",
+      ],
+    },
+    {
+      id: "sumur-mengering",
+      title: "Sumur Warga yang Mengering",
+      category: "Kekeringan",
+      region: "Jawa",
+      image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1200&auto=format&fit=crop",
+      alt: "Perbukitan kars yang sulit menyimpan air",
+      desc: "Di kawasan kars, air hujan cepat menghilang ke retakan batu. Saat kemarau, sumur dan mataair warga mengering dan truk tangki menjadi satu-satunya harapan.",
+      fakta: [
+        "Wilayah kars menyimpan air di bawah tanah yang sulit dijangkau sumur biasa",
+        "Ratusan desa rawan kekeringan terbantu operasi air bersih saat kemarau puncak",
+      ],
+      penyebab: [
+        "Geologi kars tidak mampu menahan air di permukaan",
+        "Penebangan tutupan lahan mempercepat limpasan hujan",
+      ],
+      aksi: [
+        "Dukung pembangunan embung dan sumur resapan",
+        "Kelola rumah tangga dengan satuan air hemat",
+      ],
+    },
+    {
+      id: "el-nino-ladang",
+      title: "Ladang Pecah karena El Niño",
+      category: "Kekeringan",
+      region: "Kalimantan",
+      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1200&auto=format&fit=crop",
+      alt: "Lahan pertanian yang layu saat kemarau",
+      desc: "Saat El Niño menguat, kemarau di Kalimantan berubah parah: ladang gagal panen, gambut terbakar, dan asap menutup langit berminggu-minggu.",
+      fakta: [
+        "El Niño 2015 dan 2019 memicu kemarau dan karhutla paling parah dekade ini",
+        "Gagal panen meluas saat musim kemarau ekstrem berlangsung",
+      ],
+      penyebab: [
+        "Anomali suhu permukaan laut Pasifik mengubah pola hujan",
+        "Lahan gambut kering menjadi mudah terbakar",
+      ],
+      aksi: [
+        "Gunakan varietas tanam tahan kering",
+        "Perlindungan asuransi pertanian untuk petani kecil",
+      ],
+    },
+    {
+      id: "sungai-plastik",
+      title: "Sungai Beralas Plastik",
+      category: "Limbah Plastik",
+      region: "Jawa",
+      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1200&auto=format&fit=crop",
+      alt: "Aliran sungai yang terlihat dari udara",
+      desc: "Sungai-sungai besar Jawa termasuk yang paling banyak membawa sampah plastik ke laut di dunia. Setiap hujan deras, plastik dari permukiman mengalir ke hilir tanpa saringan.",
+      fakta: [
+        "Beberapa sungai Jawa masuk daftar penyumbang plastik laut terbesar global",
+        "Sampah plastik mendominasi komposisi sampah sungai perkotaan",
+      ],
+      penyebab: [
+        "Konsumsi plastik sekali pakai yang tinggi",
+        "Kapasitas pengelolaan sampah kota yang terbatas",
+      ],
+      aksi: [
+        "Pilah sampah rumah: organik, anorganik, sisa",
+        "Tolak kantong plastik, bawa tas belanja sendiri",
+      ],
+    },
+    {
+      id: "mikroplastik-piring",
+      title: "Mikroplastik di Meja Makan",
+      category: "Limbah Plastik",
+      region: "Jawa",
+      image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=1200&auto=format&fit=crop",
+      alt: "Tangan yang menumbuhkan tanaman makanan",
+      desc: "Plastik yang dibuang tak pernah benar-benar hilang — ia pecah menjadi partikel mikro, masuk ke garam, ikan, dan air minum, lalu kembali ke piring kita.",
+      fakta: [
+        "Mikroplastik terdeteksi pada sebagian besar sampel garam laut yang diteliti",
+        "Ikan konsumsi umum ditemukan mengandung partikel mikroplastik",
+      ],
+      penyebab: [
+        "Degradasi sampah plastik menjadi partikel mikro",
+        "Serat sintetis dari pencucian pakaian",
+      ],
+      aksi: [
+        "Kurangi plastik sekali pakai di dapur",
+        "Pilih serat alami dan saring air minum",
+      ],
+    },
+    {
+      id: "laut-timur-plastik",
+      title: "Plastik Sampai ke Laut Timur",
+      category: "Limbah Plastik",
+      region: "Papua",
+      image: "https://images.unsplash.com/photo-1476610182048-b716b8518aae?q=80&w=1200&auto=format&fit=crop",
+      alt: "Pesisir dan perairan di kawasan timur Indonesia",
+      desc: "Arus lintas laut membawa sampah hingga ke perairan timur Indonesia. Kawasan yang begitu terpencil pun kini tidak luput dari plastik.",
+      fakta: [
+        "Estimasi ratusan ribu ton plastik Indonesia masuk laut setiap tahun",
+        "Sampah plastik tercatat di kawasan konservasi pesisir timur Indonesia",
+      ],
+      penyebab: [
+        "Layanan pengelolaan sampah di wilayah timur masih terbatas",
+        "Arus laut memindahkan sampah antarperairan",
+      ],
+      aksi: [
+        "Ikut bersih-bersih pesisir (beach clean-up) saat berkunjung",
+        "Turunkan plastik kantor dan rumah: botol refill, tanpa sedotan",
+      ],
+    },
   ],
 
   /* ------------------------------------------------------------
@@ -197,11 +428,44 @@ const SITE_DATA = {
       id: "tumbler",
       icon: "cup-soda",
       title: "Bawa Tumbler Sendiri",
-      desc: "Mengganti air kemasan plastik satu kali pakai.",
+      desc: "Mengganti air kemasan plastik sekali pakai di luar rumah.",
       co2: 38, plastic: 156,
     },
-    // TODO Dev B: tambahkan 5 aksi lain (hemat listrik, transportasi umum,
-    // tanam pohon, kurangi plastik sekali pakai, kurangi daging merah)
+    {
+      id: "tas-belanja",
+      icon: "shopping-bag",
+      title: "Bawa Tas Belanja Sendiri",
+      desc: "Menolak kantong plastik di minimarket dan pasar.",
+      co2: 25, plastic: 300,
+    },
+    {
+      id: "hemat-listrik",
+      icon: "zap",
+      title: "Hemat Listrik di Rumah",
+      desc: "Matikan perangkat standby, atur suhu AC masuk akal.",
+      co2: 250, plastic: 0,
+    },
+    {
+      id: "transportasi-hijau",
+      icon: "bike",
+      title: "Naik Umum / Sepeda",
+      desc: "Kurangi kendaraan pribadi untuk rute harian pendek.",
+      co2: 500, plastic: 0,
+    },
+    {
+      id: "tanam-pohon",
+      icon: "tree-pine",
+      title: "Tanam & Rawat 1 Pohon/Bulan",
+      desc: "Pohon yang dirawat menyerap karbon bertahun-tahun ke depan.",
+      co2: 252, plastic: 0,
+    },
+    {
+      id: "kurangi-daging",
+      icon: "utensils",
+      title: "Kurangi Daging Merah",
+      desc: "Ganti beberapa porsi daging merah per minggu dengan nabati.",
+      co2: 300, plastic: 0,
+    },
   ],
 
   /* ------------------------------------------------------------
@@ -209,7 +473,7 @@ const SITE_DATA = {
      ------------------------------------------------------------ */
   TIMELINE: [
     {
-      icon: "user-activity",
+      icon: "factory",
       title: "Aktivitas Manusia",
       desc: "Ekspansi ekonomi — perkebunan, tambang, kota — menuntut lahan dan sumber daya yang jauh melampaui daya dukung ekosistem.",
     },

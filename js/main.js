@@ -2,9 +2,11 @@
    LukaNusantara — js/main.js
    Dispatcher per halaman via <body data-page="...">.
 
-   Pemilik bagian (lihat PLAN.md):
+   Catatan tim (lihat PLAN.md):
    - Dev A (Rasya) : initHome (hero, statistik, peta), initNav
-   - Dev B (Tamam) : initEksplorasi, initContact  ← cari "TODO Dev B"
+   - Dev B (Tamam) : rencananya initEksplorasi & initContact —
+     saat integrasi final bagian ini diimplementasikan oleh Dev A
+     atas nama Dev B agar hasil akhir utuh untuk demo.
    ============================================================ */
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -190,40 +192,393 @@ function initHome() {
 }
 
 /* ============================================================
-   EKSPLORASI — filter, slider, modal  (Dev B)
+   EKSPLORASI — filter, galeri, slider, modal
    ============================================================ */
+
+let currentFilter = "Semua";
+
+function shortDesc(text, max = 110) {
+  return text.length > max ? text.slice(0, max).replace(/\s+\S*$/, "") + "…" : text;
+}
+
+/* Chip filter: "Semua" + kategori unik dari GALLERY */
+function renderFilter() {
+  const bar = $("#filter-bar");
+  if (!bar) return;
+  const cats = ["Semua", ...new Set(SITE_DATA.GALLERY.map((g) => g.category))];
+  bar.innerHTML = cats
+    .map((c) => {
+      const active = c === currentFilter;
+      return `<button class="filter-chip font-mono text-xs px-4 py-2 rounded-full border transition ${
+        active
+          ? "bg-leaf-400 text-deep-950 border-leaf-400"
+          : "border-deep-600 text-mist hover:border-leaf-400 hover:text-sand"
+      }" data-cat="${c}">${c}</button>`;
+    })
+    .join("");
+  $$(".filter-chip", bar).forEach((btn) =>
+    btn.addEventListener("click", () => {
+      if (btn.dataset.cat === currentFilter) return;
+      currentFilter = btn.dataset.cat;
+      renderFilter();
+      transitionGallery();
+    })
+  );
+}
+
+/* Transisi keluar → render ulang grid dengan stagger */
+function transitionGallery() {
+  const grid = $("#gallery-grid");
+  if (!grid || !grid.children.length || !ANIM.hasAnime()) {
+    renderGallery();
+    return;
+  }
+  anime({
+    targets: grid.children,
+    opacity: [1, 0],
+    translateY: [0, -14],
+    duration: 250,
+    easing: "easeInQuad",
+    complete: renderGallery,
+  });
+}
+
+/* Kartu galeri sesuai filter aktif */
+function renderGallery() {
+  const grid = $("#gallery-grid");
+  if (!grid) return;
+  const items =
+    currentFilter === "Semua"
+      ? SITE_DATA.GALLERY
+      : SITE_DATA.GALLERY.filter((g) => g.category === currentFilter);
+
+  if (!items.length) {
+    grid.innerHTML = `<p class="col-span-full text-center text-mist py-16">Belum ada kasus pada kategori ini.</p>`;
+    return;
+  }
+
+  grid.innerHTML = items
+    .map(
+      (g) => `
+    <button class="gallery-card text-left bg-deep-800 border border-deep-700 rounded-2xl overflow-hidden hover:border-leaf-400/60 transition group" data-id="${g.id}">
+      <div class="relative h-44 overflow-hidden">
+        <img src="${g.image}" alt="${g.alt}" onerror="__imgFallback(this)"
+             class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-deep-950/85 border border-deep-600 font-mono text-[10px] uppercase tracking-widest text-leaf-300">${g.category}</span>
+      </div>
+      <div class="p-5">
+        <h3 class="font-display font-bold text-lg leading-snug">${g.title}</h3>
+        <p class="mt-2 font-mono text-[10px] uppercase tracking-widest text-mist/70">Lokasi: ${g.region}</p>
+        <p class="mt-3 text-sm text-mist leading-relaxed">${shortDesc(g.desc)}</p>
+        <p class="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-leaf-300">Buka modul edukasi <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></p>
+      </div>
+    </button>`
+    )
+    .join("");
+
+  $$(".gallery-card", grid).forEach((card) =>
+    card.addEventListener("click", () => {
+      const item = SITE_DATA.GALLERY.find((x) => x.id === card.dataset.id);
+      if (item) openModal(item);
+    })
+  );
+
+  ANIM.refreshIcons();
+  ANIM.animateIn(grid.children, { y: 22, stagger: 70 });
+}
+
+/* Before-after slider: pointer drag menggeser pembatas */
+function initBeforeAfter() {
+  const wrap = $("#ba");
+  if (!wrap) return;
+  const after = $("#ba-after");
+  const handle = $("#ba-handle");
+  const setPos = (clientX) => {
+    const rect = wrap.getBoundingClientRect();
+    let pct = ((clientX - rect.left) / rect.width) * 100;
+    pct = Math.max(2, Math.min(98, pct));
+    after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+    handle.style.left = pct + "%";
+    wrap.style.setProperty("--pos", pct + "%");
+  };
+  wrap.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    wrap.setPointerCapture(e.pointerId);
+    setPos(e.clientX);
+  });
+  wrap.addEventListener("pointermove", (e) => {
+    if (e.buttons) setPos(e.clientX);
+  });
+}
+
+/* Modal detail edukasi */
+function initModal() {
+  const modal = $("#detail-modal");
+  if (!modal) return;
+  modal.addEventListener("click", (e) => {
+    if (e.target.id === "modal-backdrop" || e.target.closest("#modal-close")) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+  });
+}
+
+function openModal(item) {
+  const modal = $("#detail-modal");
+  const content = $("#modal-content");
+  content.innerHTML = `
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <span class="inline-block px-2.5 py-1 rounded-full bg-leaf-400/10 border border-leaf-400/40 font-mono text-[10px] uppercase tracking-widest text-leaf-300">${item.category}</span>
+        <h3 class="mt-3 font-display font-bold text-2xl md:text-3xl leading-snug">${item.title}</h3>
+        <p class="mt-1 font-mono text-[11px] uppercase tracking-widest text-mist/70">Lokasi: ${item.region}</p>
+      </div>
+      <button id="modal-close" class="p-2 rounded-full border border-deep-600 text-mist hover:text-sand hover:border-leaf-400 transition shrink-0" aria-label="Tutup modal">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+    <img src="${item.image}" alt="${item.alt}" onerror="__imgFallback(this)" loading="lazy"
+         class="mt-5 w-full h-52 md:h-64 object-cover rounded-xl border border-deep-700" />
+    <p class="mt-5 text-sm md:text-base text-mist leading-relaxed">${item.desc}</p>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-deep-950/60 border border-deep-700 rounded-xl p-4">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-leaf-400 mb-3">Fakta Data</p>
+        <ul class="space-y-2">${item.fakta
+          .map((f) => `<li class="flex gap-2 text-xs text-mist leading-relaxed"><i data-lucide="database" class="w-3.5 h-3.5 text-leaf-400 shrink-0 mt-0.5"></i>${f}</li>`)
+          .join("")}</ul>
+      </div>
+      <div class="bg-deep-950/60 border border-deep-700 rounded-xl p-4">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-amber-400 mb-3">Penyebab Ekologis</p>
+        <ul class="space-y-2">${item.penyebab
+          .map((p) => `<li class="flex gap-2 text-xs text-mist leading-relaxed"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5"></i>${p}</li>`)
+          .join("")}</ul>
+      </div>
+      <div class="bg-deep-950/60 border border-deep-700 rounded-xl p-4">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-tealx-400 mb-3">Aksi Pencegahan</p>
+        <ul class="space-y-2">${item.aksi
+          .map((a) => `<li class="flex gap-2 text-xs text-mist leading-relaxed"><i data-lucide="sprout" class="w-3.5 h-3.5 text-tealx-400 shrink-0 mt-0.5"></i>${a}</li>`)
+          .join("")}</ul>
+      </div>
+    </div>`;
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  ANIM.refreshIcons();
+  ANIM.animateIn(content.children, { y: 16, stagger: 50 });
+}
+
+function closeModal() {
+  const modal = $("#detail-modal");
+  modal.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
 function initEksplorasi() {
-  // TODO Dev B (tugas B2–B4):
-  // 1. Render chip filter dari kategori unik SITE_DATA.GALLERY (+"Semua")
-  // 2. Render grid kartu galeri; animasikan dengan ANIM.animateIn()
-  // 3. Before-after slider: pointer drag pada .ba-handle (touch-action sudah diatur CSS)
-  // 4. Modal: klik kartu → isi #detail-modal dari item → ANIM.refreshIcons()
-  //    Jangan lupa ikon <i data-lucide="..."> dan onerror="__imgFallback(this)" pada <img>.
+  renderFilter();
+  renderGallery();
+  initBeforeAfter();
+  initModal();
 }
 
 /* ============================================================
-   ABOUT — timeline, sumber data, tim  (opsional)
+   ABOUT — timeline, sumber data, tim
    ============================================================ */
+
+function renderTimeline() {
+  const wrap = $("#timeline");
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="absolute left-[27px] top-2 bottom-6 w-px timeline-line"></div>
+    ${SITE_DATA.TIMELINE.map(
+      (t) => `
+    <div class="timeline-item relative flex gap-5 pb-10 last:pb-0 opacity-0">
+      <div class="relative z-10 w-14 h-14 shrink-0 rounded-full bg-deep-950 border-2 border-deep-600 flex items-center justify-center">
+        <i data-lucide="${t.icon}" class="w-6 h-6 text-leaf-400"></i>
+      </div>
+      <div class="flex-1 bg-deep-800 border border-deep-700 rounded-2xl p-5">
+        <h3 class="font-display font-bold text-lg">${t.title}</h3>
+        <p class="mt-2 text-sm text-mist leading-relaxed">${t.desc}</p>
+      </div>
+    </div>`
+    ).join("")}
+  `;
+  $$(".timeline-item", wrap).forEach((item) =>
+    ANIM.observeOnce(item, (el) => {
+      ANIM.refreshIcons();
+      ANIM.animateIn(el, { y: 26, stagger: 0 });
+    }, 0.2)
+  );
+  ANIM.refreshIcons();
+}
+
+function renderSources() {
+  const wrap = $("#sources-list");
+  if (!wrap) return;
+  wrap.innerHTML = SITE_DATA.SOURCES.map(
+    (s) => `
+    <a href="${s.url}" target="_blank" rel="noopener noreferrer"
+       class="flex items-center justify-between gap-4 bg-deep-800 border border-deep-700 rounded-xl p-4 hover:border-leaf-400/60 transition group opacity-0">
+      <div>
+        <p class="font-display font-semibold text-sand group-hover:text-leaf-300 transition">${s.name}</p>
+        <p class="mt-1 text-xs text-mist leading-relaxed">${s.desc}</p>
+      </div>
+      <i data-lucide="external-link" class="w-4 h-4 text-mist group-hover:text-leaf-300 transition shrink-0"></i>
+    </a>`
+  ).join("");
+  $$("a", wrap).forEach((a) =>
+    ANIM.observeOnce(a, (el) => {
+      el.style.opacity = "1";
+      ANIM.animateIn(el, { y: 16, stagger: 0 });
+    }, 0.3)
+  );
+  ANIM.refreshIcons();
+}
+
+function renderTeam() {
+  const wrap = $("#team-grid");
+  if (!wrap) return;
+  wrap.innerHTML = SITE_DATA.TEAM.map(
+    (t) => `
+    <div class="bg-deep-800 border border-deep-700 rounded-2xl p-6 opacity-0">
+      <p class="font-display font-bold text-lg">${t.name}</p>
+      <span class="inline-block mt-2 px-2.5 py-1 rounded-full bg-leaf-400/10 border border-leaf-400/40 font-mono text-[10px] uppercase tracking-widest text-leaf-300">${t.role}</span>
+      <p class="mt-3 text-sm text-mist leading-relaxed">${t.desc}</p>
+    </div>`
+  ).join("");
+  $$(".bg-deep-800", wrap).forEach((card) =>
+    ANIM.observeOnce(card, (el) => {
+      el.style.opacity = "1";
+      ANIM.animateIn(el, { y: 20, stagger: 0 });
+    }, 0.3)
+  );
+}
+
 function initAbout() {
-  // TODO (tugas C1):
-  // 1. Render SITE_DATA.TIMELINE → #timeline (scroll reveal per item: ANIM.observeOnce + ANIM.animateIn)
-  // 2. Render SITE_DATA.SOURCES → #sources-list (kartu + link eksternal)
-  // 3. Render SITE_DATA.TEAM → #team-grid
+  renderTimeline();
+  renderSources();
+  renderTeam();
 }
 
 /* ============================================================
-   CONTACT — kalkulator hijau & form  (Dev B)
+   CONTACT — kalkulator komitmen hijau & form laporan
    ============================================================ */
+
+function renderActions() {
+  const list = $("#actions-list");
+  if (!list) return;
+  list.innerHTML = SITE_DATA.ACTIONS.map(
+    (a) => `
+    <label class="action-card cursor-pointer bg-deep-800 border border-deep-700 rounded-2xl p-5 flex gap-4 items-start hover:border-leaf-400/50 transition">
+      <input type="checkbox" data-id="${a.id}" class="sr-only action-check-input" />
+      <span class="action-check w-6 h-6 rounded-full border-2 border-deep-600 flex items-center justify-center shrink-0 mt-0.5 transition">
+        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+      </span>
+      <span class="min-w-0">
+        <span class="flex items-center gap-2 font-display font-semibold text-sand">
+          <i data-lucide="${a.icon}" class="w-4 h-4 text-leaf-400"></i>${a.title}
+        </span>
+        <span class="block mt-1 text-xs text-mist leading-relaxed">${a.desc}</span>
+        <span class="inline-block mt-2 px-2 py-0.5 rounded-full bg-deep-950/70 border border-deep-600 font-mono text-[10px] text-leaf-300">
+          hemat ${a.co2} kg CO&#8322;e/thn${a.plastic ? ` &middot; ${a.plastic} item plastik` : ""}
+        </span>
+      </span>
+    </label>`
+  ).join("");
+
+  $$("input.action-check-input", list).forEach((input) =>
+    input.addEventListener("change", () => {
+      input.closest(".action-card").classList.toggle("is-checked", input.checked);
+      updateImpact();
+    })
+  );
+  ANIM.refreshIcons();
+  ANIM.animateIn(list.children, { y: 20, stagger: 60 });
+}
+
+/* Jumlahkan dampak aksi tercentang → angka + progress bar */
+function updateImpact() {
+  const checked = $$("#actions-list input.action-check-input:checked").map((i) =>
+    SITE_DATA.ACTIONS.find((a) => a.id === i.dataset.id)
+  );
+  const co2 = checked.reduce((s, a) => s + a.co2, 0);
+  const plastic = checked.reduce((s, a) => s + (a.plastic || 0), 0);
+  ANIM.countUp($("#calc-co2"), co2, 800);
+  ANIM.countUp($("#calc-plastic"), plastic, 800);
+  const pct = Math.min(100, Math.round((co2 / 1000) * 100));
+  ANIM.setProgress($("#calc-progress"), pct);
+  $("#calc-percent").textContent = pct + "%";
+}
+
+/* Validasi & konfirmasi form laporan */
+function bindReportForm() {
+  const form = $("#report-form");
+  if (!form) return;
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const rules = [
+    { el: "#f-nama", test: (v) => v.trim().length >= 3, msg: "Nama minimal 3 karakter." },
+    { el: "#f-email", test: (v) => EMAIL_RE.test(v.trim()), msg: "Format email tidak valid." },
+    { el: "#f-kategori", test: (v) => v !== "", msg: "Pilih salah satu kategori." },
+    { el: "#f-pesan", test: (v) => v.trim().length >= 10, msg: "Pesan minimal 10 karakter." },
+  ];
+  const showError = (input, msg) => {
+    const err = input.parentElement.querySelector(".form-error");
+    err.textContent = msg;
+    err.classList.remove("hidden");
+    input.classList.add("border-rose-400");
+  };
+  const clearError = (input) => {
+    const err = input.parentElement.querySelector(".form-error");
+    if (err) err.classList.add("hidden");
+    input.classList.remove("border-rose-400");
+  };
+  rules.forEach(({ el }) => {
+    const input = $(el);
+    input.addEventListener("input", () => clearError(input));
+    input.addEventListener("change", () => clearError(input));
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let valid = true;
+    rules.forEach(({ el, test, msg }) => {
+      const input = $(el);
+      if (!test(input.value)) {
+        valid = false;
+        showError(input, msg);
+      }
+    });
+    if (!valid) return;
+
+    /* Demo: simpan lokal di peramban, tanpa server */
+    const data = Object.fromEntries(new FormData(form));
+    const reports = JSON.parse(localStorage.getItem("ln_reports") || "[]");
+    reports.push({ ...data, waktu: new Date().toISOString() });
+    localStorage.setItem("ln_reports", JSON.stringify(reports));
+
+    form.classList.add("hidden");
+    const success = $("#form-success");
+    success.classList.remove("hidden");
+    ANIM.refreshIcons();
+    ANIM.animateIn(success, { y: 20, stagger: 0 });
+    const svg = success.querySelector("svg");
+    if (svg) ANIM.drawLines(svg, { duration: 800, stagger: 300 });
+    success.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  const resetBtn = $("#success-reset");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+      form.classList.remove("hidden");
+      $("#form-success").classList.add("hidden");
+      ANIM.animateIn(form, { y: 16, stagger: 0 });
+      form.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
+}
+
 function initContact() {
-  // TODO Dev B (tugas B6–B7):
-  // 1. Render SITE_DATA.ACTIONS → #actions-list (checkbox kartu: icon, title, desc,
-  //    "hemat X kg CO₂e + Y plastik/tahun")
-  // 2. Saat checklist berubah: jumlahkan co2 & plastic yang dipilih → update
-  //    #calc-co2, #calc-plastic (ANIM.countUp) dan progress bar #calc-progress
-  //    lewat ANIM.setProgress (target acuan: 1000 kg CO₂e/tahun, tampilkan %).
-  // 3. Form (#report-form): validasi required + email regex; pesan error di
-  //    .form-error; sukses → sembunyikan form, tampilkan #form-success dengan
-  //    animasi check (ANIM.drawLines pada path .draw-line di dalam svg).
+  renderActions();
+  bindReportForm();
 }
 
 /* ============================================================

@@ -38,18 +38,18 @@ Sisa pekerjaan (`about.html`, kurasi foto) diambil siapa yang lebih dulu selesai
 ### Dev B (Tamam) — TODO
 | # | Tugas | File | Status |
 |---|-------|------|--------|
-| B1 | Isi data `GALLERY` (±12 kartu, 4 kategori) | `js/data.js` | ⬜ |
-| B2 | Filter kategori + stagger grid | `eksplorasi.html`, `js/main.js` → `initEksplorasi()` | ⬜ |
-| B3 | Before-after slider (pointer drag) | `eksplorasi.html` | ⬜ |
-| B4 | Modal detail edukasi | `eksplorasi.html` | ⬜ |
-| B5 | Isi data `ACTIONS` | `js/data.js` | ⬜ |
-| B6 | Kalkulator komitmen hijau + progress bar | `contact.html`, `js/main.js` → `initContact()` | ⬜ |
-| B7 | Form laporan: validasi + animasi konfirmasi | `contact.html` | ⬜ |
+| B1 | Isi data `GALLERY` (±12 kartu, 4 kategori) | `js/data.js` | ✔ |
+| B2 | Filter kategori + stagger grid | `eksplorasi.html`, `js/main.js` → `initEksplorasi()` | ✔ |
+| B3 | Before-after slider (pointer drag) | `eksplorasi.html` | ✔ |
+| B4 | Modal detail edukasi | `eksplorasi.html` | ✔ |
+| B5 | Isi data `ACTIONS` | `js/data.js` | ✔ |
+| B6 | Kalkulator komitmen hijau + progress bar | `contact.html`, `js/main.js` → `initContact()` | ✔ |
+| B7 | Form laporan: validasi + animasi konfirmasi | `contact.html` | ✔ |
 
 ### Sisa (opsional, siapa duluan)
 | # | Tugas | File | Status |
 |---|-------|------|--------|
-| C1 | `about.html`: misi, timeline scroll-triggered, sumber data, tim | `about.html`, `js/main.js` → `initAbout()` | ⬜ |
+| C1 | `about.html`: misi, timeline scroll-triggered, sumber data, tim | `about.html`, `js/main.js` → `initAbout()` | ✔ |
 | C2 | Isi data `TIMELINE`, `SOURCES`, `TEAM` | `js/data.js` | ✔ (data dasar sudah diisi Dev A) |
 | C3 | Kurasi foto Unsplash + fallback placeholder | `js/data.js` | ⬜ |
 

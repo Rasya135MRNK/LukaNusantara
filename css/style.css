@@ -92,6 +92,19 @@ body {
   );
 }
 
+/* ------------------------------------------------------------
+   Kalkulator aksi hijau (halaman Contact) — kartu tercentang
+   ------------------------------------------------------------ */
+.action-card.is-checked {
+  border-color: #34d399;
+  background: rgba(52, 211, 153, 0.08);
+}
+.action-card.is-checked .action-check {
+  border-color: #34d399;
+  background: #34d399;
+  color: #07120d;
+}
+
 /* Reduksi gerak untuk aksesibilitas */
 @media (prefers-reduced-motion: reduce) {
   .marker-pulse {
