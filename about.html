@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — LukaNusantara</title>
+  <meta name="description" content="Misi LukaNusantara, timeline edukasi ekologis, transparansi sumber data, dan profil tim." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E" />
+
+  <!-- ============ TEMPLATE HEAD BERSAMA (jangan ubah versi CDN) ============ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep: { 950: "#07120D", 900: "#0B1A13", 800: "#0F2418", 700: "#153223", 600: "#1E4530" },
+            leaf: { 300: "#6EE7B7", 400: "#34D399" },
+            tealx: { 400: "#2DD4BF" },
+            sand: "#E7E4D9",
+            mist: "#9CB4A7",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- ===================================================================== -->
+</head>
+
+<body data-page="about" class="bg-deep-950 text-sand font-body min-h-screen">
+
+  <!-- ================= NAVBAR (komponen bersama, jangan ubah) ================= -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-deep-950/80 backdrop-blur border-b border-deep-700">
+    <nav class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-display font-bold text-lg">
+        <i data-lucide="leaf" class="w-5 h-5 text-leaf-400"></i>
+        Luka<span class="text-leaf-400">Nusantara</span>
+      </a>
+      <div class="hidden md:flex items-center gap-1 font-mono text-xs uppercase tracking-widest">
+        <a href="index.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Home</a>
+        <a href="eksplorasi.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Eksplorasi</a>
+        <a href="about.html" class="px-4 py-2 rounded-full bg-leaf-400/10 text-leaf-300 border border-leaf-400/30">About</a>
+        <a href="contact.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Contact</a>
+      </div>
+      <button id="nav-toggle" class="md:hidden p-2 text-mist hover:text-sand" aria-label="Buka menu" aria-expanded="false">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </nav>
+    <div id="nav-menu-mobile" class="hidden md:hidden border-t border-deep-700 bg-deep-950/95 backdrop-blur px-4 py-3 font-mono text-xs uppercase tracking-widest">
+      <a href="index.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Home</a>
+      <a href="eksplorasi.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Eksplorasi</a>
+      <a href="about.html" class="block px-3 py-2 rounded-lg bg-leaf-400/10 text-leaf-300">About</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Contact</a>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- ================= JUDUL HALAMAN ================= -->
+    <section class="py-14 md:py-20">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Tentang Kami</p>
+        <h1 class="mt-3 font-display font-bold text-3xl md:text-5xl">Mengapa Luka Ini Perlu Disuarakan</h1>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-2xl leading-relaxed">
+          Kerusakan ekologis sering dianggap "berita biasa" karena tak terlihat dari layar.
+          LukaNusantara menghadapkannya kembali pada kita — dengan data, bukan drama.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= MISI ================= -->
+    <section class="pb-16 md:pb-24">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-deep-800 border border-deep-700 rounded-2xl p-6">
+          <i data-lucide="database" class="w-6 h-6 text-leaf-400"></i>
+          <h3 class="mt-4 font-display font-bold text-lg">Berbasis Data Resmi</h3>
+          <p class="mt-2 text-sm text-mist leading-relaxed">
+            Setiap angka merujuk laporan lembaga resmi — BNPB, BMKG, KLHK — agar edukasi tidak berubah menjadi hoaks.
+          </p>
+        </div>
+        <div class="bg-deep-800 border border-deep-700 rounded-2xl p-6">
+          <i data-lucide="book-open" class="w-6 h-6 text-leaf-400"></i>
+          <h3 class="mt-4 font-display font-bold text-lg">Edukasi yang Mudah Dicerna</h3>
+          <p class="mt-2 text-sm text-mist leading-relaxed">
+            Fenomena ekologis kompleks diterjemahkan menjadi cerita, peta, dan komparasi visual yang dekat dengan keseharian.
+          </p>
+        </div>
+        <div class="bg-deep-800 border border-deep-700 rounded-2xl p-6">
+          <i data-lucide="heart-handshake" class="w-6 h-6 text-leaf-400"></i>
+          <h3 class="mt-4 font-display font-bold text-lg">Berujung pada Aksi</h3>
+          <p class="mt-2 text-sm text-mist leading-relaxed">
+            Kita tidak berhenti pada kesadaran: setiap materi diarahkan pada langkah mitigasi yang bisa dimulai hari ini.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TIMELINE EDUKASI (TODO: C1) ================= -->
+    <section class="pb-16 md:pb-24 bg-deep-900">
+      <div class="max-w-4xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Alur Sebab-Akibat</p>
+        <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl">Dari Tangan Manusia ke Tangan Manusia Juga</h2>
+
+        <!-- TODO (C1): render SITE_DATA.TIMELINE → #timeline.
+             Pola: kolom kiri ikon lingkaran (border-deep-600, ikon lucide),
+             kolom kanan kartu isi; garis vertikal .timeline-line di tengah;
+             tiap item scroll-reveal via ANIM.observeOnce + ANIM.animateIn -->
+        <div id="timeline" class="mt-12 relative"></div>
+      </div>
+    </section>
+
+    <!-- ================= SUMBER DATA & TIM (TODO: C1) ================= -->
+    <section class="pb-16 md:pb-24">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Transparansi Sumber</p>
+          <h2 class="mt-3 font-display font-bold text-2xl md:text-3xl">Data Kami Bisa Kamu Periksa</h2>
+          <!-- TODO (C1): render SITE_DATA.SOURCES → #sources-list
+               (kartu: nama lembaga, desc, link eksternal ikon external-link) -->
+          <div id="sources-list" class="mt-8 space-y-4"></div>
+        </div>
+
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Tim Pembuat Karya</p>
+          <h2 class="mt-3 font-display font-bold text-2xl md:text-3xl">Dua Orang yang Peduli</h2>
+          <!-- TODO (C1): render SITE_DATA.TEAM → #team-grid
+               (kartu: nama, role chip, desc) -->
+          <div id="team-grid" class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER (komponen bersama, jangan ubah) ================= -->
+  <footer class="border-t border-deep-700 py-10">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <p class="flex items-center gap-2 font-display font-bold text-lg">
+          <i data-lucide="leaf" class="w-5 h-5 text-leaf-400"></i>
+          Luka<span class="text-leaf-400">Nusantara</span>
+        </p>
+        <p class="mt-3 text-sm text-mist leading-relaxed">
+          Interactive storytelling bencana ekologis Indonesia berbasis data resmi.
+        </p>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Navigasi</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="text-mist hover:text-leaf-300 transition">Home</a></li>
+          <li><a href="eksplorasi.html" class="text-mist hover:text-leaf-300 transition">Eksplorasi</a></li>
+          <li><a href="about.html" class="text-mist hover:text-leaf-300 transition">About</a></li>
+          <li><a href="contact.html" class="text-mist hover:text-leaf-300 transition">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Sumber Data</p>
+        <p class="text-sm text-mist leading-relaxed">
+          BNPB &middot; BMKG &middot; KLHK &middot; BRIN &middot; Global Forest Watch
+        </p>
+        <p class="mt-3 text-xs text-mist/60 leading-relaxed">
+          Seluruh konten bebas SARA, pornografi, dan hoaks. Angka merujuk laporan lembaga resmi.
+        </p>
+      </div>
+    </div>
+    <p class="mt-8 text-center font-mono text-[11px] text-mist/50">
+      &copy; <span id="year">2026</span> LukaNusantara &mdash; EcoDigital For Environment
+    </p>
+  </footer>
+
+  <!-- ============ SCRIPTS BERSAMA (urutan & versi jangan diubah) ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/data.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

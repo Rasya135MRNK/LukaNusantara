@@ -1,0 +1,110 @@
+/* ============================================================
+   LukaNusantara — css/style.css
+   Styling kustom di luar Tailwind (dipakai semua halaman).
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(52, 211, 153, 0.25);
+  color: #e7e4d9;
+}
+
+/* Scrollbar kustom (Firefox + Chromium) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e4530 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #1e4530;
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #34d399;
+}
+
+/* ------------------------------------------------------------
+   Marker peta — denyut (pulse) murni CSS agar ringan
+   ------------------------------------------------------------ */
+@keyframes marker-pulse {
+  0%   { transform: scale(0.6); opacity: 0.7; }
+  70%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.marker-pulse {
+  animation: marker-pulse 2.2s ease-out infinite;
+}
+
+/* Marker aktif */
+.marker-btn.is-active .marker-dot {
+  background: #34d399;
+  transform: scale(1.35);
+}
+.marker-btn.is-active .marker-pulse {
+  background: rgba(52, 211, 153, 0.5);
+}
+
+/* ------------------------------------------------------------
+   Garis kontur hero — awal tersembunyi, digambar oleh Anime.js
+   ------------------------------------------------------------ */
+.draw-line {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+}
+
+/* Kata pada text reveal — awal tersembunyi (JS animasikan masuk) */
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+}
+
+/* ------------------------------------------------------------
+   Kursor penggeser before-after (halaman Eksplorasi, Dev B)
+   ------------------------------------------------------------ */
+.ba-handle {
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+}
+
+/* Timeline garis vertikal (halaman About) */
+.timeline-line {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #1e4530 8%,
+    #1e4530 92%,
+    transparent
+  );
+}
+
+/* Reduksi gerak untuk aksesibilitas */
+@media (prefers-reduced-motion: reduce) {
+  .marker-pulse {
+    animation: none;
+    opacity: 0;
+  }
+  .draw-line {
+    stroke-dashoffset: 0;
+  }
+  .reveal-word {
+    opacity: 1;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

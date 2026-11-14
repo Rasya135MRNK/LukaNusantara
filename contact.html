@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Aksi — LukaNusantara</title>
+  <meta name="description" content="Hitung dampak positif aksi harianmu dan sampaikan laporan lingkungan di sekitarmu." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E" />
+
+  <!-- ============ TEMPLATE HEAD BERSAMA (jangan ubah versi CDN) ============ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep: { 950: "#07120D", 900: "#0B1A13", 800: "#0F2418", 700: "#153223", 600: "#1E4530" },
+            leaf: { 300: "#6EE7B7", 400: "#34D399" },
+            tealx: { 400: "#2DD4BF" },
+            sand: "#E7E4D9",
+            mist: "#9CB4A7",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- ===================================================================== -->
+</head>
+
+<body data-page="contact" class="bg-deep-950 text-sand font-body min-h-screen">
+
+  <!-- ================= NAVBAR (komponen bersama, jangan ubah) ================= -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-deep-950/80 backdrop-blur border-b border-deep-700">
+    <nav class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-display font-bold text-lg">
+        <i data-lucide="leaf" class="w-5 h-5 text-leaf-400"></i>
+        Luka<span class="text-leaf-400">Nusantara</span>
+      </a>
+      <div class="hidden md:flex items-center gap-1 font-mono text-xs uppercase tracking-widest">
+        <a href="index.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Home</a>
+        <a href="eksplorasi.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">Eksplorasi</a>
+        <a href="about.html" class="px-4 py-2 rounded-full text-mist hover:text-sand hover:border-deep-600 border border-transparent transition">About</a>
+        <a href="contact.html" class="px-4 py-2 rounded-full bg-leaf-400/10 text-leaf-300 border border-leaf-400/30">Contact</a>
+      </div>
+      <button id="nav-toggle" class="md:hidden p-2 text-mist hover:text-sand" aria-label="Buka menu" aria-expanded="false">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </nav>
+    <div id="nav-menu-mobile" class="hidden md:hidden border-t border-deep-700 bg-deep-950/95 backdrop-blur px-4 py-3 font-mono text-xs uppercase tracking-widest">
+      <a href="index.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Home</a>
+      <a href="eksplorasi.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">Eksplorasi</a>
+      <a href="about.html" class="block px-3 py-2 rounded-lg text-mist hover:text-sand">About</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-lg bg-leaf-400/10 text-leaf-300">Contact</a>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- ================= JUDUL HALAMAN ================= -->
+    <section class="py-14 md:py-20">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Contact &amp; Aksi</p>
+        <h1 class="mt-3 font-display font-bold text-3xl md:text-5xl">Komitmen Hijau Milikmu</h1>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-2xl leading-relaxed">
+          Pilih aksi harian yang realistis untukmu, lihat estimasi dampaknya,
+          lalu sampaikan suaramu soal lingkungan sekitar.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= KALKULATOR KOMITMEN HIJAU (TODO Dev B: B5–B6) ================= -->
+    <section class="pb-16 md:pb-24">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+
+        <!-- Daftar aksi harian -->
+        <div class="lg:col-span-3">
+          <h2 class="font-display font-bold text-2xl md:text-3xl">Pilih Aksi Harianmu</h2>
+          <div id="actions-list" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- TODO Dev B (B6): kartu dari SITE_DATA.ACTIONS.
+                 Kartu = <label> berisi <input type="checkbox"> tersembunyi + ikon lucide
+                 (data-lucide="{icon}"), title, desc, chip "hemat {co2} kg CO₂e/tahun"
+                 (+ "{plastic} plastik/tahun" bila plastic > 0).
+                 Kondisi tercentang: border-leaf-400 bg-leaf-400/10 -->
+          </div>
+        </div>
+
+        <!-- Ringkasan dampak -->
+        <div class="lg:col-span-2 bg-deep-800 border border-deep-700 rounded-2xl p-6 md:p-7 sticky top-24">
+          <p class="font-mono text-[11px] uppercase tracking-widest text-leaf-400">Estimasi Dampak / Tahun</p>
+
+          <div class="mt-6 space-y-5">
+            <div>
+              <p class="font-mono text-3xl md:text-4xl text-leaf-400 font-bold">
+                <span id="calc-co2">0</span><span class="text-base text-sand"> kg</span>
+              </p>
+              <p class="mt-1 text-xs text-mist">CO₂e yang dihemat</p>
+            </div>
+            <div>
+              <p class="font-mono text-3xl md:text-4xl text-tealx-400 font-bold">
+                <span id="calc-plastic">0</span><span class="text-base text-sand"> item</span>
+              </p>
+              <p class="mt-1 text-xs text-mist">Plastik yang terhindar</p>
+            </div>
+          </div>
+
+          <!-- Progress bar ke target kompensasi 1000 kg CO₂e/tahun -->
+          <div class="mt-7">
+            <div class="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-mist/70">
+              <span>Target 1.000 kg CO₂e</span>
+              <span id="calc-percent" class="text-leaf-300">0%</span>
+            </div>
+            <div class="mt-2 h-3 rounded-full bg-deep-950 border border-deep-700 overflow-hidden">
+              <div id="calc-progress" class="h-full rounded-full bg-gradient-to-r from-leaf-400 to-tealx-400"
+                   style="width:0%"></div>
+            </div>
+            <p class="mt-2 text-[11px] text-mist/60 leading-snug">
+              Persentase porsi aksimu terhadap jejak karbon rata-rata satu orang Indonesia (±2,2 ton/tahun) yang bisa dikompensasi lewat pilihan di kiri.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= FORM LAPORAN (TODO Dev B: B7) ================= -->
+    <section class="pb-16 md:pb-24">
+      <div class="max-w-3xl mx-auto px-4 md:px-6">
+        <h2 class="font-display font-bold text-2xl md:text-3xl">Laporan &amp; Aspirasi Lingkungan</h2>
+        <p class="mt-3 text-sm md:text-base text-mist leading-relaxed">
+          Sampaikan kasus kerusakan lingkungan atau aspirasi pelestarian di sekitarmu.
+        </p>
+
+        <form id="report-form" class="mt-8 bg-deep-800 border border-deep-700 rounded-2xl p-6 md:p-8 space-y-5" novalidate>
+          <div>
+            <label for="f-nama" class="block font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-2">Nama</label>
+            <input id="f-nama" name="nama" type="text" required
+                   class="w-full bg-deep-950 border border-deep-600 rounded-xl px-4 py-3 text-sm text-sand placeholder-mist/40 focus:outline-none focus:border-leaf-400 transition"
+                   placeholder="Nama lengkap" />
+            <p class="form-error mt-1.5 text-xs text-rose-400 hidden"></p>
+          </div>
+
+          <div>
+            <label for="f-email" class="block font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-2">Email</label>
+            <input id="f-email" name="email" type="email" required
+                   class="w-full bg-deep-950 border border-deep-600 rounded-xl px-4 py-3 text-sm text-sand placeholder-mist/40 focus:outline-none focus:border-leaf-400 transition"
+                   placeholder="email@contoh.id" />
+            <p class="form-error mt-1.5 text-xs text-rose-400 hidden"></p>
+          </div>
+
+          <div>
+            <label for="f-kategori" class="block font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-2">Kategori</label>
+            <select id="f-kategori" name="kategori" required
+                    class="w-full bg-deep-950 border border-deep-600 rounded-xl px-4 py-3 text-sm text-sand focus:outline-none focus:border-leaf-400 transition">
+              <option value="">— Pilih kategori —</option>
+              <option value="laporan">Laporan kerusakan lingkungan</option>
+              <option value="aspirasi">Aspirasi pelestarian</option>
+              <option value="pertanyaan">Pertanyaan / edukasi</option>
+            </select>
+            <p class="form-error mt-1.5 text-xs text-rose-400 hidden"></p>
+          </div>
+
+          <div>
+            <label for="f-pesan" class="block font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-2">Pesan</label>
+            <textarea id="f-pesan" name="pesan" rows="5" required
+                      class="w-full bg-deep-950 border border-deep-600 rounded-xl px-4 py-3 text-sm text-sand placeholder-mist/40 focus:outline-none focus:border-leaf-400 transition resize-none"
+                      placeholder="Ceritakan kasus atau aspirasimu (lokasi, kronologi singkat, dsb.)"></textarea>
+            <p class="form-error mt-1.5 text-xs text-rose-400 hidden"></p>
+          </div>
+
+          <button type="submit"
+                  class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-leaf-400 text-deep-950 font-semibold rounded-full px-7 py-3 hover:bg-leaf-300 transition">
+            Kirim Pesan <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+          <p class="text-[11px] text-mist/60">
+            Data laporan disimpan lokal di peramban (demo) — tidak dikirim ke server.
+          </p>
+        </form>
+
+        <!-- Panel sukses (tampilkan setelah submit valid) -->
+        <div id="form-success" class="hidden mt-8 bg-deep-800 border border-leaf-400/40 rounded-2xl p-8 text-center">
+          <svg class="w-16 h-16 mx-auto text-leaf-400" viewBox="0 0 64 64" fill="none">
+            <circle class="draw-line" cx="32" cy="32" r="28" stroke="currentColor" stroke-width="2.5"/>
+            <path class="draw-line" d="M20 33 L29 42 L45 24" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="mt-5 font-display font-bold text-xl">Pesanmu Terkirim</h3>
+          <p class="mt-2 text-sm text-mist leading-relaxed">
+            Terima kasih telah bersuara untuk lingkungan. Nantikan balasan di email yang kamu cantumkan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER (komponen bersama, jangan ubah) ================= -->
+  <footer class="border-t border-deep-700 py-10">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <p class="flex items-center gap-2 font-display font-bold text-lg">
+          <i data-lucide="leaf" class="w-5 h-5 text-leaf-400"></i>
+          Luka<span class="text-leaf-400">Nusantara</span>
+        </p>
+        <p class="mt-3 text-sm text-mist leading-relaxed">
+          Interactive storytelling bencana ekologis Indonesia berbasis data resmi.
+        </p>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Navigasi</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="text-mist hover:text-leaf-300 transition">Home</a></li>
+          <li><a href="eksplorasi.html" class="text-mist hover:text-leaf-300 transition">Eksplorasi</a></li>
+          <li><a href="about.html" class="text-mist hover:text-leaf-300 transition">About</a></li>
+          <li><a href="contact.html" class="text-mist hover:text-leaf-300 transition">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Sumber Data</p>
+        <p class="text-sm text-mist leading-relaxed">
+          BNPB &middot; BMKG &middot; KLHK &middot; BRIN &middot; Global Forest Watch
+        </p>
+        <p class="mt-3 text-xs text-mist/60 leading-relaxed">
+          Seluruh konten bebas SARA, pornografi, dan hoaks. Angka merujuk laporan lembaga resmi.
+        </p>
+      </div>
+    </div>
+    <p class="mt-8 text-center font-mono text-[11px] text-mist/50">
+      &copy; <span id="year">2026</span> LukaNusantara &mdash; EcoDigital For Environment
+    </p>
+  </footer>
+
+  <!-- ============ SCRIPTS BERSAMA (urutan & versi jangan diubah) ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/data.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
