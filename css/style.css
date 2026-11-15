@@ -152,6 +152,69 @@ body {
   display: none;
 }
 
+/* ------------------------------------------------------------
+   Spring bounce — kurva linear() setara anime.js v4
+   spring({ bounce: 0.65, duration: 400 }) — jatuh 1.56s lalu mantul.
+   (Proyek ini pakai Anime.js v3 global, jadi efeknya dibake ke CSS
+   agar hasil visual identik dan tetap jalan walau CDN gagal.)
+   ------------------------------------------------------------ */
+:root {
+  --spring-65: linear(
+    0, 0.0282, 0.1054, 0.2195, 0.3584, 0.5107, 0.6659, 0.8149, 0.9506,
+    1.0676, 1.1625, 1.2335, 1.2805, 1.3046, 1.3083, 1.2944, 1.2666,
+    1.2285, 1.1839, 1.1362, 1.0885, 1.0435, 1.0032, 0.9691, 0.9421,
+    0.9225, 0.9102, 0.9048, 0.9055, 0.9113, 0.921, 0.9335, 0.9477,
+    0.9626, 0.9771, 0.9906, 1.0025, 1.0124, 1.0201, 1.0254, 1.0285,
+    1.0296, 1.0288, 1.0266, 1.0233, 1.0192, 1.0147, 1.0101, 1.0057,
+    1.0017, 0.9982, 0.9953, 0.9932, 0.9918, 0.991, 0.9909, 0.9913,
+    0.9921, 0.9932, 0.9945, 0.9959, 0.9973, 0.9986, 0.9998, 1.0009,
+    1.0017, 1.0023, 1.0026, 1.0028, 1.0028, 1.0026, 1.0024, 1.002,
+    1.0016, 1.0011, 1.0007, 1.0003, 0.9999, 0.9996, 0.9994, 0.9993,
+    0.9992, 0.9991, 0.9991, 0.9992, 0.9993, 0.9994, 0.9996, 0.9997,
+    0.9998, 0.9999, 1, 1.0001, 1.0002, 1.0002, 1.0003, 1.0003,
+    1.0003, 1.0002, 1.0002, 1
+  );
+}
+
+/* Entri "jatuh + mantul" sekali jalan — tempel di elemen apa pun */
+@keyframes spring-drop {
+  from { opacity: 0; transform: translateY(-24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.spring-drop {
+  opacity: 0;
+  /* fallback: overshoot mirip spring untuk browser tanpa linear() */
+  animation: spring-drop 1.15s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@supports (animation-timing-function: linear(0, 1)) {
+  .spring-drop { animation-timing-function: var(--spring-65); }
+}
+
+/* Scroll hint (hero Home): kotak jatuh-mantul berulang di track kecil.
+   Siklus 2.6s = 1.56s jatuh (60%) + jeda + fade, restart saat tak terlihat */
+.spring-hint-track {
+  animation: spring-hint-fade 2.6s linear infinite;
+}
+.spring-hint-box {
+  --hint-fall: 1.75rem; /* jarak jatuh di dalam track h-16 */
+  animation: spring-fall 2.6s infinite;
+}
+@keyframes spring-fall {
+  0%   { transform: translateY(0); animation-timing-function: var(--spring-65); }
+  60%  { transform: translateY(var(--hint-fall)); }
+  72%  { transform: translateY(var(--hint-fall)); }
+  84%  { transform: translateY(var(--hint-fall)); }
+  85%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+@keyframes spring-hint-fade {
+  0%   { opacity: 0; }
+  5%   { opacity: 1; }
+  70%  { opacity: 1; }
+  80%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
 /* Reduksi gerak untuk aksesibilitas */
 @media (prefers-reduced-motion: reduce) {
   .marker-pulse {
@@ -163,6 +226,19 @@ body {
   }
   .reveal-word {
     opacity: 1;
+  }
+  .spring-drop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .spring-hint-track {
+    animation: none;
+    opacity: 1;
+  }
+  .spring-hint-box {
+    animation: none;
+    transform: translateY(var(--hint-fall, 1.75rem));
   }
   html {
     scroll-behavior: auto;

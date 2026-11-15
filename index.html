@@ -100,17 +100,22 @@
           BNPB, BMKG, dan KLHK &mdash; lalu mengajakmu bergerak dari sekadar melihat menjadi bertindak.
         </p>
         <div class="mt-9 flex flex-wrap gap-4">
-          <a href="#peta" class="inline-flex items-center gap-2 bg-leaf-400 text-deep-950 font-semibold rounded-full px-7 py-3 hover:bg-leaf-300 transition">
+          <a href="#peta" class="spring-drop inline-flex items-center gap-2 bg-leaf-400 text-deep-950 font-semibold rounded-full px-7 py-3 hover:bg-leaf-300 transition" style="animation-delay: 1.15s">
             Jelajahi Peta <i data-lucide="map-pin" class="w-4 h-4"></i>
           </a>
-          <a href="contact.html" class="inline-flex items-center gap-2 border border-deep-600 text-sand rounded-full px-7 py-3 hover:border-leaf-400 hover:text-leaf-300 transition">
+          <a href="contact.html" class="spring-drop inline-flex items-center gap-2 border border-deep-600 text-sand rounded-full px-7 py-3 hover:border-leaf-400 hover:text-leaf-300 transition" style="animation-delay: 1.32s">
             Mulai Aksimu <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
       </div>
 
-      <a href="#statistik" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-mist hover:text-leaf-300 transition" aria-label="Gulir ke bawah">
-        <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
+      <!-- Kotak jatuh-mantul (kurva spring anime.js) sebagai petunjuk gulir -->
+      <a href="#statistik" class="group absolute bottom-5 left-1/2 -translate-x-1/2" aria-label="Gulir ke bawah">
+        <span class="spring-hint-track relative block h-16 w-11 overflow-hidden rounded-full border border-deep-700 bg-deep-900/60 transition-colors group-hover:border-leaf-400/60">
+          <span class="spring-hint-box absolute left-1/2 top-2 -ml-3 grid h-6 w-6 place-items-center rounded-lg bg-leaf-400 text-deep-950">
+            <i data-lucide="chevron-down" class="h-4 w-4"></i>
+          </span>
+        </span>
       </a>
     </section>
 
