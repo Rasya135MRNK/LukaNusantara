@@ -14,7 +14,7 @@ Interaktif Website bertema pelestarian lingkungan yang mengangkat realitas benca
 
 ## 🛠️ Tech Stack & Library (100% Open-Source / Gratis)
 * **Struktur & Markup:** HTML5 Semantik
-* **Styling:** Tailwind CSS (via CDN / CLI) + Custom CSS (`style.css`)
+* **Styling:** Tailwind CSS (self-hosted v3.4.16 di `assets/vendor/`) + Custom CSS (`style.css`)
 * **Interaktivitas & Logika:** Vanilla JavaScript (ES6+)
 * **Engine Animasi:** [Anime.js](https://animejs.com/) (MIT License) — digunakan untuk *SVG line drawing*, *staggered grid*, *number counter*, dan transisi UI.
 * **Ikonografi:** [Lucide Icons](https://lucide.dev/) (ISC License)

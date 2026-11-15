@@ -482,7 +482,8 @@ function initCerita() {
     captions.forEach((el, i) => {
       const start = i / N;
       const end = (i + 1) / N;
-      let o = ramp(p, start + fade, start + 3 * fade);
+      /* Babak pertama langsung terlihat sejak halaman dibuka */
+      let o = i === 0 ? 1 : ramp(p, start + fade, start + 3 * fade);
       if (i < N - 1) o *= 1 - ramp(p, end - 3 * fade, end - fade);
       el.style.opacity = String(o);
     });
