@@ -123,6 +123,16 @@ body .font-shadows {
   line-height: 1.35;
 }
 
+/* Teks kartu aksi harian (halaman Contact) — Indie Flower, tulisan
+   tangan Kimberly Geswein (lisensi OFL, bebas termasuk komersial);
+   font ini hanya punya weight 400 (jangan dibold) */
+body .font-indie {
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
 /* ------------------------------------------------------------
    Polish shadcn — detail interaksi halus di atas tema yang ada.
    Tidak mengubah tampilan dasar: hanya menambah selection
