@@ -672,7 +672,7 @@ function renderActions() {
         <span class="font-indie flex items-center gap-2 text-sand">
           <i data-lucide="${a.icon}" class="w-4 h-4 text-leaf-400"></i>${a.title}
         </span>
-        <span class="font-indie block mt-1 text-xs text-mist leading-relaxed">${a.desc}</span>
+        <span class="block mt-1 text-xs text-mist leading-relaxed">${a.desc}</span>
         <span class="inline-block mt-2 px-2 py-0.5 rounded-full bg-deep-950/70 border border-deep-600 font-mono text-[10px] text-leaf-300">
           hemat ${a.co2} kg CO&#8322;e/thn${a.plastic ? ` &middot; ${a.plastic} item plastik` : ""}
         </span>

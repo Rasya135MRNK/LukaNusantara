@@ -123,9 +123,9 @@ body .font-shadows {
   line-height: 1.35;
 }
 
-/* Teks kartu aksi harian (halaman Contact) — Indie Flower, tulisan
-   tangan Kimberly Geswein (lisensi OFL, bebas termasuk komersial);
-   font ini hanya punya weight 400 (jangan dibold) */
+/* Judul kartu aksi harian ("Bawa Tumbler Sendiri", dst.) di halaman
+   Contact — Indie Flower, tulisan tangan Kimberly Geswein (lisensi OFL,
+   bebas termasuk komersial); font ini hanya punya weight 400 */
 body .font-indie {
   font-family: "Indie Flower", cursive;
   font-weight: 400;
