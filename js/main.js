@@ -481,6 +481,7 @@ function initCerita() {
   const counter = $("#story-counter");
   const fill = $("#story-progress-fill");
   const hint = $("#story-hint");
+  const blackout = $("#story-blackout");
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
   const ramp = (p, a, b) => clamp01((p - a) / (b - a));
 
@@ -517,14 +518,22 @@ function initCerita() {
       el.style.opacity = String(o);
     });
 
-    /* Sela: masuk di fase 3 segmen 1 (scroll ketiga), tetap tampil selama
-       gambar berganti di belakangnya, lalu terbelah dari tengah di fase 3
-       segmen sela — setengah atas naik, setengah bawah turun — serentak
-       dengan masuknya caption babak berikutnya pada fase yang sama. */
+    /* Sela: masuk di fase 3 segmen 1 (scroll ketiga) — kini di atas layar
+       yang sudah menghitam — lalu terbelah dari tengah di fase 3 segmen
+       sela: setengah atas naik, setengah bawah turun, serentak dengan
+       masuknya caption babak berikutnya pada fase yang sama. */
     const buka = ramp(p, (INTERLUDE_SEG + IN_A) / M, (INTERLUDE_SEG + IN_B) / M);
     interlude.style.opacity = String(ramp(p, (1 + IN_A) / M, (1 + IN_B) / M) * (1 - buka));
     interludeTop.style.transform = `translateY(${(-16 * buka).toFixed(2)}vh)`;
     interludeBottom.style.transform = `translateY(${(16 * buka).toFixed(2)}vh)`;
+
+    /* Layar mengelap sampai hitam menggantikan pergantian gambar pada
+       transisi ini: gelap di fase 2 segmen 1 (gambar Denyut Kehidupan
+       "menghilang" ke hitam), gambar Suara Mesin berganti di belakang
+       layar hitam, lalu hitam terangkat serentak saat sela terbuka. */
+    blackout.style.opacity = String(
+      ramp(p, (1 + SWAP_A) / M, (1 + SWAP_B) / M) * (1 - buka)
+    );
 
     /* Overlay menebal serentak dengan pergantian gambar (fase 2).
        Segmen 1 menahan overlay (tak ada gambar yang berganti di sana);
