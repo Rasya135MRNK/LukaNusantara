@@ -225,9 +225,9 @@ const SITE_DATA = {
     {
       id: "s8",
       title: "Tenggelam",
-      text: "Hujan deras dan pasang laut datang bersamaan. Warga mengayuh air setinggi pinggang — mengangkat perabot ke lantai atas, menahan pintu dengan karung pasir, tetap berjualan di pasar yang terendam. Banjir rob datang setiap tahun, dan setiap tahun lebih tinggi. Nusantara tidak tumbang sekaligus — ia memudar, perlahan, sampai kita mengingatnya sebagai cerita.",
-      image: "https://images.pexels.com/photos/38551005/pexels-photo-38551005/free-photo-of-flooded-street-market-with-mango-vendor-and-shoppers.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      alt: "Warga dan pedagang tetap beraktivitas di jalan pasar yang terendam banjir",
+      text: "Hujan deras dan pasang laut datang bersamaan. Warga mengayuh air setinggi dada melewati kampung yang setengah tenggelam, mengangkat perabot ke lantai atas, menahan pintu dengan karung pasir. Banjir rob datang setiap tahun, dan setiap tahun lebih tinggi. Nusantara tidak tumbang sekaligus — ia memudar, perlahan, sampai kita mengingatnya sebagai cerita.",
+      image: "https://images.pexels.com/photos/13455948/pexels-photo-13455948.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      alt: "Dua warga mengayuh air banjir yang setinggi dada di depan permukiman yang terendam",
       filter: "saturate(0.25) brightness(0.5) contrast(1.1)",
       overlay: 0.65,
     },
