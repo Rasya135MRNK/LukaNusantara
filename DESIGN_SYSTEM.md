@@ -31,7 +31,7 @@ di `<head>` setiap file HTML (lihat blok `tailwind.config`).
 
 | Font | Kelas | Penggunaan |
 |------|-------|------------|
-| Space Grotesk | `font-display` | Judul (h1–h3), CTA |
+| Nothing You Could Do | `font-display` | Judul besar (h1–h3, logo) — handwriting, **wajib weight 400** (jangan dibold) |
 | Inter | `font-body` | Paragraf, UI |
 | JetBrains Mono | `font-mono` | Angka statistik, label data, kode |
 

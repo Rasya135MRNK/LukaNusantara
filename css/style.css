@@ -73,6 +73,17 @@ body {
 }
 
 /* ------------------------------------------------------------
+   Font judul — Nothing You Could Do (handwriting, weight 400 saja)
+   Faux-bold dimatikan & spasi dilonggarkan agar goresannya tetap
+   rapi dan judul besar tetap terbaca.
+   ------------------------------------------------------------ */
+body .font-display {
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------
    Kursor penggeser before-after (halaman Eksplorasi, Dev B)
    ------------------------------------------------------------ */
 .ba-handle {

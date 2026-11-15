@@ -18,7 +18,7 @@ Interaktif Website bertema pelestarian lingkungan yang mengangkat realitas benca
 * **Interaktivitas & Logika:** Vanilla JavaScript (ES6+)
 * **Engine Animasi:** [Anime.js](https://animejs.com/) (MIT License) — digunakan untuk *SVG line drawing*, *staggered grid*, *number counter*, dan transisi UI.
 * **Ikonografi:** [Lucide Icons](https://lucide.dev/) (ISC License)
-* **Tipografi:** Google Fonts (`Space Grotesk`, `Inter`, `JetBrains Mono`)
+* **Tipografi:** Google Fonts (`Nothing You Could Do`, `Space Grotesk`, `Inter`, `JetBrains Mono`)
 
 ---
 
