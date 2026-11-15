@@ -285,7 +285,7 @@ function renderGallery() {
         <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-deep-950/85 border border-deep-600 font-mono text-[10px] uppercase tracking-widest text-leaf-300">${g.category}</span>
       </div>
       <div class="p-5">
-        <h3 class="font-display font-bold text-lg leading-snug">${g.title}</h3>
+        <h3 class="font-sg font-bold text-lg leading-snug">${g.title}</h3>
         <p class="mt-2 font-mono text-[10px] uppercase tracking-widest text-mist/70">Lokasi: ${g.region}</p>
         <p class="mt-3 text-sm text-mist leading-relaxed">${shortDesc(g.desc)}</p>
         <p class="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-leaf-300">Buka modul edukasi <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></p>
@@ -348,7 +348,7 @@ function openModal(item) {
     <div class="flex items-start justify-between gap-4">
       <div>
         <span class="inline-block px-2.5 py-1 rounded-full bg-leaf-400/10 border border-leaf-400/40 font-mono text-[10px] uppercase tracking-widest text-leaf-300">${item.category}</span>
-        <h3 class="mt-3 font-display font-bold text-2xl md:text-3xl leading-snug">${item.title}</h3>
+        <h3 class="mt-3 font-sg font-bold text-2xl md:text-3xl leading-snug">${item.title}</h3>
         <p class="mt-1 font-mono text-[11px] uppercase tracking-widest text-mist/70">Lokasi: ${item.region}</p>
       </div>
       <button id="modal-close" class="p-2 rounded-full border border-deep-600 text-mist hover:text-sand hover:border-leaf-400 transition shrink-0" aria-label="Tutup modal">
