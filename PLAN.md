@@ -53,6 +53,13 @@ Sisa pekerjaan (`about.html`, kurasi foto) diambil siapa yang lebih dulu selesai
 | C2 | Isi data `TIMELINE`, `SOURCES`, `TEAM` | `js/data.js` | ✔ (data dasar sudah diisi Dev A) |
 | C3 | Kurasi foto Unsplash + fallback placeholder | `js/data.js` | ⬜ |
 
+### Tambahan (hasil keputusan tim — scrollytelling, dikerjakan Dev A)
+| # | Tugas | File | Status |
+|---|-------|------|--------|
+| D1 | Halaman scrollytelling crossfade 7 babak "Nusantara yang Memudar" | `cerita.html` | ✔ |
+| D2 | Mesin scroll-progress + fallback reduced-motion | `js/main.js` → `initCerita()` | ✔ |
+| D3 | Kontrak data `STORY` + link navbar/footer "Cerita" di semua halaman | `js/data.js`, `css/style.css`, 5 halaman | ✔ |
+
 ---
 
 ## Kontrak `js/data.js` (JANGAN ubah nama key tanpa sepakat)
@@ -60,6 +67,7 @@ Sisa pekerjaan (`about.html`, kurasi foto) diambil siapa yang lebih dulu selesai
 ```js
 STATS    = [ { value, suffix, label, source } ]        // dipakai index.html (Dev A selesai)
 REGIONS  = { <id>: { name, icon, disaster, tagline, desc, fakta[], penyebab[], mitigasi[], markerX, markerY } }  // index.html
+STORY    = [ { id, title, text, image, alt, filter, overlay } ]  // cerita.html (Dev A) — filter CSS & kepekatan overlay per babak
 GALLERY  = [ { id, title, category, region, image, alt, desc, fakta[], penyebab[], aksi[] } ]  // TODO Dev B
 ACTIONS  = [ { id, icon, title, desc, co2, plastic } ]  // TODO Dev B (co2 = kg CO₂e/tahun)
 TIMELINE = [ { icon, title, desc } ]                    // about.html

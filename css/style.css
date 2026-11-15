@@ -105,6 +105,53 @@ body {
   color: #07120d;
 }
 
+/* ------------------------------------------------------------
+   Scrollytelling (halaman Cerita)
+   ------------------------------------------------------------ */
+.scene-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: opacity;
+}
+.story-caption {
+  position: absolute;
+  left: max(1.5rem, 8vw);
+  right: max(1.5rem, 5vw);
+  bottom: 18vh;
+  opacity: 0;
+  will-change: opacity;
+  text-shadow: 0 2px 24px rgba(7, 18, 13, 0.9), 0 1px 3px rgba(7, 18, 13, 0.8);
+}
+#story-hint {
+  transition: opacity 0.2s linear;
+}
+
+/* Fallback tanpa gerak: cerita jadi tumpukan statis */
+.story-static #story-stage {
+  position: relative;
+  height: auto;
+  overflow: visible;
+}
+.story-static .scene-layer {
+  position: static;
+  opacity: 1 !important;
+  height: 55vh;
+}
+.story-static .story-caption {
+  position: static;
+  opacity: 1 !important;
+  max-width: 42rem;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+.story-static #story-overlay,
+.story-static #story-captions {
+  display: none;
+}
+
 /* Reduksi gerak untuk aksesibilitas */
 @media (prefers-reduced-motion: reduce) {
   .marker-pulse {

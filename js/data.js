@@ -2,7 +2,7 @@
    LukaNusantara — js/data.js
    Satu sumber data untuk semua halaman.
    Pemilik bagian awal (lihat PLAN.md):
-   - Dev A (Rasya)   : STATS, REGIONS, TIMELINE, SOURCES, TEAM
+   - Dev A (Rasya)   : STATS, REGIONS, STORY, TIMELINE, SOURCES, TEAM
    - Dev B (Tamam)   : GALLERY, ACTIONS (diisi saat integrasi final
      oleh Dev A atas nama Dev B)
    Jangan mengubah nama key tanpa kesepakatan tim.
@@ -154,6 +154,77 @@ const SITE_DATA = {
   },
 
   /* ------------------------------------------------------------
+     STORY — scrollytelling "Nusantara yang Memudar" (cerita.html)
+     filter  : CSS filter per adegan (indah → hancur)
+     overlay : 0–1, kepekatan gradient gelap per adegan
+     ------------------------------------------------------------ */
+  STORY: [
+    {
+      id: "s1",
+      title: "Hutan yang Hidup",
+      text: "Sebelum peta tahu nama-nama kita, hutan ini sudah bernapas. Kanopi rimbun menampung hujan, mengubah karbon menjadi oksigen, dan menyimpan kehidupan yang belum selesai diceritakan.",
+      image: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1920&auto=format&fit=crop",
+      alt: "Kanopi hutan tropis yang rimbun dilihat dari udara",
+      filter: "saturate(1.1) brightness(1)",
+      overlay: 0.25,
+    },
+    {
+      id: "s2",
+      title: "Denyut Kehidupan",
+      text: "Air jatuh dari bukit, terumbu menyala di laut timur, gajah berjalan di lorong hijau. Nusantara adalah rumah bagi keanekaragaman yang membuat dunia iri.",
+      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=1920&auto=format&fit=crop",
+      alt: "Air terjun yang mengalir di hutan tropis",
+      filter: "saturate(1.05) brightness(0.97)",
+      overlay: 0.3,
+    },
+    {
+      id: "s3",
+      title: "Aroma Mesin & Gergaji",
+      text: "Lalu aroma itu datang: mesin, gergaji, dan lembaran izin atas lahan. Kabut pagi mulai berbaur dengan sesuatu yang tidak wajar.",
+      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format&fit=crop",
+      alt: "Kabut berat menyelimuti perbukitan",
+      filter: "saturate(0.85) brightness(0.9)",
+      overlay: 0.38,
+    },
+    {
+      id: "s4",
+      title: "Hutan Tumbang",
+      text: "Pohon yang bertahan ratusan tahun tumbang dalam hitungan menit. Yang tertinggal hanya pangkalan, akar yang kering, dan sunyi yang aneh.",
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920&auto=format&fit=crop",
+      alt: "Lahan terbuka yang gundul tanpa pepohonan",
+      filter: "saturate(0.6) brightness(0.8)",
+      overlay: 0.45,
+    },
+    {
+      id: "s5",
+      title: "Langit Menghitam",
+      text: "Kemarau datang, gambut menyala di bawah permukaan. Langit berubah warna, dan anak-anak belajar mengenali ISPA sebelum mengenali bintang.",
+      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1920&auto=format&fit=crop",
+      alt: "Asap tebal membumbung ke langit",
+      filter: "saturate(0.5) brightness(0.7) contrast(1.05)",
+      overlay: 0.52,
+    },
+    {
+      id: "s6",
+      title: "Laut yang Menelan",
+      text: "Apa yang tidak dibakar, dibuang ke sungai — dan sungai membawanya ke laut. Plastik menemani arus, memutihkan terumbu, lalu kembali ke piring kita.",
+      image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1920&auto=format&fit=crop",
+      alt: "Permukaan laut yang kelam",
+      filter: "saturate(0.4) brightness(0.65)",
+      overlay: 0.55,
+    },
+    {
+      id: "s7",
+      title: "Tenggelam",
+      text: "Pesisir merosot, pasang merangsek lebih tinggi setiap tahun, dan langit di atasnya masih membakar. Nusantara tidak tumbang sekaligus — ia memudar, perlahan, sampai kita mengingatnya sebagai cerita.",
+      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1920&auto=format&fit=crop",
+      alt: "Gelombang laut yang mengamuk",
+      filter: "saturate(0.25) brightness(0.5) contrast(1.1)",
+      overlay: 0.65,
+    },
+  ],
+
+  /* ------------------------------------------------------------
      GALLERY — halaman Eksplorasi
      TODO Dev B: isi ±12 kartu lintas 4 kategori.
      category harus salah satu dari: "Banjir Rob" | "Deforestasi" | "Kekeringan" | "Limbah Plastik"
@@ -209,7 +280,7 @@ const SITE_DATA = {
       title: "Mangrove: Benteng yang Hilang",
       category: "Banjir Rob",
       region: "Jawa",
-      image: "https://images.unsplash.com/photo-1447752875315-247703c9f238?q=80&w=1200&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop",
       alt: "Kanopi hijau dari udara di kawasan pesisir",
       desc: "Indonesia punya mangrove terluas di dunia, tetapi luasnya terus menyusut. Padahal lereng bakau adalah pemecah gelombang alami yang melindungi pesisir dari rob dan abrasi.",
       fakta: [

@@ -398,9 +398,127 @@ function initEksplorasi() {
 }
 
 /* ============================================================
-   ABOUT — timeline, sumber data, tim
+   CERITA — scrollytelling crossfade "Nusantara yang Memudar"
    ============================================================ */
 
+/* Membangun layer gambar & caption dari STORY, lalu mengikat
+   opacity tiap layer ke progres scroll. Layer ditumpuk: layer i
+   memudar masuk di atas layer i-1 → crossfade tanpa flicker. */
+function initCerita() {
+  const wrap = $("#story-scroll");
+  const stage = $("#story-stage");
+  const captionWrap = $("#story-captions");
+  if (!wrap || !stage || !captionWrap) return;
+
+  const scenes = SITE_DATA.STORY;
+  if (!scenes.length) return;
+  const N = scenes.length;
+
+  /* Aksesibilitas: tanpa gerak → mode statis (CSS fallback) */
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    wrap.classList.add("story-static");
+    stage.innerHTML = scenes
+      .map(
+        (s) => `
+      <img class="scene-layer" src="${s.image}" alt="${s.alt}" onerror="__imgFallback(this)" style="filter:${s.filter}" />
+      <div class="story-caption">
+        <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-leaf-400">${s.title}</p>
+        <p class="mt-3 text-sm text-mist leading-relaxed max-w-xl">${s.text}</p>
+      </div>`
+      )
+      .join("");
+    return;
+  }
+
+  /* Layer + caption dinamis */
+  stage.insertAdjacentHTML(
+    "afterbegin",
+    scenes
+      .map(
+        (s, i) => `
+      <img class="scene-layer" data-index="${i}" src="${s.image}" alt="${s.alt}"
+           onerror="__imgFallback(this)" loading="eager"
+           style="filter:${s.filter}; opacity:${i === 0 ? 1 : 0}" />`
+      )
+      .join("")
+  );
+  captionWrap.innerHTML = scenes
+    .map(
+      (s, i) => `
+    <div class="story-caption" data-index="${i}" style="opacity:${i === 0 ? 1 : 0}">
+      <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-leaf-400">Babak ${i + 1}</p>
+      <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl leading-snug">${s.title}</h2>
+      <p class="mt-4 text-sm md:text-base text-mist leading-relaxed max-w-xl">${s.text}</p>
+    </div>`
+    )
+    .join("");
+
+  /* Preload agar crossfade tidak tersendat */
+  scenes.forEach((s) => {
+    const im = new Image();
+    im.src = s.image;
+  });
+
+  const layers = $$(".scene-layer", stage);
+  const captions = $$(".story-caption", captionWrap);
+  const overlay = $("#story-overlay");
+  const counter = $("#story-counter");
+  const fill = $("#story-progress-fill");
+  const hint = $("#story-hint");
+  const fade = 0.18 / N; /* lebar zona crossfade per batas adegan */
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const ramp = (p, a, b) => clamp01((p - a) / (b - a));
+
+  function apply(p) {
+    let active = Math.min(N - 1, Math.max(0, Math.floor(p * N)));
+    const t = p * N - active; /* posisi dalam jendela babak aktif */
+
+    layers.forEach((el, i) => {
+      if (i === 0) return; /* lapisan dasar selalu 1, tertutup dari atas */
+      const start = i / N;
+      el.style.opacity = String(clamp01((p - (start - fade)) / (2 * fade)));
+    });
+
+    captions.forEach((el, i) => {
+      const start = i / N;
+      const end = (i + 1) / N;
+      let o = ramp(p, start + fade, start + 3 * fade);
+      if (i < N - 1) o *= 1 - ramp(p, end - 3 * fade, end - fade);
+      el.style.opacity = String(o);
+    });
+
+    /* Overlay menebal dari adegan ke adegan */
+    const nextOverlay = scenes[active + 1] ? scenes[active + 1].overlay : scenes[active].overlay;
+    overlay.style.opacity = String(
+      scenes[active].overlay + (nextOverlay - scenes[active].overlay) * t
+    );
+
+    if (counter) counter.textContent = `Babak ${active + 1} / ${N}`;
+    if (fill) fill.style.height = `${p * 100}%`;
+    if (hint && p > 0.04) hint.style.opacity = String(1 - ramp(p, 0.04, 0.09));
+  }
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const total = wrap.offsetHeight - window.innerHeight;
+    const p = total > 0 ? clamp01(-wrap.getBoundingClientRect().top / total) : 0;
+    apply(p);
+  };
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
+}
+
+/* ============================================================
+   ABOUT — timeline, sumber data, tim
+   ============================================================ */
 function renderTimeline() {
   const wrap = $("#timeline");
   if (!wrap) return;
@@ -607,6 +725,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const page = document.body.dataset.page;
   if (page === "home") initHome();
+  else if (page === "cerita") initCerita();
   else if (page === "eksplorasi") initEksplorasi();
   else if (page === "about") initAbout();
   else if (page === "contact") initContact();
