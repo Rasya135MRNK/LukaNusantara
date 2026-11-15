@@ -83,6 +83,21 @@ body .font-display {
   line-height: 1.4;
 }
 
+/* Pengecualian font — halaman Eksplorasi: dua judul ini tetap Space Grotesk
+   (tampil persis seperti sebelum pergantian font judul) */
+body .font-sg {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* Nama tim (halaman About) — Playwrite AU SA Guides, handwriting edukasi
+   dengan garis bantu; font ini hanya punya weight 400 */
+body .font-team {
+  font-family: "Playwrite AU SA Guides", cursive;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
 /* ------------------------------------------------------------
    Kursor penggeser before-after (halaman Eksplorasi, Dev B)
    ------------------------------------------------------------ */

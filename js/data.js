@@ -586,7 +586,7 @@ const SITE_DATA = {
       desc: "Mahasiswa Universitas Darussalam Gontor (462025611050). Menggarap halaman Home, animasi Anime.js, dan peta interaktif.",
     },
     {
-      name: "Tamam Ni'amillah",
+      name: "Tamam Ni'amillah Ramadhan Putra Widyana",
       role: "Dev B — Konten & Interaksi",
       desc: "Mahasiswa Universitas Darussalam Gontor (462025611095). Menggarap halaman Eksplorasi, Contact, dan pengelolaan data galeri.",
     },

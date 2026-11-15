@@ -576,7 +576,7 @@ function renderTeam() {
   wrap.innerHTML = SITE_DATA.TEAM.map(
     (t) => `
     <div class="bg-deep-800 border border-deep-700 rounded-2xl p-6 opacity-0">
-      <p class="font-display font-bold text-lg">${t.name}</p>
+      <p class="font-team text-lg">${t.name}</p>
       <span class="inline-block mt-2 px-2.5 py-1 rounded-full bg-leaf-400/10 border border-leaf-400/40 font-mono text-[10px] uppercase tracking-widest text-leaf-300">${t.role}</span>
       <p class="mt-3 text-sm text-mist leading-relaxed">${t.desc}</p>
     </div>`

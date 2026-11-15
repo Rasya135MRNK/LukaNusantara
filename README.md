@@ -8,7 +8,7 @@ Interaktif Website bertema pelestarian lingkungan yang mengangkat realitas benca
 * **Nama Tim:** [dah lah]
 * **Anggota:**
   1. [Muhamad Rasya Naufal Khadafi] — [462025611050 / Universitas Darussalam Gontor]
-  2. [Tamam Ni'amillah Ramdhan Putra Widyana] — [462025611095 / Universitas Darussalam Gontor]
+  2. [Tamam Ni'amillah Ramadhan Putra Widyana] — [462025611095 / Universitas Darussalam Gontor]
 
 ---
 

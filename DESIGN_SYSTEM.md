@@ -32,6 +32,8 @@ di `<head>` setiap file HTML (lihat blok `tailwind.config`).
 | Font | Kelas | Penggunaan |
 |------|-------|------------|
 | Nothing You Could Do | `font-display` | Judul besar (h1–h3, logo) — handwriting, **wajib weight 400** (jangan dibold) |
+| Space Grotesk | `font-sg` | Khusus h1 & "Dulu vs Sekarang" di halaman Eksplorasi — tetap grotesque bold |
+| Playwrite AU SA Guides | `font-team` | Nama tim di halaman About — handwriting garis bantu (weight 400) |
 | Inter | `font-body` | Paragraf, UI |
 | JetBrains Mono | `font-mono` | Angka statistik, label data, kode |
 
