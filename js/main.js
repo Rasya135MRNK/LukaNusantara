@@ -402,8 +402,9 @@ function initEksplorasi() {
    ============================================================ */
 
 /* Membangun layer gambar & caption dari STORY, lalu mengikat
-   opacity tiap layer ke progres scroll. Layer ditumpuk: layer i
-   memudar masuk di atas layer i-1 → crossfade tanpa flicker. */
+   opacity tiap layer ke progres scroll. Setiap perpindahan babak
+   punya ritme 3 fase: tulisan keluar → gambar berganti (crossfade
+   tanpa flicker) → tulisan babak berikutnya muncul. */
 function initCerita() {
   const wrap = $("#story-scroll");
   const stage = $("#story-stage");
@@ -465,9 +466,16 @@ function initCerita() {
   const counter = $("#story-counter");
   const fill = $("#story-progress-fill");
   const hint = $("#story-hint");
-  const fade = 0.18 / N; /* lebar zona crossfade per batas adegan */
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
   const ramp = (p, a, b) => clamp01((p - a) / (b - a));
+
+  /* Ritme 3 fase per perpindahan babak (t = posisi dalam jendela babak):
+     1) tulisan keluar            : t 0.25–0.45
+     2) gambar berganti           : t 0.45–0.70
+     3) tulisan berikutnya masuk  : t 0.70–0.95 */
+  const OUT_A = 0.25, OUT_B = 0.45;
+  const SWAP_A = 0.45, SWAP_B = 0.7;
+  const IN_A = 0.7, IN_B = 0.95;
 
   function apply(p) {
     let active = Math.min(N - 1, Math.max(0, Math.floor(p * N)));
@@ -475,26 +483,27 @@ function initCerita() {
 
     layers.forEach((el, i) => {
       if (i === 0) return; /* lapisan dasar selalu 1, tertutup dari atas */
-      const start = i / N;
-      el.style.opacity = String(clamp01((p - (start - fade)) / (2 * fade)));
+      /* Gambar berganti di fase 2, pada jendela babak sebelumnya */
+      el.style.opacity = String(ramp(p, (i - 1 + SWAP_A) / N, (i - 1 + SWAP_B) / N));
     });
 
     captions.forEach((el, i) => {
-      const start = i / N;
-      const end = (i + 1) / N;
       /* Babak pertama langsung terlihat sejak halaman dibuka */
-      let o = i === 0 ? 1 : ramp(p, start + fade, start + 3 * fade);
-      if (i < N - 1) o *= 1 - ramp(p, end - 3 * fade, end - fade);
+      let o = i === 0 ? 1 : ramp(p, (i - 1 + IN_A) / N, (i - 1 + IN_B) / N);
+      if (i < N - 1) o *= 1 - ramp(p, (i + OUT_A) / N, (i + OUT_B) / N);
       el.style.opacity = String(o);
     });
 
-    /* Overlay menebal dari adegan ke adegan */
+    /* Overlay menebal serentak dengan pergantian gambar (fase 2) */
     const nextOverlay = scenes[active + 1] ? scenes[active + 1].overlay : scenes[active].overlay;
     overlay.style.opacity = String(
-      scenes[active].overlay + (nextOverlay - scenes[active].overlay) * t
+      scenes[active].overlay + (nextOverlay - scenes[active].overlay) * ramp(t, SWAP_A, SWAP_B)
     );
 
-    if (counter) counter.textContent = `Babak ${active + 1} / ${N}`;
+    /* Counter mengikuti caption yang tampil — fase 3 memunculkan babak
+       berikutnya sedikit sebelum jendela scroll penuhnya berganti */
+    const shown = Math.min(N - 1, active + (t >= IN_A ? 1 : 0));
+    if (counter) counter.textContent = `Babak ${shown + 1} / ${N}`;
     if (fill) fill.style.height = `${p * 100}%`;
     if (hint && p > 0.04) hint.style.opacity = String(1 - ramp(p, 0.04, 0.09));
   }
