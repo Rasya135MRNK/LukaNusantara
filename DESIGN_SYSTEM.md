@@ -39,6 +39,7 @@ di `<head>` setiap file HTML (lihat blok `tailwind.config`).
 | Rough Typewriter | sela cerita | Kalimat interlude "bukalah matamu…" di halaman Cerita — self-host `assets/fonts/rough_typewriter.otf` (JibbaJabba Fonts, bebas personal, weight 400) |
 | Shadows Into Light | `font-shadows` | Judul form "Laporan & Aspirasi Lingkungan" di halaman Contact — tulisan tangan tipis (weight 400) |
 | Indie Flower | `font-indie` | Judul kartu aksi harian ("Bawa Tumbler Sendiri", dst.) di halaman Contact — tulisan tangan (weight 400, lisensi OFL Google Fonts: bebas termasuk komersial) |
+| Allerta Stencil | navbar (CSS `body header a`) | Logo & tautan navbar di SEMUA halaman — stencil display, Matt McInerney (weight 400, lisensi OFL Google Fonts: bebas termasuk komersial) |
 | Inter | `font-body` | Paragraf, UI |
 | JetBrains Mono | `font-mono` | Angka statistik, label data, kode |
 

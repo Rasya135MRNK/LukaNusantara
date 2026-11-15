@@ -133,6 +133,16 @@ body .font-indie {
   line-height: 1.4;
 }
 
+/* Navbar (semua halaman) — Allerta Stencil, Matt McInerney (lisensi OFL,
+   bebas termasuk komersial); font hanya punya weight 400, jadi logo yang
+   tadinya dibold ikut normal. Markup navbar komponen bersama, jadi
+   pergantian dilakukan dari CSS tanpa menyentuh HTML-nya. */
+body header a,
+body header a.font-display {
+  font-family: "Allerta Stencil", "Space Grotesk", sans-serif;
+  font-weight: 400;
+}
+
 /* ------------------------------------------------------------
    Polish shadcn — detail interaksi halus di atas tema yang ada.
    Tidak mengubah tampilan dasar: hanya menambah selection
