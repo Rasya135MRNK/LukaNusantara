@@ -172,6 +172,21 @@ function selectRegion(id) {
 /* ============================================================
    HOME init
    ============================================================ */
+
+/* Background hero memudar + parallax ringan saat halaman digulir */
+function initHeroBackground() {
+  const bg = $("#hero-bg");
+  const hero = $("#hero");
+  if (!bg || !hero) return;
+  const update = () => {
+    const progress = Math.min(1, window.scrollY / (hero.offsetHeight * 0.9));
+    bg.style.opacity = String(1 - progress);
+    bg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+  };
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+}
+
 function initHome() {
   /* Hero: kontur tergambar + judul per kata */
   const heroSvg = $("#hero-svg");
@@ -181,6 +196,9 @@ function initHome() {
   if (title) ANIM.revealWords(title, 350);
   const subtitle = $("#hero-sub");
   if (subtitle) ANIM.revealWords(subtitle, 900);
+
+  /* Background hero memudar saat scroll */
+  initHeroBackground();
 
   /* Statistik */
   renderStats();

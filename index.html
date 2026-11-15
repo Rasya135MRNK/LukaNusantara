@@ -66,7 +66,16 @@
   <main class="pt-16">
 
     <!-- ================= HERO ================= -->
-    <section class="relative min-h-[88vh] flex items-center overflow-hidden">
+    <section id="hero" class="relative min-h-[88vh] flex items-center overflow-hidden">
+      <!-- Background gambar (memudar saat scroll, dikendalikan main.js) -->
+      <div id="hero-bg" class="absolute inset-0 will-change-transform">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1920&auto=format&fit=crop"
+             alt="Lanskap pegunungan dan hutan tropis Indonesia"
+             onerror="__imgFallback(this)"
+             class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-deep-950/75 via-deep-950/60 to-deep-950"></div>
+      </div>
+
       <!-- SVG kontur topografi (line drawing oleh Anime.js) -->
       <svg id="hero-svg" class="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <path class="draw-line" d="M-100,600 C280,470 560,700 920,540 C1140,440 1360,500 1540,450" stroke="#2DD4BF" stroke-opacity="0.18" stroke-width="1.5"/>
