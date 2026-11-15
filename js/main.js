@@ -555,7 +555,7 @@ function renderSources() {
     <a href="${s.url}" target="_blank" rel="noopener noreferrer"
        class="flex items-center justify-between gap-4 bg-deep-800 border border-deep-700 rounded-xl p-4 hover:border-leaf-400/60 transition group opacity-0">
       <div>
-        <p class="font-display font-semibold text-sand group-hover:text-leaf-300 transition">${s.name}</p>
+        <p class="font-orb font-semibold text-sand group-hover:text-leaf-300 transition">${s.name}</p>
         <p class="mt-1 text-xs text-mist leading-relaxed">${s.desc}</p>
       </div>
       <i data-lucide="external-link" class="w-4 h-4 text-mist group-hover:text-leaf-300 transition shrink-0"></i>

@@ -98,6 +98,13 @@ body .font-team {
   line-height: 1.5;
 }
 
+/* Nama lembaga sumber data (halaman About) — Orbitron, geometris futuristik
+   (variable font 400–900, weight mengikuti class Tailwind) */
+body .font-orb {
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.05em;
+}
+
 /* ------------------------------------------------------------
    Kursor penggeser before-after (halaman Eksplorasi, Dev B)
    ------------------------------------------------------------ */

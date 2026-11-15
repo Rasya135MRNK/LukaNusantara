@@ -34,6 +34,7 @@ di `<head>` setiap file HTML (lihat blok `tailwind.config`).
 | Nothing You Could Do | `font-display` | Judul besar (h1–h3, logo) — handwriting, **wajib weight 400** (jangan dibold) |
 | Space Grotesk | `font-sg` | Font judul bawaan — semua elemen display di halaman Eksplorasi (logo, footer, judul kartu & modal), **kecuali** h1 & "Dulu vs Sekarang" yang tetap Nothing You Could Do |
 | Playwrite AU SA Guides | `font-team` | Nama tim di halaman About — handwriting garis bantu (weight 400) |
+| Orbitron | `font-orb` | Nama lembaga sumber data di halaman About (BNPB, BMKG, dst.) — futuristik |
 | Inter | `font-body` | Paragraf, UI |
 | JetBrains Mono | `font-mono` | Angka statistik, label data, kode |
 
