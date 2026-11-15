@@ -124,6 +124,48 @@ body .font-shadows {
 }
 
 /* ------------------------------------------------------------
+   Polish shadcn — detail interaksi halus di atas tema yang ada.
+   Tidak mengubah tampilan dasar: hanya menambah selection
+   bertema, ring fokus keyboard, dan shadow lembut kartu.
+   ------------------------------------------------------------ */
+
+/* Seleksi teks memakai hijau tema (leaf) */
+::selection {
+  background: #6ee7b7;
+  color: #07120d;
+}
+
+/* Ring fokus ala shadcn untuk navigasi keyboard — tautan & tombol.
+   (:focus-visible hanya muncul lewat keyboard, klik mouse tak berubah) */
+a:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #07120d,
+    0 0 0 4px rgba(52, 211, 153, 0.55);
+  border-radius: inherit;
+}
+
+/* Field form: bel border leaf yang sudah ada + glow tipis menyatu */
+input:focus,
+select:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.12);
+}
+
+/* Kartu aksi (checkbox tersembunyi) mendapat ring saat kotak centangnya
+   menerima fokus keyboard, dan shadow lembut saat disorot */
+label.action-card:focus-within {
+  box-shadow:
+    0 0 0 2px #07120d,
+    0 0 0 4px rgba(52, 211, 153, 0.55);
+}
+
+label.action-card:hover {
+  box-shadow: 0 10px 30px rgba(7, 18, 13, 0.45);
+}
+
+/* ------------------------------------------------------------
    Kursor penggeser before-after (halaman Eksplorasi, Dev B)
    ------------------------------------------------------------ */
 .ba-handle {

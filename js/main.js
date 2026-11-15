@@ -755,6 +755,9 @@ function bindReportForm() {
     success.classList.remove("hidden");
     ANIM.refreshIcons();
     ANIM.animateIn(success, { y: 20, stagger: 0 });
+    /* Pantulan spring Motion menyusul entrance Anime.js (650 ms) —
+       hanya scale, agar dua engine tidak menimpa transform yang sama */
+    if (window.MOTION_UI) setTimeout(() => MOTION_UI.pop(success), 660);
     const svg = success.querySelector("svg");
     if (svg) ANIM.drawLines(svg, { duration: 800, stagger: 300 });
     success.scrollIntoView({ behavior: "smooth", block: "center" });
