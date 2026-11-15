@@ -195,6 +195,65 @@ body .font-elite {
 }
 
 /* ------------------------------------------------------------
+   Sela interlude (halaman Cerita) — "bukalah matamu dan lihatlah dunia"
+   Font self-host Rough Typewriter (JibbaJabba Fonts; bebas untuk
+   pemakaian personal — lisensi di assets/fonts/JibbaJabba_License.rtf).
+   Tanpa panel gelap; teks digandai dua & dipotong per setengah
+   (clip-path), lalu ditarik JS: atas naik, bawah turun.
+   ------------------------------------------------------------ */
+@font-face {
+  font-family: "Rough Typewriter";
+  src: url("../assets/fonts/rough_typewriter.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.story-interlude {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  padding: 0 max(1.5rem, 8vw);
+  opacity: 0;
+  will-change: opacity;
+}
+
+.interlude-half {
+  grid-area: 1 / 1;
+  font-family: "Rough Typewriter", "Special Elite", cursive;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4.2vw, 3rem);
+  line-height: 1.45;
+  text-align: center;
+  color: #e7e4d9;
+  text-shadow: 0 2px 24px rgba(7, 18, 13, 0.95), 0 1px 3px rgba(7, 18, 13, 0.85);
+  will-change: transform;
+}
+
+.interlude-top {
+  clip-path: inset(0 0 50% 0);
+}
+
+.interlude-bottom {
+  clip-path: inset(50% 0 0 0);
+}
+
+/* Versi statis (reduced motion) — interlude jadi paragraf biasa */
+.story-static .story-interlude-static {
+  font-family: "Rough Typewriter", "Special Elite", cursive;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4.2vw, 3rem);
+  line-height: 1.45;
+  text-align: center;
+  color: #e7e4d9;
+  text-shadow: 0 2px 24px rgba(7, 18, 13, 0.95), 0 1px 3px rgba(7, 18, 13, 0.85);
+  max-width: 42rem;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+/* ------------------------------------------------------------
    Spring bounce — kurva linear() setara anime.js v4
    spring({ bounce: 0.65, duration: 400 }) — jatuh 1.56s lalu mantul.
    (Proyek ini pakai Anime.js v3 global, jadi efeknya dibake ke CSS

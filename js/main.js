@@ -404,7 +404,9 @@ function initEksplorasi() {
 /* Membangun layer gambar & caption dari STORY, lalu mengikat
    opacity tiap layer ke progres scroll. Setiap perpindahan babak
    punya ritme 3 fase: tulisan keluar → gambar berganti (crossfade
-   tanpa flicker) → tulisan babak berikutnya muncul. */
+   tanpa flicker) → tulisan babak berikutnya muncul. Di antara babak
+   2 & 3 disisip segmen sela: kalimat "bukalah matamu…" yang terbelah
+   dari tengah (atas naik, bawah turun) membuka babak berikutnya. */
 function initCerita() {
   const wrap = $("#story-scroll");
   const stage = $("#story-stage");
@@ -420,12 +422,16 @@ function initCerita() {
     wrap.classList.add("story-static");
     stage.innerHTML = scenes
       .map(
-        (s) => `
+        (s, i) => `
       <img class="scene-layer" src="${s.image}" alt="${s.alt}" onerror="__imgFallback(this)" style="filter:${s.filter}" />
       <div class="story-caption">
         <p class="font-elite text-lg text-leaf-400">${s.title}</p>
         <p class="mt-3 text-sm text-mist leading-relaxed max-w-xl">${s.text}</p>
-      </div>`
+      </div>` +
+        (i === 1
+          ? `
+      <p class="story-interlude-static">bukalah matamu dan lihatlah dunia</p>`
+          : "")
       )
       .join("");
     return;
@@ -443,16 +449,22 @@ function initCerita() {
       )
       .join("")
   );
-  captionWrap.innerHTML = scenes
-    .map(
-      (s, i) => `
+  captionWrap.innerHTML =
+    scenes
+      .map(
+        (s, i) => `
     <div class="story-caption" data-index="${i}" style="opacity:${i === 0 ? 1 : 0}">
       <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-leaf-400">Babak ${i + 1}</p>
       <h2 class="mt-3 font-elite text-2xl md:text-4xl leading-snug">${s.title}</h2>
       <p class="mt-4 text-sm md:text-base text-mist leading-relaxed max-w-xl">${s.text}</p>
     </div>`
-    )
-    .join("");
+      )
+      .join("") +
+    `
+    <div class="story-interlude" style="opacity:0">
+      <span class="interlude-half interlude-top">bukalah matamu dan lihatlah dunia</span>
+      <span class="interlude-half interlude-bottom" aria-hidden="true">bukalah matamu dan lihatlah dunia</span>
+    </div>`;
 
   /* Preload agar crossfade tidak tersendat */
   scenes.forEach((s) => {
@@ -462,6 +474,9 @@ function initCerita() {
 
   const layers = $$(".scene-layer", stage);
   const captions = $$(".story-caption", captionWrap);
+  const interlude = $(".story-interlude", captionWrap);
+  const interludeTop = $(".interlude-top", captionWrap);
+  const interludeBottom = $(".interlude-bottom", captionWrap);
   const overlay = $("#story-overlay");
   const counter = $("#story-counter");
   const fill = $("#story-progress-fill");
@@ -472,37 +487,63 @@ function initCerita() {
   /* Ritme 3 fase per perpindahan babak (t = posisi dalam jendela babak):
      1) tulisan keluar            : t 0.25–0.45
      2) gambar berganti           : t 0.45–0.70
-     3) tulisan berikutnya masuk  : t 0.70–0.95 */
+     3) tulisan berikutnya masuk  : t 0.70–0.95
+     Linimasa = N + 1 segmen: 8 babak + 1 segmen sela (interlude) yang
+     menempati celah antara segmen babak 2 & 3. */
   const OUT_A = 0.25, OUT_B = 0.45;
   const SWAP_A = 0.45, SWAP_B = 0.7;
   const IN_A = 0.7, IN_B = 0.95;
+  const INTERLUDE_SEG = 2; /* segmen sela setelah Denyut Kehidupan */
+  const M = N + 1; /* jumlah segmen linimasa */
+  const segOf = (i) => (i < 2 ? i : i + 1); /* segmen tempat babak i berada */
 
   function apply(p) {
-    let active = Math.min(N - 1, Math.max(0, Math.floor(p * N)));
-    const t = p * N - active; /* posisi dalam jendela babak aktif */
+    const seg = Math.min(M - 1, Math.max(0, Math.floor(p * M)));
+    const t = p * M - seg; /* posisi dalam segmen aktif */
 
     layers.forEach((el, i) => {
       if (i === 0) return; /* lapisan dasar selalu 1, tertutup dari atas */
-      /* Gambar berganti di fase 2, pada jendela babak sebelumnya */
-      el.style.opacity = String(ramp(p, (i - 1 + SWAP_A) / N, (i - 1 + SWAP_B) / N));
+      /* Gambar babak i masuk di fase 2 segmen sebelum segmennya sendiri —
+         gambar Suara Mesin tampil di belakang sela, sisanya seperti biasa */
+      const s = i < 2 ? i - 1 : i;
+      el.style.opacity = String(ramp(p, (s + SWAP_A) / M, (s + SWAP_B) / M));
     });
 
     captions.forEach((el, i) => {
+      const s = segOf(i);
       /* Babak pertama langsung terlihat sejak halaman dibuka */
-      let o = i === 0 ? 1 : ramp(p, (i - 1 + IN_A) / N, (i - 1 + IN_B) / N);
-      if (i < N - 1) o *= 1 - ramp(p, (i + OUT_A) / N, (i + OUT_B) / N);
+      let o = i === 0 ? 1 : ramp(p, (s - 1 + IN_A) / M, (s - 1 + IN_B) / M);
+      if (i < N - 1) o *= 1 - ramp(p, (s + OUT_A) / M, (s + OUT_B) / M);
       el.style.opacity = String(o);
     });
 
-    /* Overlay menebal serentak dengan pergantian gambar (fase 2) */
-    const nextOverlay = scenes[active + 1] ? scenes[active + 1].overlay : scenes[active].overlay;
+    /* Sela: masuk di fase 3 segmen 1 (scroll ketiga), tetap tampil selama
+       gambar berganti di belakangnya, lalu terbelah dari tengah di fase 3
+       segmen sela — setengah atas naik, setengah bawah turun — serentak
+       dengan masuknya caption babak berikutnya pada fase yang sama. */
+    const buka = ramp(p, (INTERLUDE_SEG + IN_A) / M, (INTERLUDE_SEG + IN_B) / M);
+    interlude.style.opacity = String(ramp(p, (1 + IN_A) / M, (1 + IN_B) / M) * (1 - buka));
+    interludeTop.style.transform = `translateY(${(-16 * buka).toFixed(2)}vh)`;
+    interludeBottom.style.transform = `translateY(${(16 * buka).toFixed(2)}vh)`;
+
+    /* Overlay menebal serentak dengan pergantian gambar (fase 2).
+       Segmen 1 menahan overlay (tak ada gambar yang berganti di sana);
+       segmen sela menjadi tempat pergantian overlay babak 1 → 2. */
+    let ovA, ovB;
+    if (seg === 0) { ovA = 0; ovB = 1; }
+    else if (seg === 1) { ovA = 1; ovB = 1; }
+    else if (seg === INTERLUDE_SEG) { ovA = 1; ovB = 2; }
+    else { ovA = seg - 1; ovB = Math.min(N - 1, seg); }
     overlay.style.opacity = String(
-      scenes[active].overlay + (nextOverlay - scenes[active].overlay) * ramp(t, SWAP_A, SWAP_B)
+      scenes[ovA].overlay + (scenes[ovB].overlay - scenes[ovA].overlay) * ramp(t, SWAP_A, SWAP_B)
     );
 
-    /* Counter mengikuti caption yang tampil — fase 3 memunculkan babak
-       berikutnya sedikit sebelum jendela scroll penuhnya berganti */
-    const shown = Math.min(N - 1, active + (t >= IN_A ? 1 : 0));
+    /* Counter mengikuti caption babak yang tampil — sela tidak bernomor
+       (masih bagian Denyut Kehidupan), berpindah saat sela terbuka */
+    let shown;
+    if (seg <= 1) shown = seg;
+    else if (seg === INTERLUDE_SEG) shown = t >= IN_A ? 2 : 1;
+    else shown = seg - 1;
     if (counter) counter.textContent = `Babak ${shown + 1} / ${N}`;
     if (fill) fill.style.height = `${p * 100}%`;
     if (hint && p > 0.04) hint.style.opacity = String(1 - ramp(p, 0.04, 0.09));

@@ -179,7 +179,7 @@ const SITE_DATA = {
     },
     {
       id: "s3",
-      title: "Aroma Mesin & Gergaji",
+      title: "Suara Mesin & Gergaji",
       text: "Lalu aroma itu datang: mesin, gergaji, dan lembaran izin atas lahan. Kabut pagi mulai berbaur dengan sesuatu yang tidak wajar.",
       image: "https://images.pexels.com/photos/34273658/pexels-photo-34273658/free-photo-of-lumberjacks-working-in-forest-clearing-with-chainsaws.jpeg?auto=compress&cs=tinysrgb&w=1920",
       alt: "Penebang kayu menggergaji batang pohon di areal tebangan",

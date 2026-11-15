@@ -36,6 +36,7 @@ di `<head>` setiap file HTML (lihat blok `tailwind.config`).
 | Playwrite AU SA Guides | `font-team` | Nama tim di halaman About — handwriting garis bantu (weight 400) |
 | Orbitron | `font-orb` | Nama lembaga sumber data di halaman About (BNPB, BMKG, dst.) — futuristik |
 | Special Elite | `font-elite` | Judul babak cerita di halaman Cerita — mesin ketik (weight 400) |
+| Rough Typewriter | sela cerita | Kalimat interlude "bukalah matamu…" di halaman Cerita — self-host `assets/fonts/rough_typewriter.otf` (JibbaJabba Fonts, bebas personal, weight 400) |
 | Inter | `font-body` | Paragraf, UI |
 | JetBrains Mono | `font-mono` | Angka statistik, label data, kode |
 
