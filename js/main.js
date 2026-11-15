@@ -423,7 +423,7 @@ function initCerita() {
     stage.innerHTML = scenes
       .map(
         (s, i) => `
-      <img class="scene-layer" src="${s.image}" alt="${s.alt}" onerror="__imgFallback(this)" style="filter:${s.filter}" />
+      <img class="scene-layer" src="${s.image}" alt="${s.alt}" onerror="__imgFallback(this)" style="filter:${s.filter}; object-position:${s.pos || "center"}" />
       <div class="story-caption">
         <p class="font-elite text-lg text-leaf-400">${s.title}</p>
         <p class="mt-3 text-sm text-mist leading-relaxed max-w-xl">${s.text}</p>
@@ -445,7 +445,7 @@ function initCerita() {
         (s, i) => `
       <img class="scene-layer" data-index="${i}" src="${s.image}" alt="${s.alt}"
            onerror="__imgFallback(this)" loading="eager"
-           style="filter:${s.filter}; opacity:${i === 0 ? 1 : 0}" />`
+           style="filter:${s.filter}; opacity:${i === 0 ? 1 : 0}; object-position:${s.pos || "center"}" />`
       )
       .join("")
   );

@@ -114,6 +114,15 @@ body .font-elite {
   line-height: 1.4;
 }
 
+/* Judul form laporan (halaman Contact) — Shadows Into Light, tulisan
+   tangan tipis Kimberly Geswein; font ini hanya punya weight 400 */
+body .font-shadows {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+
 /* ------------------------------------------------------------
    Kursor penggeser before-after (halaman Eksplorasi, Dev B)
    ------------------------------------------------------------ */

@@ -157,6 +157,7 @@ const SITE_DATA = {
      STORY — scrollytelling "Nusantara yang Memudar" (cerita.html)
      filter  : CSS filter per adegan (indah → hancur)
      overlay : 0–1, kepekatan gradient gelap per adegan
+     pos     : posisi crop object-position (opsional, default "center")
      ------------------------------------------------------------ */
   STORY: [
     {
@@ -225,9 +226,13 @@ const SITE_DATA = {
     {
       id: "s8",
       title: "Tenggelam",
-      text: "Hujan deras dan pasang laut datang bersamaan. Warga mengayuh air setinggi dada melewati kampung yang setengah tenggelam, mengangkat perabot ke lantai atas, menahan pintu dengan karung pasir. Banjir rob datang setiap tahun, dan setiap tahun lebih tinggi. Nusantara tidak tumbang sekaligus — ia memudar, perlahan, sampai kita mengingatnya sebagai cerita.",
-      image: "https://images.pexels.com/photos/33762353/pexels-photo-33762353/free-photo-of-man-carrying-jute-bundles-in-flooded-field.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      alt: "Warga mengayuh banjir setinggi pinggang sambil mengangkut barang di atas kepalanya",
+      /* Foto dokumentasi Wikimedia Commons — CC BY-SA 4.0:
+         "Banjir Jakarta, Perumahan di Tanjung Duren, 1 Januari 2020"
+         (lokasi sama dengan banjir Tanjung Duren 14 November 2026) */
+      text: "Hujan deras dan pasang laut datang bersamaan. Dalam hitungan jam, taman dan gang perumahan Jakarta berubah menjadi danau cokelat — ayunan taman bermain tenggelam sampai dudukannya, pagar-pagar hilang di bawah air keruh. Banjir rob datang setiap tahun, dan setiap tahun lebih tinggi. Nusantara tidak tumbang sekaligus — ia memudar, perlahan, sampai kita mengingatnya sebagai cerita.",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Banjir_Jakarta_Perumahan_di_Tanjung_Duren_1_Januari_2020.jpg/1920px-Banjir_Jakarta_Perumahan_di_Tanjung_Duren_1_Januari_2020.jpg",
+      alt: "Banjir merendam taman perumahan di Tanjung Duren, Jakarta Barat (dok. Wikimedia Commons, CC BY-SA 4.0)",
+      pos: "center 40%",
       filter: "saturate(0.25) brightness(0.5) contrast(1.1)",
       overlay: 0.65,
     },
