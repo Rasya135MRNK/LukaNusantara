@@ -105,6 +105,15 @@ body .font-orb {
   letter-spacing: 0.05em;
 }
 
+/* Judul babak cerita (halaman Cerita) — Special Elite, mesin ketik;
+   font ini hanya punya weight 400 (jangan dibold) */
+body .font-elite {
+  font-family: "Special Elite", cursive;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
 /* ------------------------------------------------------------
    Kursor penggeser before-after (halaman Eksplorasi, Dev B)
    ------------------------------------------------------------ */

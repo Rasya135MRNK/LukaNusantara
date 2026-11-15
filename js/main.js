@@ -422,7 +422,7 @@ function initCerita() {
         (s) => `
       <img class="scene-layer" src="${s.image}" alt="${s.alt}" onerror="__imgFallback(this)" style="filter:${s.filter}" />
       <div class="story-caption">
-        <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-leaf-400">${s.title}</p>
+        <p class="font-elite text-lg text-leaf-400">${s.title}</p>
         <p class="mt-3 text-sm text-mist leading-relaxed max-w-xl">${s.text}</p>
       </div>`
       )
@@ -447,7 +447,7 @@ function initCerita() {
       (s, i) => `
     <div class="story-caption" data-index="${i}" style="opacity:${i === 0 ? 1 : 0}">
       <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-leaf-400">Babak ${i + 1}</p>
-      <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl leading-snug">${s.title}</h2>
+      <h2 class="mt-3 font-elite text-2xl md:text-4xl leading-snug">${s.title}</h2>
       <p class="mt-4 text-sm md:text-base text-mist leading-relaxed max-w-xl">${s.text}</p>
     </div>`
     )
