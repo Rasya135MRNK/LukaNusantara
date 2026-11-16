@@ -405,8 +405,10 @@ function initEksplorasi() {
    opacity tiap layer ke progres scroll. Setiap perpindahan babak
    punya ritme 3 fase: tulisan keluar → gambar berganti (crossfade
    tanpa flicker) → tulisan babak berikutnya muncul. Di antara babak
-   2 & 3 disisip segmen sela: kalimat "bukalah matamu…" yang terbelah
-   dari tengah (atas naik, bawah turun) membuka babak berikutnya. */
+   2 & 3 disisip dua segmen sela: pertama kalimat "Tetapi..." yang
+   diketik huruf demi huruf dari kiri di layar hitam, lalu kalimat
+   "Bukalah Matamu…" yang terbelah dari tengah (atas naik, bawah
+   turun) membuka babak berikutnya. */
 function initCerita() {
   const wrap = $("#story-scroll");
   const stage = $("#story-stage");
@@ -430,7 +432,8 @@ function initCerita() {
       </div>` +
         (i === 1
           ? `
-      <p class="story-interlude-static">bukalah matamu dan lihatlah dunia</p>`
+      <p class="story-typing-static">Tetapi...</p>
+      <p class="story-interlude-static">Bukalah Matamu dan Lihatlah Nusantara</p>`
           : "")
       )
       .join("");
@@ -462,8 +465,11 @@ function initCerita() {
       .join("") +
     `
     <div class="story-interlude" style="opacity:0">
-      <span class="interlude-half interlude-top">bukalah matamu dan lihatlah dunia</span>
-      <span class="interlude-half interlude-bottom" aria-hidden="true">bukalah matamu dan lihatlah dunia</span>
+      <span class="interlude-half interlude-top">Bukalah Matamu dan Lihatlah Nusantara</span>
+      <span class="interlude-half interlude-bottom" aria-hidden="true">Bukalah Matamu dan Lihatlah Nusantara</span>
+    </div>
+    <div class="story-typing" style="opacity:0" aria-label="Tetapi...">
+      <span><span class="typing-text" aria-hidden="true"></span><span class="typing-caret" aria-hidden="true"></span></span>
     </div>`;
 
   /* Preload agar crossfade tidak tersendat */
@@ -477,6 +483,8 @@ function initCerita() {
   const interlude = $(".story-interlude", captionWrap);
   const interludeTop = $(".interlude-top", captionWrap);
   const interludeBottom = $(".interlude-bottom", captionWrap);
+  const typing = $(".story-typing", captionWrap);
+  const typingText = $(".typing-text", captionWrap);
   const overlay = $("#story-overlay");
   const counter = $("#story-counter");
   const fill = $("#story-progress-fill");
@@ -489,14 +497,18 @@ function initCerita() {
      1) tulisan keluar            : t 0.25–0.45
      2) gambar berganti           : t 0.45–0.70
      3) tulisan berikutnya masuk  : t 0.70–0.95
-     Linimasa = N + 1 segmen: 8 babak + 1 segmen sela (interlude) yang
-     menempati celah antara segmen babak 2 & 3. */
+     Linimasa = N + 2 segmen: 8 babak + segmen "Tetapi..." (mengetik)
+     + segmen sela (interlude). Urutan: babak 0–1 → mengetik → sela →
+     babak 2 dst. */
   const OUT_A = 0.25, OUT_B = 0.45;
   const SWAP_A = 0.45, SWAP_B = 0.7;
   const IN_A = 0.7, IN_B = 0.95;
-  const INTERLUDE_SEG = 2; /* segmen sela setelah Denyut Kehidupan */
-  const M = N + 1; /* jumlah segmen linimasa */
-  const segOf = (i) => (i < 2 ? i : i + 1); /* segmen tempat babak i berada */
+  const TYPE_SEG = 2; /* segmen mengetik "Tetapi..." setelah Denyut Kehidupan */
+  const INTERLUDE_SEG = 3; /* segmen sela setelah segmen mengetik */
+  const TYPE_TEXT = "Tetapi...";
+  const INTERLUDE_TEXT = "Bukalah Matamu dan Lihatlah Nusantara";
+  const M = N + 2; /* jumlah segmen linimasa */
+  const segOf = (i) => (i < 2 ? i : i + 2); /* segmen tempat babak i berada */
 
   function apply(p) {
     const seg = Math.min(M - 1, Math.max(0, Math.floor(p * M)));
@@ -506,7 +518,7 @@ function initCerita() {
       if (i === 0) return; /* lapisan dasar selalu 1, tertutup dari atas */
       /* Gambar babak i masuk di fase 2 segmen sebelum segmennya sendiri —
          gambar Suara Mesin tampil di belakang sela, sisanya seperti biasa */
-      const s = i < 2 ? i - 1 : i;
+      const s = i < 2 ? i - 1 : i + 1;
       el.style.opacity = String(ramp(p, (s + SWAP_A) / M, (s + SWAP_B) / M));
     });
 
@@ -518,14 +530,40 @@ function initCerita() {
       el.style.opacity = String(o);
     });
 
-    /* Sela: masuk di fase 3 segmen 1 (scroll ketiga) — kini di atas layar
-       yang sudah menghitam — lalu terbelah dari tengah di fase 3 segmen
-       sela: setengah atas naik, setengah bawah turun, serentak dengan
-       masuknya caption babak berikutnya pada fase yang sama. */
+    /* Sela: masuk di fase 3 segmen mengetik (layar masih hitam), lalu
+       terbelah dari tengah di fase 3 segmen sela: setengah atas naik,
+       setengah bawah turun, serentak dengan masuknya caption babak
+       berikutnya pada fase yang sama. Teksnya juga diketik dari kiri
+       mengikuti scroll — selesai tepat sebelum sela terbelah. Kedua
+       setengah selalu berisi potongan string yang sama agar clip-path
+       atas/bawah tetap sejajar. */
     const buka = ramp(p, (INTERLUDE_SEG + IN_A) / M, (INTERLUDE_SEG + IN_B) / M);
-    interlude.style.opacity = String(ramp(p, (1 + IN_A) / M, (1 + IN_B) / M) * (1 - buka));
+    interlude.style.opacity = String(
+      ramp(p, (TYPE_SEG + IN_A) / M, (TYPE_SEG + IN_B) / M) * (1 - buka)
+    );
     interludeTop.style.transform = `translateY(${(-16 * buka).toFixed(2)}vh)`;
     interludeBottom.style.transform = `translateY(${(16 * buka).toFixed(2)}vh)`;
+    const ketikSela = ramp(
+      p,
+      (TYPE_SEG + IN_A) / M,
+      (INTERLUDE_SEG + IN_A) / M
+    );
+    const potonganSela = INTERLUDE_TEXT.slice(
+      0,
+      Math.round(ketikSela * INTERLUDE_TEXT.length)
+    );
+    interludeTop.textContent = potonganSela;
+    interludeBottom.textContent = potonganSela;
+
+    /* Segmen mengetik "Tetapi...": di layar hitam, huruf muncul satu
+       per satu dari kiri mengikuti progres scroll (mengetik dari samping,
+       karet berkedip di ujung), lalu seluruh teks memudar sebelum sela
+       "Bukalah Matamu…" masuk. */
+    const typeIn = ramp(p, (TYPE_SEG + 0.02) / M, (TYPE_SEG + 0.15) / M);
+    const typeOut = ramp(p, (TYPE_SEG + 0.55) / M, (TYPE_SEG + 0.7) / M);
+    typing.style.opacity = String(typeIn * (1 - typeOut));
+    const maju = ramp(p, (TYPE_SEG + 0.1) / M, (TYPE_SEG + 0.55) / M);
+    typingText.textContent = TYPE_TEXT.slice(0, Math.round(maju * TYPE_TEXT.length));
 
     /* Layar mengelap sampai hitam menggantikan pergantian gambar pada
        transisi ini: gelap di fase 2 segmen 1 (gambar Denyut Kehidupan
@@ -536,23 +574,26 @@ function initCerita() {
     );
 
     /* Overlay menebal serentak dengan pergantian gambar (fase 2).
-       Segmen 1 menahan overlay (tak ada gambar yang berganti di sana);
-       segmen sela menjadi tempat pergantian overlay babak 1 → 2. */
+       Segmen 1 & segmen mengetik menahan overlay (tak ada gambar yang
+       berganti di sana); segmen sela menjadi tempat pergantian overlay
+       babak 1 → 2. */
     let ovA, ovB;
     if (seg === 0) { ovA = 0; ovB = 1; }
-    else if (seg === 1) { ovA = 1; ovB = 1; }
+    else if (seg === 1 || seg === TYPE_SEG) { ovA = 1; ovB = 1; }
     else if (seg === INTERLUDE_SEG) { ovA = 1; ovB = 2; }
-    else { ovA = seg - 1; ovB = Math.min(N - 1, seg); }
+    else { ovA = seg - 2; ovB = Math.min(N - 1, seg - 1); }
     overlay.style.opacity = String(
       scenes[ovA].overlay + (scenes[ovB].overlay - scenes[ovA].overlay) * ramp(t, SWAP_A, SWAP_B)
     );
 
-    /* Counter mengikuti caption babak yang tampil — sela tidak bernomor
-       (masih bagian Denyut Kehidupan), berpindah saat sela terbuka */
+    /* Counter mengikuti caption babak yang tampil — segmen mengetik & sela
+       tidak bernomor (masih bagian Denyut Kehidupan), berpindah saat sela
+       terbuka */
     let shown;
     if (seg <= 1) shown = seg;
+    else if (seg === TYPE_SEG) shown = 1;
     else if (seg === INTERLUDE_SEG) shown = t >= IN_A ? 2 : 1;
-    else shown = seg - 1;
+    else shown = seg - 2;
     if (counter) counter.textContent = `Babak ${shown + 1} / ${N}`;
     if (fill) fill.style.height = `${p * 100}%`;
     if (hint && p > 0.04) hint.style.opacity = String(1 - ramp(p, 0.04, 0.09));
@@ -574,6 +615,29 @@ function initCerita() {
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
   update();
+}
+
+/* Outro — slideshow latar bencana (cerita.html): foto-foto dari
+   SITE_DATA.OUTRO_BG bersilangan (crossfade) otomatis tiap 5 detik;
+   gerak perlahan tiap foto ditangani animasi CSS (outro-pan). */
+function initOutro() {
+  const wrap = $("#outro-bg");
+  if (!wrap || !SITE_DATA.OUTRO_BG || SITE_DATA.OUTRO_BG.length < 2) return;
+
+  wrap.innerHTML = SITE_DATA.OUTRO_BG.map(
+    (s, i) => `
+    <img class="outro-bg-item${i === 0 ? " is-active" : ""}"
+         src="${s.image}" alt="" loading="lazy"
+         title="${s.label}" onerror="__imgFallback(this)" />`
+  ).join("");
+
+  const items = $$(".outro-bg-item", wrap);
+  let idx = 0;
+  setInterval(() => {
+    items[idx].classList.remove("is-active");
+    idx = (idx + 1) % items.length;
+    items[idx].classList.add("is-active");
+  }, 5000);
 }
 
 /* ============================================================
@@ -788,7 +852,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const page = document.body.dataset.page;
   if (page === "home") initHome();
-  else if (page === "cerita") initCerita();
+  else if (page === "cerita") {
+    initCerita();
+    initOutro();
+  }
   else if (page === "eksplorasi") initEksplorasi();
   else if (page === "about") initAbout();
   else if (page === "contact") initContact();

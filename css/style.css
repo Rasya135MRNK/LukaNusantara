@@ -266,7 +266,7 @@ label.action-card:hover {
 }
 
 /* ------------------------------------------------------------
-   Sela interlude (halaman Cerita) — "bukalah matamu dan lihatlah dunia"
+   Sela interlude (halaman Cerita) — "Bukalah Matamu dan Lihatlah Nusantara"
    Font self-host Rough Typewriter (JibbaJabba Fonts; bebas untuk
    pemakaian personal — lisensi di assets/fonts/JibbaJabba_License.rtf).
    Tanpa panel gelap; teks digandai dua & dipotong per setengah
@@ -310,7 +310,66 @@ label.action-card:hover {
   clip-path: inset(50% 0 0 0);
 }
 
+/* ------------------------------------------------------------
+   Segmen mengetik (halaman Cerita) — "Tetapi..."
+   Huruf muncul satu per satu dari kiri mengikuti progres scroll
+   (potongan string oleh JS), karet hijau berkedip di ujung teks.
+   ------------------------------------------------------------ */
+.story-typing {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  justify-items: start;
+  padding: 0 max(1.5rem, 8vw);
+  opacity: 0;
+  will-change: opacity;
+}
+
+.story-typing .typing-text,
+.story-typing .typing-caret {
+  font-family: "Rough Typewriter", "Special Elite", cursive;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4.2vw, 3rem);
+  line-height: 1.45;
+  color: #e7e4d9;
+  text-shadow: 0 2px 24px rgba(7, 18, 13, 0.95), 0 1px 3px rgba(7, 18, 13, 0.85);
+}
+
+.story-typing .typing-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 0.08em;
+  background: #34d399;
+  vertical-align: text-bottom;
+  box-shadow: 0 2px 24px rgba(52, 211, 153, 0.45);
+  animation: typing-blink 0.9s steps(1) infinite;
+}
+
+@keyframes typing-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-typing .typing-caret { animation: none; }
+}
+
 /* Versi statis (reduced motion) — interlude jadi paragraf biasa */
+.story-static .story-typing-static {
+  font-family: "Rough Typewriter", "Special Elite", cursive;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4.2vw, 3rem);
+  line-height: 1.45;
+  text-align: center;
+  color: #e7e4d9;
+  text-shadow: 0 2px 24px rgba(7, 18, 13, 0.95), 0 1px 3px rgba(7, 18, 13, 0.85);
+  max-width: 42rem;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
 .story-static .story-interlude-static {
   font-family: "Rough Typewriter", "Special Elite", cursive;
   font-weight: 400;
@@ -322,6 +381,37 @@ label.action-card:hover {
   max-width: 42rem;
   margin: 2.5rem auto;
   padding: 0 1.5rem;
+}
+
+/* ------------------------------------------------------------
+   Outro (halaman Cerita) — slideshow latar bencana
+   Foto-foto bencana bersilangan (crossfade) tiap 5 detik oleh JS,
+   sementara tiap foto terus bergeser perlahan (Ken Burns) agar
+   latar terasa berjalan. Teks outro berada di atasnya.
+   ------------------------------------------------------------ */
+.outro-bg-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  will-change: opacity, transform;
+}
+
+.outro-bg-item.is-active {
+  opacity: 1;
+  animation: outro-pan 6.5s linear forwards;
+}
+
+@keyframes outro-pan {
+  from { transform: scale(1.02) translateX(1.5%); }
+  to   { transform: scale(1.14) translateX(-1.5%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outro-bg-item.is-active { animation: none; transform: scale(1.05); }
 }
 
 /* ------------------------------------------------------------

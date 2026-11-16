@@ -49,7 +49,7 @@ const SITE_DATA = {
         "Sertifikasi & penataan wilayah perkebunan yang sah",
         "Pemantauan titik api satelit dengan respons cepat",
       ],
-      markerX: 17.5, markerY: 45,
+      markerX: 12.0, markerY: 40.4,
     },
     jawa: {
       name: "Jawa",
@@ -74,7 +74,7 @@ const SITE_DATA = {
         "Tata ruang pesisir berbasis riset ketahanan iklim",
         "Sistem drainase kota yang diperbaiki dan dirawat rutin",
       ],
-      markerX: 43, markerY: 86,
+      markerX: 33.0, markerY: 82.3,
     },
     kalimantan: {
       name: "Kalimantan",
@@ -99,7 +99,7 @@ const SITE_DATA = {
         "Agroforestri & hutan desa sebagai ekonomi alternatif",
         "Moratorium izin baru di hutan alam primer",
       ],
-      markerX: 54, markerY: 46,
+      markerX: 40.5, markerY: 34.7,
     },
     sulawesi: {
       name: "Sulawesi",
@@ -124,7 +124,7 @@ const SITE_DATA = {
         "Sistem peringatan dini banjir bandang berbasis komunitas",
         "Kesepakatan tata ruang kawasan tambang yang ketat",
       ],
-      markerX: 67.5, markerY: 51,
+      markerX: 57.5, markerY: 47.6,
     },
     papua: {
       name: "Papua",
@@ -149,7 +149,7 @@ const SITE_DATA = {
         "Eco-development berbasis ekonomi masyarakat lokal",
         "Monitoring satelit independen terhadap pembukaan lahan",
       ],
-      markerX: 86, markerY: 46,
+      markerX: 88.0, markerY: 57.8,
     },
   },
 
@@ -235,6 +235,38 @@ const SITE_DATA = {
       pos: "center 40%",
       filter: "saturate(0.25) brightness(0.5) contrast(1.1)",
       overlay: 0.65,
+    },
+  ],
+
+  /* ------------------------------------------------------------
+     OUTRO_BG — slideshow latar penutup (cerita.html)
+     Kumpulan foto bencana ekologis Indonesia; diganti otomatis
+     tiap 5 detik oleh initOutro() di main.js.
+     ------------------------------------------------------------ */
+  OUTRO_BG: [
+    {
+      image: "https://images.pexels.com/photos/51951/forest-fire-fire-smoke-conservation-51951.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      label: "Karhutla — kebakaran hutan dan lahan",
+    },
+    {
+      image: "https://images.pexels.com/photos/28345859/pexels-photo-28345859/free-photo-of-dramatic-sky-above-smoke-covered-mountain.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      label: "Asap karhutla menutup langit",
+    },
+    {
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Banjir_Jakarta_Perumahan_di_Tanjung_Duren_1_Januari_2020.jpg/1920px-Banjir_Jakarta_Perumahan_di_Tanjung_Duren_1_Januari_2020.jpg",
+      label: "Banjir merendam permukiman (dok. Wikimedia Commons, CC BY-SA 4.0)",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1920&auto=format&fit=crop",
+      label: "Banjir rob di pesisir",
+    },
+    {
+      image: "https://images.pexels.com/photos/9305820/pexels-photo-9305820.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      label: "Deforestasi — rawan longsor & erosi",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1920&auto=format&fit=crop",
+      label: "Kekeringan — ladang pecah karena El Niño",
     },
   ],
 
