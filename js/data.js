@@ -258,8 +258,8 @@ const SITE_DATA = {
       label: "Banjir merendam permukiman (dok. Wikimedia Commons, CC BY-SA 4.0)",
     },
     {
-      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1920&auto=format&fit=crop",
-      label: "Banjir rob di pesisir",
+      image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Abandoned_guardhouse_in_flooded_parking_lot%2C_Tanjung_Mas_Harbour%2C_Semarang.jpg/1920px-Abandoned_guardhouse_in_flooded_parking_lot%2C_Tanjung_Mas_Harbour%2C_Semarang.jpg",
+      label: "Banjir rob di pelabuhan Tanjung Mas, Semarang (dok. Wikimedia Commons, CC BY-SA 3.0)",
     },
     {
       image: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Landslides_in_Agam_Regency%2C_West_Sumatra.jpg",
@@ -270,8 +270,8 @@ const SITE_DATA = {
       label: "Longsor di Tapanuli Utara pasca hujan deras, 2025 (dok. Wikimedia Commons)",
     },
     {
-      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1920&auto=format&fit=crop",
-      label: "Kekeringan — ladang pecah karena El Niño",
+      image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Sawah_Kering.jpg/1920px-Sawah_Kering.jpg",
+      label: "Kekeringan — sawah yang mengering (dok. Wikimedia Commons, CC BY-SA 4.0)",
     },
   ],
 
