@@ -242,6 +242,7 @@ const SITE_DATA = {
      OUTRO_BG — slideshow latar penutup (cerita.html)
      Kumpulan foto bencana ekologis Indonesia; diganti otomatis
      tiap 5 detik oleh initOutro() di main.js.
+     Foto Wikimedia Commons: domain publik / CC BY-SA (lihat label).
      ------------------------------------------------------------ */
   OUTRO_BG: [
     {
@@ -261,8 +262,12 @@ const SITE_DATA = {
       label: "Banjir rob di pesisir",
     },
     {
-      image: "https://images.pexels.com/photos/9305820/pexels-photo-9305820.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      label: "Deforestasi — rawan longsor & erosi",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Landslides_in_Agam_Regency%2C_West_Sumatra.jpg",
+      label: "Longsor akibat banjir bandang Sumatera Barat, 2025 (dok. Wikimedia Commons)",
+    },
+    {
+      image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Landslide_in_North_Tapanuli_following_heavy_rainfall.jpg",
+      label: "Longsor di Tapanuli Utara pasca hujan deras, 2025 (dok. Wikimedia Commons)",
     },
     {
       image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1920&auto=format&fit=crop",
