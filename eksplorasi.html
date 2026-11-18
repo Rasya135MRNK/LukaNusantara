@@ -24,6 +24,7 @@
             display: ["Nothing You Could Do", "cursive"],
             body: ["Inter", "sans-serif"],
             mono: ["JetBrains Mono", "monospace"],
+            caption: ['"Bona Nova SC"', "serif"],
           },
         },
       },
@@ -31,7 +32,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Allerta+Stencil&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Allerta+Stencil&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <!-- ===================================================================== -->
 </head>
@@ -100,40 +101,286 @@
       </div>
     </section>
 
+    <!-- ================= DATA & GRAFIK PENDUKUNG ================= -->
+    <section id="data" class="pb-16 md:pb-24">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Data Pendukung</p>
+        <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl">Angka di Balik Setiap Kasus</h2>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-2xl leading-relaxed">
+          Sebelum masuk ke galeri, lihat besaran persoalannya. Empat grafik berikut
+          memakai data resmi dan setiap kartu mencantumkan tautan sumbernya.
+        </p>
+
+        <div id="explore-charts" class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <!-- diisi CHART.renderGrid() dari js/charts.js -->
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-deep-700 bg-deep-900/60 p-5 md:p-6">
+          <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-mist/60">Sumber data</p>
+          <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px]">
+            <a href="https://bnpb.go.id" target="_blank" rel="noopener" class="text-leaf-300 hover:text-leaf-400 underline decoration-deep-600 underline-offset-4 inline-flex items-center gap-1">BNPB <i data-lucide="external-link" class="w-3 h-3"></i></a>
+            <a href="https://sipongi.gakkum.kehutanan.go.id/indikasi-luas-kebakaran" target="_blank" rel="noopener" class="text-leaf-300 hover:text-leaf-400 underline decoration-deep-600 underline-offset-4 inline-flex items-center gap-1">KLHK / SiPongi <i data-lucide="external-link" class="w-3 h-3"></i></a>
+            <a href="https://www.globalforestwatch.org/dashboards/country/IDN/" target="_blank" rel="noopener" class="text-leaf-300 hover:text-leaf-400 underline decoration-deep-600 underline-offset-4 inline-flex items-center gap-1">Global Forest Watch <i data-lucide="external-link" class="w-3 h-3"></i></a>
+            <a href="https://sipsn.menlhk.go.id" target="_blank" rel="noopener" class="text-leaf-300 hover:text-leaf-400 underline decoration-deep-600 underline-offset-4 inline-flex items-center gap-1">SIPSN <i data-lucide="external-link" class="w-3 h-3"></i></a>
+          </div>
+          <p class="mt-3 text-xs leading-relaxed text-mist/65">
+            Tiap grafik juga memuat sumber spesifik di bagian bawah kartu. Angka
+            dibulatkan untuk keterbacaan; nilai lengkap mengikuti laporan resmi.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= BEFORE-AFTER SLIDER (TODO Dev B: B3) ================= -->
-    <section class="pb-16 md:pb-24">
+    <section id="komparasi" class="pb-16 md:pb-24">
       <div class="max-w-6xl mx-auto px-4 md:px-6">
         <p class="font-mono text-xs uppercase tracking-[0.3em] text-leaf-400">Komparasi Waktu</p>
         <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl">Dulu vs Sekarang</h2>
         <p class="mt-3 text-sm md:text-base text-mist max-w-2xl leading-relaxed">
-          Geser garis tengah untuk melihat perubahan ekosistem sebuah kawasan.
+          Geser ikon api untuk melihat wilayah terdampak: titik karhutla, banjir parah,
+          kekeringan, longsor, dan tambang.
         </p>
 
-        <!-- Foto ilustrasi Unsplash (bebas royalti); fallback offline otomatis -->
-        <div id="ba" class="relative w-full aspect-[16/9] bg-deep-900 overflow-hidden touch-none select-none" style="--pos:50%">
-          <img id="ba-before"
-               src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1600&auto=format&fit=crop"
-               alt="Hutan rimbun — kondisi kawasan di masa lalu (ilustrasi)"
-               onerror="__imgFallback(this)"
-               class="absolute inset-0 w-full h-full object-cover" />
-          <img id="ba-after"
-               src="https://images.pexels.com/photos/30805406/pexels-photo-30805406/free-photo-of-dramatic-australian-bushfire-landscape.jpeg?auto=compress&cs=tinysrgb&w=1600"
-               alt="Hutan yang terbakar — kondisi kawasan saat ini (ilustrasi)"
-               onerror="__imgFallback(this)"
-               class="absolute inset-0 w-full h-full object-cover"
-               style="clip-path: inset(0 0 0 50%)" />
-          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-deep-950/80 border border-deep-700 font-mono text-[11px] uppercase tracking-widest text-sand pointer-events-none">Dulu</span>
-          <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-deep-950/80 border border-deep-700 font-mono text-[11px] uppercase tracking-widest text-sand pointer-events-none">Sekarang</span>
-          <div id="ba-handle" class="ba-handle absolute inset-y-0 z-10 w-0" style="left:50%">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 bg-leaf-400"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-leaf-400 text-deep-950 flex items-center justify-center shadow-lg">
-              <i data-lucide="move-horizontal" class="w-5 h-5"></i>
+        <!-- Peta Indonesia bergaya sama dengan peta Home (SVG lokal) — ilustrasi edukatif -->
+        <div class="mt-10 rounded-2xl border border-deep-700 bg-deep-900 p-3 md:p-6">
+          <div id="ba" class="ba relative w-full aspect-[1000/346] overflow-hidden rounded-lg touch-none select-none" style="--pos:30%">
+            <img id="ba-before"
+                 src="assets/images/peta-karhutla-dahulu.svg"
+                 alt="Peta Indonesia — alam yang masih hijau sebelum karhutla (Dulu)"
+                 onerror="__imgFallback(this)"
+                 class="absolute inset-0 w-full h-full object-cover" />
+            <img id="ba-after"
+                 src="assets/images/peta-karhutla-sekarang.svg"
+                 alt="Peta Indonesia — titik karhutla, banjir, kekeringan, longsor, dan tambang (Sekarang)"
+                 onerror="__imgFallback(this)"
+                 class="ba-after absolute inset-0 w-full h-full object-cover"
+                 style="clip-path: inset(0 0 0 30%)" />
+            <span class="absolute top-3 left-3 md:top-4 md:left-4 px-2.5 py-1 md:px-3 rounded-full bg-deep-950/80 border border-deep-700 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-sand pointer-events-none flex items-center gap-1.5">
+              <i data-lucide="trees" class="w-3.5 h-3.5 text-leaf-300"></i>Dulu
+            </span>
+            <span class="absolute top-3 right-3 md:top-4 md:right-4 px-2.5 py-1 md:px-3 rounded-full bg-deep-950/80 border border-deep-700 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-sand pointer-events-none flex items-center gap-1.5">
+              <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-300"></i>Sekarang
+            </span>
+            <div id="ba-handle" class="ba-handle absolute inset-y-0 z-10 w-0" style="left:30%"
+                 tabindex="0" role="slider" aria-label="Geser pembanding peta Dulu dan Sekarang"
+                 aria-valuemin="2" aria-valuemax="98" aria-valuenow="30">
+              <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-leaf-400 via-amber-300 to-orange-500 shadow-[0_0_12px_rgba(251,146,60,0.65)]"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div class="ba-flame relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-deep-950 border-2 border-amber-400 text-amber-300 flex items-center justify-center">
+                  <span class="ba-ring absolute inset-0 rounded-full border-2 border-amber-400/70 pointer-events-none" aria-hidden="true"></span>
+                  <span class="ba-ring ba-ring-late absolute inset-0 rounded-full border border-amber-300/60 pointer-events-none" aria-hidden="true"></span>
+                  <i data-lucide="flame" class="ba-flame-icon relative w-6 h-6 md:w-7 md:h-7"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legenda singkat -->
+          <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-mist/70">
+            <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-leaf-400"></span>Wilayah terpantau</span>
+            <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></span>Titik karhutla</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="waves" class="w-3.5 h-3.5 text-sky-400"></i>Banjir sangat parah</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="pickaxe" class="w-3.5 h-3.5 text-amber-300"></i>Tambang</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="sun" class="w-3.5 h-3.5 text-yellow-300"></i>Kekeringan</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="mountain" class="w-3.5 h-3.5 text-rose-300"></i>Longsor</span>
+            <span class="text-mist/50 normal-case tracking-normal">Ilustrasi edukatif — bukan peta resmi</span>
+          </div>
+          <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[10px] leading-relaxed text-mist/60">
+            <span>Titik api: <span class="text-amber-200/90">Riau &middot; Jambi &middot; Sumsel &middot; Kalbar &middot; Kalteng &middot; Kalsel</span></span>
+            <span>Banjir parah: <span class="text-sky-200/90">Jawa &amp; Sulawesi</span></span>
+            <span>Tambang: <span class="text-amber-200/90">Kalimantan Timur &middot; Sulawesi &middot; Papua</span></span>
+            <span>Kekeringan: <span class="text-yellow-200/90">Nusa Tenggara Timur</span></span>
+            <span>Longsor: <span class="text-rose-200/90">Jawa Barat</span></span>
+          </p>
+        </div>
+
+        <!-- Dampak di sekitar titik api -->
+        <div class="mt-4 md:mt-5">
+          <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-mist/60">Dampak di sekitar wilayah terdampak</p>
+          <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/30 text-amber-300 flex items-center justify-center">
+                <i data-lucide="wind" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-amber-200/90">Asap lintas batas</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Kabut asap dari titik api Sumatra menyeberang ke Malaysia dan Singapura.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-rose-400/10 border border-rose-400/30 text-rose-300 flex items-center justify-center">
+                <i data-lucide="heart-pulse" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-rose-200/90">Kesehatan warga</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">ISPA, iritasi mata, dan gangguan pernapasan naik di permukiman sekitar titik api.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-leaf-400/10 border border-leaf-400/30 text-leaf-300 flex items-center justify-center">
+                <i data-lucide="paw-print" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-leaf-200/90">Habitat &amp; satwa</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Hutan gambut dan rumah satwa di Sumatra&ndash;Kalimantan hilang; satwa terdorong ke permukiman.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-orange-400/10 border border-orange-400/30 text-orange-300 flex items-center justify-center">
+                <i data-lucide="layers" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-orange-200/90">Gambut sulit pulih</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Lahan gambut kering butuh puluhan tahun untuk pulih dan mudah terbakar lagi.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-sky-400/10 border border-sky-400/30 text-sky-300 flex items-center justify-center">
+                <i data-lucide="waves" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-sky-200/90">Banjir &amp; rob</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Permukiman pesisir Jawa dan Sulawesi terendam; warga mengungsi.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/30 text-amber-300 flex items-center justify-center">
+                <i data-lucide="pickaxe" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-amber-200/90">Tambang &amp; lahan rusak</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Lubang tambang di Kalimantan Timur &amp; Papua; air tercemar, bentang alam rusak.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/30 text-amber-300 flex items-center justify-center">
+                <i data-lucide="mountain" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-amber-200/90">Nikel di Sulawesi</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Tambang nikel membuka hutan lereng, meninggalkan tailing, dan mengeruhkan sungai warga.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-yellow-400/10 border border-yellow-400/30 text-yellow-300 flex items-center justify-center">
+                <i data-lucide="sun" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-yellow-200/90">Kekeringan NTT</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Kemarau panjang membuat sumur dan embung kering; warga bergantung pada truk tangki air.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-xl border border-deep-700/80 bg-deep-900/60 p-3">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-rose-400/10 border border-rose-400/30 text-rose-300 flex items-center justify-center">
+                <i data-lucide="mountain-snow" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-rose-200/90">Longsor Jawa Barat</p>
+                <p class="mt-1 text-xs leading-relaxed text-mist">Hujan ekstrem di lereng yang gundul memicu longsor, menutup jalan dan merusak rumah.</p>
+              </div>
             </div>
           </div>
         </div>
-        <p class="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-mist/60">
-          Foto ilustratif untuk visualisasi perubahan ekosistem — bukan dokumentasi titik lokasi yang sama
+
+        <p class="mt-6 md:mt-8 max-w-3xl mx-auto text-center font-caption font-bold italic text-[18px] md:text-[22px] leading-relaxed text-sand">
+          &ldquo;Di antara hamparan yang dulu hijau, tersisa jejak bara yang mengingatkan kita: alam tak pernah benar-benar pulih sendirian.&rdquo;
         </p>
+      </div>
+    </section>
+
+    <!-- ================= STUDI KASUS: DELTA SEMARANG ================= -->
+    <section id="semarang" class="pb-16 md:pb-24">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-sky-300">Studi Kasus &mdash; Delta Semarang</p>
+        <h2 class="mt-3 font-display font-bold text-2xl md:text-4xl">Ketika Laut Mengambil Alih Delta</h2>
+        <p class="mt-3 text-sm md:text-base text-mist max-w-3xl leading-relaxed">
+          Di pesisir Semarang&ndash;Demak, delta sungai yang dulu subur kini menghadapi dua
+          tekanan sekaligus: tanahnya turun karena pengambilan air tanah, sementara muka
+          laut terus naik. Garis pantai pun bergerak ke darat, dan rob masuk lebih jauh
+          ke permukiman serta tambak. Geser pembanding berikut untuk melihat perkiraan
+          perubahan delta dari kondisi 1990-an menuju 2024.
+        </p>
+
+        <div class="mt-8 rounded-2xl border border-deep-700 bg-deep-900 p-3 md:p-6">
+          <div id="ba-semarang" class="ba relative w-full aspect-[1000/600] overflow-hidden rounded-lg touch-none select-none" style="--pos:50%">
+            <img id="ba-semarang-before"
+                 src="assets/images/semarang-dahulu.svg"
+                 alt="Ilustrasi delta Semarang era 1990-an: garis pantai masih di utara, mangrove lebat, tambak dan sawah produktif"
+                 onerror="__imgFallback(this)"
+                 class="absolute inset-0 w-full h-full object-cover" />
+            <img id="ba-semarang-after"
+                 src="assets/images/semarang-sekarang.svg"
+                 alt="Ilustrasi delta Semarang 2024: garis pantai mundur ke darat, rob permanen, mangrove hilang, dan penurunan muka tanah"
+                 onerror="__imgFallback(this)"
+                 class="ba-after absolute inset-0 w-full h-full object-cover"
+                 style="clip-path: inset(0 0 0 50%)" />
+            <span class="absolute top-3 left-3 md:top-4 md:left-4 px-2.5 py-1 md:px-3 rounded-full bg-deep-950/85 border border-deep-700 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-sand pointer-events-none flex items-center gap-1.5">
+              <i data-lucide="trees" class="w-3.5 h-3.5 text-leaf-300"></i>Dulu &middot; 1990-an
+            </span>
+            <span class="absolute top-3 right-3 md:top-4 md:right-4 px-2.5 py-1 md:px-3 rounded-full bg-deep-950/85 border border-deep-700 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-sand pointer-events-none flex items-center gap-1.5">
+              <i data-lucide="waves" class="w-3.5 h-3.5 text-sky-300"></i>Sekarang &middot; 2024
+            </span>
+            <div id="ba-semarang-handle" class="ba-handle absolute inset-y-0 z-10 w-0" style="left:50%"
+                 tabindex="0" role="slider" aria-label="Geser pembanding delta Semarang 1990-an dan 2024"
+                 aria-valuemin="2" aria-valuemax="98" aria-valuenow="50">
+              <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-sky-300 via-cyan-300 to-blue-500 shadow-[0_0_12px_rgba(56,189,248,0.7)]"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div class="ba-flame relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-deep-950 border-2 border-sky-400 text-sky-300 flex items-center justify-center">
+                  <span class="ba-ring absolute inset-0 rounded-full border-2 border-sky-400/70 pointer-events-none" aria-hidden="true"></span>
+                  <span class="ba-ring ba-ring-late absolute inset-0 rounded-full border border-sky-300/60 pointer-events-none" aria-hidden="true"></span>
+                  <i data-lucide="waves" class="ba-flame-icon relative w-6 h-6 md:w-7 md:h-7"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-3 font-mono text-[10px] leading-relaxed text-mist/60">
+            Ilustrasi interpretatif berbasis citra satelit historis &amp; literatur ilmiah &mdash;
+            bukan tangkapan layar Google Earth. Pembaca dapat memverifikasi perubahan garis
+            pantai pada citra historis di
+            <a href="https://earth.google.com/web/" target="_blank" rel="noopener" class="text-sky-300 underline decoration-deep-600 underline-offset-2 hover:text-sky-200">Google Earth / Earth Pro</a>.
+          </p>
+          <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-mist/70">
+            <span class="flex items-center gap-2"><span class="w-5 h-0 border-t-2 border-dashed border-leaf-300"></span>Garis pantai lama</span>
+            <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-sm bg-sky-400/70"></span>Genangan rob</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="trees" class="w-3.5 h-3.5 text-emerald-300"></i>Mangrove tersisa</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="arrow-down" class="w-3.5 h-3.5 text-amber-300"></i>Tanah menurun</span>
+          </div>
+        </div>
+
+        <!-- Angka kunci delta Semarang -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="rounded-xl border border-deep-700 bg-deep-800 p-4">
+            <p class="font-mono text-2xl text-amber-300 font-bold">19,5 <span class="text-sm">cm/thn</span></p>
+            <p class="mt-2 text-xs leading-relaxed text-mist">Penurunan muka tanah terparah di Sayung berdasarkan InSAR Sentinel-1 (2015&ndash;2022).</p>
+          </div>
+          <div class="rounded-xl border border-deep-700 bg-deep-800 p-4">
+            <p class="font-mono text-2xl text-sky-300 font-bold">1.266,52 <span class="text-sm">ha</span></p>
+            <p class="mt-2 text-xs leading-relaxed text-mist">Perkiraan luas genangan rob di Kecamatan Sayung pada skenario pasang dan penurunan tanah.</p>
+          </div>
+          <div class="rounded-xl border border-deep-700 bg-deep-800 p-4">
+            <p class="font-mono text-2xl text-orange-300 font-bold">141,49 <span class="text-sm">ha</span></p>
+            <p class="mt-2 text-xs leading-relaxed text-mist">Abrasi pesisir Sayung 2013&ndash;2020, jauh lebih luas daripada akresi 36,61 ha.</p>
+          </div>
+          <div class="rounded-xl border border-deep-700 bg-deep-800 p-4">
+            <p class="font-mono text-2xl text-amber-300 font-bold">10&ndash;12 <span class="text-sm">cm/thn</span></p>
+            <p class="mt-2 text-xs leading-relaxed text-mist">Laju penurunan muka tanah Kota Semarang; rob makin sering masuk ke permukiman.</p>
+          </div>
+        </div>
+
+        <div id="semarang-charts" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <!-- diisi CHART.renderGrid() dari js/charts.js -->
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-deep-700 bg-deep-900/60 p-5 md:p-6">
+          <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-mist/60">Sumber &amp; cara verifikasi</p>
+          <ul class="mt-3 space-y-2 text-xs leading-relaxed text-mist">
+            <li class="flex gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-sky-300 shrink-0 mt-0.5"></i><span>Khairullah, K. K., Rifai, A., &amp; Indrayanti, E. (2024). <em>Studi Luasan Genangan Banjir Rob Akibat Kenaikan Muka Air Laut dan Penurunan Muka Tanah di Kecamatan Sayung, Demak.</em> UNDIP. <a href="https://ejournal2.undip.ac.id/index.php/ijoce/article/download/19468/11809" target="_blank" rel="noopener" class="text-leaf-300 underline decoration-deep-600 underline-offset-2 hover:text-leaf-400">tautan</a></span></li>
+            <li class="flex gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-sky-300 shrink-0 mt-0.5"></i><span>Ramadhani et al. (2021). <em>Perubahan Garis Pantai Pesisir Sayung.</em> Journal of Marine Research UNDIP. <a href="https://ejournal3.undip.ac.id/index.php/jmr/article/view/30468" target="_blank" rel="noopener" class="text-leaf-300 underline decoration-deep-600 underline-offset-2 hover:text-leaf-400">tautan</a></span></li>
+            <li class="flex gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-sky-300 shrink-0 mt-0.5"></i><span>InSAR Sentinel-1 (2015&ndash;2022) untuk laju penurunan muka tanah; <a href="https://www.sciencedirect.com/science/article/pii/S156984322300403X" target="_blank" rel="noopener" class="text-leaf-300 underline decoration-deep-600 underline-offset-2 hover:text-leaf-400">artikel terkait</a>.</span></li>
+            <li class="flex gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-sky-300 shrink-0 mt-0.5"></i><span>Badan Informasi Geospasial (BIG) untuk data garis pantai dan DEM: <a href="https://big.go.id" target="_blank" rel="noopener" class="text-leaf-300 underline decoration-deep-600 underline-offset-2 hover:text-leaf-400">big.go.id</a>.</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -179,7 +426,7 @@
       <div>
         <p class="font-mono text-[11px] uppercase tracking-widest text-mist/70 mb-3">Sumber Data</p>
         <p class="text-sm text-mist leading-relaxed">
-          BNPB &middot; BMKG &middot; KLHK &middot; BRIN &middot; Global Forest Watch
+          BNPB &middot; BMKG &middot; KLHK / SiPongi &middot; BRIN &middot; Global Forest Watch &middot; SIPSN
         </p>
         <p class="mt-3 text-xs text-mist/60 leading-relaxed">
           Seluruh konten bebas SARA, pornografi, dan hoaks. Angka merujuk laporan lembaga resmi.
@@ -197,6 +444,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="js/data.js"></script>
   <script src="js/animations.js"></script>
+  <script src="js/charts.js"></script>
   <script src="js/main.js"></script>
   <script src="js/motion-ui.js"></script>
 </body>

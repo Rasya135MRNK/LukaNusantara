@@ -75,22 +75,27 @@ const ANIM = (() => {
     });
   }
 
-  /* Angka berjalan; suffix di data langsung ke elemen tanpa ikut dihitung */
-  function countUp(el, value, duration = 2000) {
+  /* Angka berjalan; suffix di data langsung ke elemen tanpa ikut dihitung.
+     decimals dipakai untuk seri yang butuh satu angka di belakang koma. */
+  function countUp(el, value, duration = 2000, decimals = 0) {
     if (!el) return;
+    const format = (n) =>
+      n.toLocaleString("id-ID", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      });
     if (!hasAnime()) {
-      el.textContent = value.toLocaleString("id-ID");
+      el.textContent = format(value);
       return;
     }
     const obj = { n: 0 };
     anime({
       targets: obj,
       n: value,
-      round: 1,
       duration,
       easing: "easeOutExpo",
       update: () => {
-        el.textContent = obj.n.toLocaleString("id-ID");
+        el.textContent = format(obj.n);
       },
     });
   }

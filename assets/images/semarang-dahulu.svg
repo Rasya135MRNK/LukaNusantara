@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustrasi delta Semarang era 1990-an</title>
+  <desc id="desc">Peta ilustratif delta Semarang dan Sayung pada 1990-an: garis pantai masih di utara, mangrove lebat di sepanjang pesisir, tambak dan sawah produktif, serta kota dan pelabuhan yang lebih kecil.</desc>
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A2530"/>
+      <stop offset=".55" stop-color="#081A1F"/>
+      <stop offset="1" stop-color="#07120D"/>
+    </linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123021"/>
+      <stop offset="1" stop-color="#0B1A13"/>
+    </linearGradient>
+    <pattern id="padi" width="26" height="18" patternUnits="userSpaceOnUse">
+      <rect width="26" height="18" fill="#143526"/>
+      <path d="M0 9h26M0 17h26" stroke="#34D399" stroke-opacity=".14" stroke-width="1"/>
+      <path d="M13 0v9M0 9v8M26 9v8" stroke="#34D399" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <pattern id="tambak" width="30" height="24" patternUnits="userSpaceOnUse">
+      <rect width="30" height="24" fill="#0B2E2A"/>
+      <path d="M0 0h30v24H0Z" fill="none" stroke="#2DD4BF" stroke-opacity=".26" stroke-width="1"/>
+      <path d="M0 12h30M15 0v24" stroke="#2DD4BF" stroke-opacity=".12" stroke-width="1"/>
+    </pattern>
+    <pattern id="kota" width="24" height="20" patternUnits="userSpaceOnUse">
+      <rect width="24" height="20" fill="#143526"/>
+      <rect x="3" y="4" width="8" height="6" fill="#9CB4A7" fill-opacity=".2"/>
+      <rect x="14" y="11" width="7" height="5" fill="#9CB4A7" fill-opacity=".15"/>
+      <rect x="3" y="13" width="5" height="4" fill="#9CB4A7" fill-opacity=".13"/>
+    </pattern>
+    <radialGradient id="mangroveGlow">
+      <stop offset="0" stop-color="#34D399" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <g id="mangrove">
+      <path d="M0 4v-6" stroke="#065F46" stroke-width="1.6"/>
+      <circle cx="-3" cy="-4" r="4.2" fill="#34D399" fill-opacity=".85"/>
+      <circle cx="3" cy="-5" r="3.6" fill="#10B981" fill-opacity=".8"/>
+      <circle cx="0" cy="-9" r="3.2" fill="#6EE7B7" fill-opacity=".8"/>
+    </g>
+  </defs>
+
+  <!-- Laut Jawa -->
+  <rect width="1000" height="600" fill="url(#sea)"/>
+  <g stroke="#1E4530" stroke-width="1" stroke-dasharray="4 7" opacity=".55">
+    <line x1="0" y1="86" x2="1000" y2="86"/>
+    <line x1="0" y1="173" x2="1000" y2="173"/>
+    <line x1="250" y1="0" x2="250" y2="234"/>
+    <line x1="500" y1="0" x2="500" y2="230"/>
+    <line x1="750" y1="0" x2="750" y2="228"/>
+  </g>
+  <g fill="none" stroke="#2DD4BF" stroke-opacity=".16" stroke-width="1.2">
+    <path d="M40 96q28 -12 56 0t56 0 56 0"/>
+    <path d="M620 128q30 -13 60 0t60 0 60 0"/>
+    <path d="M180 184q25 -11 50 0t50 0 50 0"/>
+    <path d="M760 64q26 -11 52 0t52 0"/>
+  </g>
+
+  <!-- Daratan delta -->
+  <path d="M0 238 C70 228 130 246 200 238 C270 230 320 248 390 240 C455 232 500 246 560 238 C625 230 680 246 750 236 C815 226 875 242 940 234 L1000 230 L1000 600 L0 600 Z"
+        fill="url(#land)"/>
+  <path d="M0 238 C70 228 130 246 200 238 C270 230 320 248 390 240 C455 232 500 246 560 238 C625 230 680 246 750 236 C815 226 875 242 940 234 L1000 230"
+        fill="none" stroke="#34D399" stroke-opacity=".55" stroke-width="1.6"/>
+
+  <!-- Sabuk mangrove pesisir -->
+  <path d="M0 238 C70 228 130 246 200 238 C270 230 320 248 390 240 C455 232 500 246 560 238 C625 230 680 246 750 236 C815 226 875 242 940 234 L1000 230"
+        fill="none" stroke="#10B981" stroke-opacity=".28" stroke-width="15"/>
+  <g>
+    <use href="#mangrove" x="32" y="246"/><use href="#mangrove" x="76" y="244"/><use href="#mangrove" x="118" y="250"/>
+    <use href="#mangrove" x="164" y="247"/><use href="#mangrove" x="208" y="248"/><use href="#mangrove" x="252" y="244"/>
+    <use href="#mangrove" x="296" y="249"/><use href="#mangrove" x="340" y="247"/><use href="#mangrove" x="384" y="248"/>
+    <use href="#mangrove" x="428" y="246"/><use href="#mangrove" x="474" y="249"/><use href="#mangrove" x="520" y="247"/>
+    <use href="#mangrove" x="566" y="245"/><use href="#mangrove" x="612" y="247"/><use href="#mangrove" x="658" y="248"/>
+    <use href="#mangrove" x="704" y="244"/><use href="#mangrove" x="750" y="244"/><use href="#mangrove" x="796" y="243"/>
+    <use href="#mangrove" x="842" y="239"/><use href="#mangrove" x="888" y="242"/><use href="#mangrove" x="934" y="239"/>
+    <use href="#mangrove" x="976" y="236"/>
+  </g>
+  <ellipse cx="180" cy="258" rx="150" ry="40" fill="url(#mangroveGlow)" filter="url(#soft)"/>
+  <ellipse cx="760" cy="254" rx="170" ry="42" fill="url(#mangroveGlow)" filter="url(#soft)"/>
+
+  <!-- Tambak produktif -->
+  <g stroke="#2DD4BF" stroke-opacity=".4" stroke-width="1.2">
+    <path d="M108 276 L252 266 L304 326 L266 390 L132 380 L92 326 Z" fill="url(#tambak)"/>
+    <path d="M646 270 L836 260 L920 322 L884 392 L706 384 L638 332 Z" fill="url(#tambak)"/>
+  </g>
+  <g fill="none" stroke="#6EE7B7" stroke-opacity=".32" stroke-width="1.3">
+    <path d="M136 296 L232 290M126 318 L248 312M148 342 L264 338M172 362 L252 360"/>
+    <path d="M678 294 L790 286M666 318 L830 310M688 344 L860 338M716 366 L868 362"/>
+  </g>
+
+  <!-- Sawah dan kebun -->
+  <path d="M330 330 L640 316 L700 474 L596 548 L370 540 L310 420 Z" fill="url(#padi)"/>
+  <path d="M104 398 L286 392 L330 528 L148 556 L84 470 Z" fill="url(#padi)" opacity=".75"/>
+  <g fill="none" stroke="#6EE7B7" stroke-opacity=".22" stroke-width="1.4">
+    <path d="M354 360q48 8 96 0t96 0 68 -2"/>
+    <path d="M340 402q50 8 100 0t100 0 64 -2"/>
+    <path d="M328 446q54 8 108 0t108 0 56 -2"/>
+    <path d="M340 492q56 8 112 0t102 0"/>
+  </g>
+
+  <!-- Kota Semarang dan permukiman -->
+  <path d="M386 306 L608 296 L652 438 L442 478 L364 392 Z" fill="url(#kota)" stroke="#9CB4A7" stroke-opacity=".22" stroke-width="1.2"/>
+  <path d="M748 346 L874 340 L902 442 L768 456 Z" fill="url(#kota)" opacity=".8" stroke="#9CB4A7" stroke-opacity=".18" stroke-width="1"/>
+  <g stroke="#9CB4A7" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="7 6">
+    <path d="M20 300 C180 294 300 306 420 300 C560 292 700 304 820 298 L980 292"/>
+    <path d="M460 600 C456 520 470 460 474 400 C478 350 468 300 470 240"/>
+    <path d="M664 600 C660 520 676 460 672 396 C668 344 682 292 680 240"/>
+    <path d="M806 600 C800 520 816 456 810 396 C804 340 818 286 814 232"/>
+  </g>
+  <g fill="#E7E4D9" fill-opacity=".45">
+    <circle cx="466" cy="382" r="2.4"/><circle cx="520" cy="374" r="2.4"/><circle cx="566" cy="368" r="2.4"/>
+    <circle cx="802" cy="396" r="2.2"/><circle cx="844" cy="392" r="2.2"/>
+  </g>
+
+  <!-- Pelabuhan Tanjung Mas -->
+  <g stroke="#9CB4A7" stroke-opacity=".6" stroke-width="2">
+    <path d="M566 246 L566 206M600 244 L600 200M634 242 L634 204"/>
+    <path d="M552 214h34M586 208h34M620 212h34"/>
+  </g>
+  <g fill="#153223" stroke="#9CB4A7" stroke-opacity=".35">
+    <rect x="548" y="252" width="14" height="8"/><rect x="568" y="252" width="14" height="8"/>
+    <rect x="588" y="250" width="14" height="8"/><rect x="608" y="250" width="14" height="8"/>
+  </g>
+
+  <!-- Sungai dan muara -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M456 600 C450 520 472 466 462 414 C454 366 480 326 470 240" stroke="#38BDF8" stroke-width="10" stroke-opacity=".8"/>
+    <path d="M470 332 C500 310 522 278 540 240" stroke="#38BDF8" stroke-width="7" stroke-opacity=".7"/>
+    <path d="M462 414 C440 394 424 360 408 330" stroke="#38BDF8" stroke-width="5" stroke-opacity=".55"/>
+    <path d="M654 600 C648 512 672 460 668 400 C664 344 688 292 678 238" stroke="#38BDF8" stroke-width="9" stroke-opacity=".75"/>
+    <path d="M790 600 C784 518 810 458 804 398 C798 338 820 286 814 232" stroke="#38BDF8" stroke-width="8" stroke-opacity=".7"/>
+    <path d="M814 232 C830 238 850 240 868 236" stroke="#38BDF8" stroke-width="5" stroke-opacity=".55"/>
+    <path d="M456 600 C450 520 472 466 462 414 C454 366 480 326 470 240" stroke="#BAE6FD" stroke-width="2.4" stroke-opacity=".55"/>
+    <path d="M654 600 C648 512 672 460 668 400 C664 344 688 292 678 238" stroke="#BAE6FD" stroke-width="2" stroke-opacity=".5"/>
+    <path d="M790 600 C784 518 810 458 804 398 C798 338 820 286 814 232" stroke="#BAE6FD" stroke-width="1.8" stroke-opacity=".45"/>
+  </g>
+
+  <!-- Label peta -->
+  <g font-family="JetBrains Mono, monospace" fill="#9CB4A7" letter-spacing="2.2">
+    <text x="420" y="116" font-size="13" fill="#7DD3FC" letter-spacing="6">LAUT JAWA</text>
+    <text x="120" y="230" font-size="8" fill="#6EE7B7">GARIS PANTAI 1990</text>
+    <text x="112" y="256" font-size="9" fill="#6EE7B7">MANGROVE LEBAT</text>
+    <text x="214" y="336" font-size="9" fill="#5EEAD4">TAMBAK</text>
+    <text x="380" y="508" font-size="9" fill="#86EFAC">SAWAH</text>
+    <text x="378" y="390" font-size="10" fill="#E7E4D9">KOTA SEMARANG</text>
+    <text x="390" y="462" font-size="7.5" fill="#7DD3FC">KALI SEMARANG</text>
+    <text x="662" y="502" font-size="7.5" fill="#7DD3FC">KALI TIMUR</text>
+    <text x="792" y="484" font-size="7.5" fill="#7DD3FC">KALI SAYUNG</text>
+  </g>
+
+  <!-- Arah utara -->
+  <g transform="translate(944 54)" font-family="JetBrains Mono, monospace">
+    <circle r="22" fill="#0B1A13" fill-opacity=".7" stroke="#1E4530"/>
+    <path d="M0 -13 L6 8 L0 4 L-6 8 Z" fill="#6EE7B7"/>
+    <text y="20" text-anchor="middle" font-size="8" fill="#9CB4A7">N</text>
+  </g>
+
+  <!-- Legenda -->
+  <g transform="translate(48 512)" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#9CB4A7">
+    <rect x="0" y="0" width="238" height="54" rx="8" fill="#07120D" fill-opacity=".72" stroke="#1E4530"/>
+    <rect x="12" y="12" width="10" height="10" fill="#10B981" fill-opacity=".7"/><text x="28" y="21">Mangrove</text>
+    <rect x="90" y="12" width="10" height="10" fill="#2DD4BF" fill-opacity=".35"/><text x="106" y="21">Tambak</text>
+    <rect x="166" y="12" width="10" height="10" fill="#34D399" fill-opacity=".2"/><text x="182" y="21">Sawah</text>
+    <rect x="12" y="32" width="10" height="10" fill="#9CB4A7" fill-opacity=".35"/><text x="28" y="41">Permukiman</text>
+    <line x1="132" y1="37" x2="156" y2="37" stroke="#38BDF8" stroke-width="2"/><text x="162" y="41">Sungai</text>
+  </g>
+</svg>

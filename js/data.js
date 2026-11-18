@@ -15,11 +15,127 @@ const SITE_DATA = {
      value : angka murni (diformat id-ID oleh counter)
      ------------------------------------------------------------ */
   STATS: [
-    { value: 113500,   suffix: " ha",  label: "Deforestasi hutan Indonesia dalam setahun", source: "KLHK" },
-    { value: 1241,     suffix: " kasus", label: "Kejadian banjir & banjir rob dalam setahun", source: "BNPB" },
-    { value: 481000,   suffix: " ton", label: "Estimasi sampah plastik bocor ke laut per tahun", source: "Riset Jambeck et al." },
+    { value: 3472,     suffix: " kejadian", label: "Bencana alam tercatat sepanjang 2024 — 99% hidrometeorologi", source: "BNPB, Data Bencana 2024" },
+    { value: 1420,     suffix: " kejadian", label: "Banjir menjadi bencana paling sering pada 2024", source: "BNPB, Data Bencana 2024" },
+    { value: 376805,   suffix: " ha",  label: "Luas karhutla Indonesia sepanjang 2024", source: "KLHK / SiPongi" },
+    { value: 292000,   suffix: " ha",  label: "Kehilangan hutan primer Indonesia pada 2023", source: "Global Forest Watch" },
+    { value: 113500,   suffix: " ha",  label: "Deforestasi neto hutan Indonesia dalam setahun", source: "KLHK" },
+    { value: 1480331,  suffix: " jiwa", label: "Penduduk terdampak kekeringan sepanjang 2024", source: "BNPB, Data Bencana 2024" },
+    { value: 38.3,     suffix: " juta ton", decimals: 1, label: "Timbulan sampah nasional 2023 — 19% di antaranya plastik", source: "KLHK / SIPSN 2023" },
     { value: 7,        suffix: "%",    label: "Terumbu karang Indonesia dalam kondisi sangat baik", source: "LIPI/BRIN" },
   ],
+
+  /* ------------------------------------------------------------
+     CHARTS — grafik statistik (Home & Eksplorasi)
+     type  : "bar" | "line" | "hbar" | "range"
+     labels/values : seri data; values boleh angka atau [min, max]
+     ------------------------------------------------------------ */
+  CHARTS: {
+    bencana: {
+      type: "bar",
+      kicker: "Tren bencana",
+      title: "Kejadian bencana nasional",
+      subtitle: "2020–2024",
+      unit: "kejadian",
+      labels: ["2020", "2021", "2022", "2023", "2024"],
+      values: [4649, 5402, 3544, 5400, 3472],
+      color: "#34D399",
+      source: "BNPB — Laporan Kinerja 2024",
+      sourceUrl: "https://bnpb.go.id",
+    },
+    karhutla: {
+      type: "bar",
+      kicker: "Karhutla",
+      title: "Luas kebakaran hutan & lahan",
+      subtitle: "2015–2024",
+      unit: "hektare",
+      labels: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      values: [2611411, 438363, 165484, 529267, 1649258, 296942, 358867, 204894, 1161193, 376805],
+      color: "#FB923C",
+      source: "KLHK / SiPongi — Indikasi Luas Kebakaran",
+      sourceUrl: "https://sipongi.gakkum.kehutanan.go.id/indikasi-luas-kebakaran",
+    },
+    banjir: {
+      type: "line",
+      kicker: "Banjir",
+      title: "Jumlah kejadian banjir",
+      subtitle: "2015, 2020–2024",
+      unit: "kejadian",
+      labels: ["2015", "2020", "2021", "2022", "2023", "2024"],
+      values: [525, 1065, 1794, 1531, 1255, 1420],
+      color: "#38BDF8",
+      source: "BNPB — Data Bencana Indonesia",
+      sourceUrl: "https://bnpb.go.id",
+    },
+    hutan: {
+      type: "line",
+      kicker: "Deforestasi",
+      title: "Kehilangan hutan primer",
+      subtitle: "2017–2024",
+      unit: "ribu hektare",
+      labels: ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      values: [373, 340, 324, 270, 203, 230, 292, 260],
+      color: "#6EE7B7",
+      source: "Global Forest Watch — University of Maryland",
+      sourceUrl: "https://www.globalforestwatch.org/dashboards/country/IDN/",
+    },
+    komposisi: {
+      type: "hbar",
+      kicker: "Limbah",
+      title: "Komposisi sampah nasional 2023",
+      subtitle: "Persen dari total timbulan",
+      unit: "%",
+      labels: ["Sisa makanan", "Plastik", "Kayu & ranting", "Kertas & karton", "Logam", "Lainnya"],
+      values: [39.9, 19.2, 11.8, 10.8, 3.2, 15.1],
+      color: "#2DD4BF",
+      source: "KLHK — SIPSN 2023",
+      sourceUrl: "https://sipsn.menlhk.go.id",
+    },
+    semarangTanah: {
+      type: "range",
+      kicker: "Delta Semarang",
+      title: "Laju penurunan muka tanah",
+      subtitle: "cm per tahun, InSAR 2015–2022",
+      unit: "cm/tahun",
+      labels: ["Sayung (maks.)", "Semarang", "Demak", "Kendal"],
+      values: [[19.5, 19.5], [10.0, 12.0], [7.0, 10.0], [5.0, 7.0]],
+      color: "#FBBF24",
+      source: "InSAR Sentinel-1 (2015–2022); Khairullah et al., UNDIP 2024",
+      sourceUrl: "https://www.sciencedirect.com/science/article/pii/S156984322300403X",
+    },
+    sayungPantai: {
+      type: "bar",
+      kicker: "Garis pantai",
+      title: "Abrasi vs akresi pesisir Sayung",
+      subtitle: "2013–2020",
+      unit: "hektare",
+      labels: ["Abrasi", "Akresi"],
+      values: [141.49, 36.61],
+      color: "#F97316",
+      source: "Ramadhani et al., Journal of Marine Research UNDIP 2021",
+      sourceUrl: "https://ejournal3.undip.ac.id/index.php/jmr/article/view/30468",
+    },
+    kekeringan: {
+      type: "bar",
+      kicker: "Kekeringan",
+      title: "Jumlah kejadian kekeringan",
+      subtitle: "2020–2024",
+      unit: "kejadian",
+      labels: ["2020", "2021", "2022", "2023", "2024"],
+      values: [29, 15, 4, 174, 89],
+      color: "#FBBF24",
+      source: "BNPB — Data Bencana Indonesia",
+      sourceUrl: "https://bnpb.go.id",
+    },
+  },
+
+  /* Grafik mini yang tampil di tiap modul galeri, dipilih per kategori */
+  MODULE_CHARTS: {
+    "Banjir Rob": "banjir",
+    "Deforestasi": "hutan",
+    "Kekeringan": "kekeringan",
+    "Limbah Plastik": "komposisi",
+  },
 
   /* ------------------------------------------------------------
      REGIONS — peta interaktif (halaman Home)
@@ -622,9 +738,11 @@ const SITE_DATA = {
   SOURCES: [
     { name: "BNPB", desc: "Data kejadian bencana nasional: banjir, longsor, karhutla.", url: "https://bnpb.go.id" },
     { name: "BMKG", desc: "Data iklim, kenaikan muka laut, dan meteorologi.", url: "https://bmkg.go.id" },
-    { name: "KLHK", desc: "Data tutupan hutan, deforestasi, dan kualitas lingkungan.", url: "https://klhk.go.id" },
+    { name: "KLHK / SiPongi", desc: "Data tutupan hutan, deforestasi, karhutla, dan kualitas lingkungan.", url: "https://sipongi.gakkum.kehutanan.go.id" },
     { name: "BRIN", desc: "Riset biota, terumbu karang, dan ekosistem gambut.", url: "https://brin.go.id" },
     { name: "Global Forest Watch", desc: "Monitoring deforestasi satelit global.", url: "https://globalforestwatch.org" },
+    { name: "BIG", desc: "Data geospasial, garis pantai, dan DEM nasional.", url: "https://big.go.id" },
+    { name: "SIPSN", desc: "Data timbulan dan komposisi sampah nasional.", url: "https://sipsn.menlhk.go.id" },
   ],
 
   /* ------------------------------------------------------------

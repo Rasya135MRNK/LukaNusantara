@@ -194,6 +194,200 @@ label.action-card:hover {
   user-select: none;
 }
 
+/* Ikon api pada penggeser: mengambang, api berkedip, cincin berdenyut.
+   Makin cepat dan liar saat penggeser sedang digeser. */
+.ba-flame {
+  animation:
+    ba-bob 1.6s ease-in-out infinite,
+    ba-glow 2.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.ba-flame-icon {
+  animation: ba-flicker 0.75s ease-in-out infinite;
+  transform-origin: 50% 80%;
+}
+
+.ba-ring {
+  animation: ba-ring 2s ease-out infinite;
+}
+
+.ba-ring-late {
+  animation-delay: 1s;
+}
+
+.is-dragging .ba-flame {
+  animation-duration: 0.9s, 1.1s;
+}
+
+.is-dragging .ba-flame-icon {
+  animation-duration: 0.38s;
+}
+
+.is-dragging .ba-ring {
+  animation-duration: 1.1s;
+}
+
+@keyframes ba-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  30%      { transform: translateY(-4px) rotate(2deg); }
+  60%      { transform: translateY(-1px) rotate(-1deg); }
+}
+
+@keyframes ba-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 18px rgba(251, 146, 60, 0.35),
+      0 0 0 0 rgba(251, 146, 60, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 36px rgba(251, 146, 60, 0.75),
+      0 0 0 10px rgba(251, 146, 60, 0);
+  }
+}
+
+@keyframes ba-flicker {
+  0%, 100% { transform: scale(1) rotate(-4deg); }
+  20%      { transform: scale(1.14, 0.88) rotate(5deg); }
+  40%      { transform: scale(0.92, 1.1) rotate(-3deg); }
+  65%      { transform: scale(1.08, 0.94) rotate(3deg); }
+  85%      { transform: scale(0.96, 1.04) rotate(-2deg); }
+}
+
+@keyframes ba-ring {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* Penggeser kedua (delta Semarang): nuansa air, bukan api */
+.ba-water .ba-flame {
+  animation-name: ba-bob, ba-glow-water;
+}
+
+.ba-water .ba-flame-icon {
+  animation: ba-wave-sway 1.8s ease-in-out infinite;
+}
+
+.is-dragging .ba-water .ba-flame-icon {
+  animation-duration: 0.8s;
+}
+
+.ba-handle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #07120d,
+    0 0 0 4px rgba(56, 189, 248, 0.65);
+  border-radius: 999px;
+}
+
+@keyframes ba-glow-water {
+  0%, 100% {
+    box-shadow:
+      0 0 18px rgba(56, 189, 248, 0.4),
+      0 0 0 0 rgba(56, 189, 248, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 36px rgba(56, 189, 248, 0.8),
+      0 0 0 10px rgba(56, 189, 248, 0);
+  }
+}
+
+@keyframes ba-wave-sway {
+  0%, 100% { transform: translateX(-1px) rotate(-4deg); }
+  50%      { transform: translateX(1px) rotate(4deg); }
+}
+
+/* ------------------------------------------------------------
+   Grafik statistik SVG (js/charts.js) — Home & Eksplorasi
+   ------------------------------------------------------------ */
+.chart-card {
+  transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.3s ease;
+}
+
+.chart-card.is-visible {
+  opacity: 1 !important;
+}
+
+.chart-card:hover {
+  border-color: rgba(52, 211, 153, 0.45);
+}
+
+.chart-bar {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: chart-rise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.chart-hbar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: chart-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.chart-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: chart-draw 1.5s 0.15s ease-out both;
+}
+
+.chart-area {
+  opacity: 0;
+  animation: chart-fade 0.9s 0.55s ease-out both;
+}
+
+.chart-point {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: chart-pop 0.55s ease-out both;
+}
+
+@keyframes chart-rise {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes chart-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes chart-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes chart-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes chart-pop {
+  0%   { opacity: 0; transform: scale(0.2); }
+  70%  { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Hormati preferensi pengguna yang tidak ingin animasi berlebihan */
+@media (prefers-reduced-motion: reduce) {
+  .ba-flame,
+  .ba-flame-icon,
+  .ba-ring,
+  .chart-bar,
+  .chart-hbar,
+  .chart-line,
+  .chart-area,
+  .chart-point {
+    animation: none;
+  }
+  .chart-line {
+    stroke-dashoffset: 0;
+  }
+  .chart-area {
+    opacity: 1;
+  }
+}
+
 /* Timeline garis vertikal (halaman About) */
 .timeline-line {
   background: linear-gradient(

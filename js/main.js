@@ -61,7 +61,7 @@ function renderStats() {
     (s, i) => `
     <div class="stat-card bg-deep-800 border border-deep-700 rounded-2xl p-6 md:p-8 opacity-0">
       <p class="font-mono text-3xl md:text-4xl text-leaf-400 font-bold">
-        <span class="stat-number" data-value="${s.value}">0</span><span class="stat-suffix text-lg text-sand">${s.suffix}</span>
+        <span class="stat-number" data-value="${s.value}" data-decimals="${s.decimals || 0}">0</span><span class="stat-suffix text-lg text-sand">${s.suffix}</span>
       </p>
       <p class="mt-3 text-sm md:text-base text-mist leading-relaxed">${s.label}</p>
       <p class="mt-4 font-mono text-[11px] uppercase tracking-widest text-mist/60">Sumber: ${s.source}</p>
@@ -73,7 +73,7 @@ function renderStats() {
       el.style.opacity = "1";
       ANIM.animateIn(el, { y: 28, stagger: 0 });
       const num = $(".stat-number", el);
-      ANIM.countUp(num, Number(num.dataset.value));
+      ANIM.countUp(num, Number(num.dataset.value), 2000, Number(num.dataset.decimals || 0));
     }, 0.35);
   });
 }
@@ -203,6 +203,11 @@ function initHome() {
   /* Statistik */
   renderStats();
 
+  /* Grafik tren: bencana, karhutla, banjir, deforestasi */
+  if (typeof CHART !== "undefined") {
+    CHART.renderGrid($("#home-charts"), ["bencana", "karhutla", "banjir", "hutan"]);
+  }
+
   /* Peta */
   renderMap();
   const firstRegion = Object.keys(SITE_DATA.REGIONS)[0];
@@ -305,27 +310,53 @@ function renderGallery() {
   ANIM.animateIn(grid.children, { y: 22, stagger: 70 });
 }
 
-/* Before-after slider: pointer drag menggeser pembatas */
+/* Before-after slider: pointer drag menggeser pembatas.
+   Semua elemen .ba di halaman ikut terpasang (peta Indonesia &
+   delta Semarang), dengan elemen dalam .ba-after / .ba-handle. */
 function initBeforeAfter() {
-  const wrap = $("#ba");
-  if (!wrap) return;
-  const after = $("#ba-after");
-  const handle = $("#ba-handle");
-  const setPos = (clientX) => {
-    const rect = wrap.getBoundingClientRect();
-    let pct = ((clientX - rect.left) / rect.width) * 100;
-    pct = Math.max(2, Math.min(98, pct));
-    after.style.clipPath = `inset(0 0 0 ${pct}%)`;
-    handle.style.left = pct + "%";
-    wrap.style.setProperty("--pos", pct + "%");
-  };
-  wrap.addEventListener("pointerdown", (e) => {
-    e.preventDefault();
-    wrap.setPointerCapture(e.pointerId);
-    setPos(e.clientX);
-  });
-  wrap.addEventListener("pointermove", (e) => {
-    if (e.buttons) setPos(e.clientX);
+  $$(".ba").forEach((wrap) => {
+    const after = $(".ba-after", wrap);
+    const handle = $(".ba-handle", wrap);
+    if (!after || !handle) return;
+    let dragging = false;
+
+    const setPos = (clientX) => {
+      const rect = wrap.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(2, Math.min(98, pct));
+      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      handle.style.left = pct + "%";
+      wrap.style.setProperty("--pos", pct + "%");
+    };
+    const endDrag = () => {
+      dragging = false;
+      wrap.classList.remove("is-dragging");
+    };
+
+    wrap.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      dragging = true;
+      wrap.setPointerCapture(e.pointerId);
+      wrap.classList.add("is-dragging");
+      setPos(e.clientX);
+    });
+    wrap.addEventListener("pointermove", (e) => {
+      if (dragging) setPos(e.clientX);
+    });
+    wrap.addEventListener("pointerup", endDrag);
+    wrap.addEventListener("pointercancel", endDrag);
+    wrap.addEventListener("lostpointercapture", endDrag);
+
+    /* Aksesibilitas: panah kiri/kanan saat handle difokuskan */
+    handle.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      e.preventDefault();
+      const current = parseFloat(handle.style.left) || 30;
+      const next = Math.max(2, Math.min(98, current + (e.key === "ArrowRight" ? 4 : -4)));
+      after.style.clipPath = `inset(0 0 0 ${next}%)`;
+      handle.style.left = next + "%";
+      wrap.style.setProperty("--pos", next + "%");
+    });
   });
 }
 
@@ -358,6 +389,11 @@ function openModal(item) {
     <img src="${item.image}" alt="${item.alt}" onerror="__imgFallback(this)" loading="lazy"
          class="mt-5 w-full h-52 md:h-64 object-cover rounded-xl border border-deep-700" />
     <p class="mt-5 text-sm md:text-base text-mist leading-relaxed">${item.desc}</p>
+    ${(() => {
+      const chartId = SITE_DATA.MODULE_CHARTS[item.category];
+      const cfg = chartId && SITE_DATA.CHARTS[chartId];
+      return cfg && typeof CHART !== "undefined" ? `<div class="mt-6">${CHART.cardHTML(cfg)}</div>` : "";
+    })()}
     <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="bg-deep-950/60 border border-deep-700 rounded-xl p-4">
         <p class="font-mono text-[11px] uppercase tracking-widest text-leaf-400 mb-3">Fakta Data</p>
@@ -380,6 +416,11 @@ function openModal(item) {
     </div>`;
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
+  const modalChart = $(".chart-card", content);
+  if (modalChart) {
+    modalChart.classList.add("is-visible");
+    modalChart.style.opacity = "1";
+  }
   ANIM.refreshIcons();
   ANIM.animateIn(content.children, { y: 16, stagger: 50 });
 }
@@ -395,6 +436,12 @@ function initEksplorasi() {
   renderGallery();
   initBeforeAfter();
   initModal();
+
+  /* Grafik data nasional & studi kasus delta Semarang */
+  if (typeof CHART !== "undefined") {
+    CHART.renderGrid($("#explore-charts"), ["karhutla", "banjir", "kekeringan", "komposisi"]);
+    CHART.renderGrid($("#semarang-charts"), ["semarangTanah", "sayungPantai"]);
+  }
 }
 
 /* ============================================================
