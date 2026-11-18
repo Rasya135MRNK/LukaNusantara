@@ -12,3 +12,7 @@ desktop.ini
 # Log & cache
 *.log
 node_modules/
+
+# catatan hanay untunk tim
+/PLAN.md
+
